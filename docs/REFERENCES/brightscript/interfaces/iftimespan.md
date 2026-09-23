@@ -1,24 +1,25 @@
 ---
-title: "ifTimeSpan"
-excerpt: ''
+title: ifTimeSpan
+excerpt: >-
+  Interface for tracking elapsed time via Mark, TotalMilliseconds, and
+  TotalSeconds methods
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: ifTimeSpan
+  description: >-
+    Documents the ifTimeSpan interface, which provides methods to set a Mark
+    point and measure elapsed microseconds, milliseconds, and seconds from that
+    point.
   robots: index
 next:
   description: ''
 ---
-
-
-
 ## Implemented by
 
-| Name         | Description                                                           |
-|--------------|-----------------------------------------------------------------------|
-|[roTimespan](doc:rotimespan)    | The Timespan object provides an interface to a simple timer for tracking the duration of activities                                                                      |
-
+| Name                         | Description                                                                                         |
+| ---------------------------- | --------------------------------------------------------------------------------------------------- |
+| [roTimespan](doc:rotimespan) | The Timespan object provides an interface to a simple timer for tracking the duration of activities |
 
 ## Supported methods
 
@@ -36,7 +37,19 @@ Returns the total number of microseconds from the "Mark" point to the current ti
 
 #### Return Value
 
-The number of microseconds. 
+The number of microseconds.
+
+### TotalMicroseconds() as LongInteger
+
+_Available since Roku OS 15.3_
+
+#### Description
+
+Returns the total number of microseconds from the "Mark" point to the current time as a LongInteger.
+
+#### Return Value
+
+The number of microseconds as a LongInteger.
 
 ### TotalMilliseconds() as Integer
 
@@ -46,7 +59,19 @@ Returns the total number of milliseconds from the "Mark" point to the current ti
 
 #### Return Value
 
-The number of milliseconds. 
+The number of milliseconds.
+
+### TotalMilliseconds() as LongInteger
+
+_Available since Roku OS 15.3_
+
+#### Description
+
+Returns the total number of milliseconds from the "Mark" point to the current time as a LongInteger.
+
+#### Return Value
+
+The number of milliseconds as a LongInteger.
 
 ### TotalSeconds() as Integer
 
@@ -60,15 +85,15 @@ The number of seconds.
 
 #### Example
 
-~~~
+```brightscript
 x = timespan.TotalSeconds()
-~~~
+```
 
 is equivalent to
 
-~~~
+```brightscript
 x = Int(timespan.TotalMilliseconds() / 1000)
-~~~
+```
 
 ### GetSecondsToISO8601Date(date as String) as Integer
 
@@ -80,10 +105,10 @@ The date provided and the current time calculations are all done assuming UTC. T
 
 #### Parameters
 
-| Parameters                              | Type           | Description                                                                                                                                                          |
-| --------------------------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| date    | String | The ISO8601date to be parsed. |
+| Parameters | Type   | Description                   |
+| ---------- | ------ | ----------------------------- |
+| date       | String | The ISO8601date to be parsed. |
 
 #### Return Value
 
-The number of seconds. 
+The number of seconds.

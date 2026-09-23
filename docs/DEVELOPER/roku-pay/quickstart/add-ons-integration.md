@@ -1,11 +1,11 @@
 ---
 title: Catalog 2.0 API integration guide
-excerpt: ''
+excerpt: 'Step-by-step guide to integrating add-ons and purchase options using Catalog 2.0 APIs'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Catalog 2.0 API integration guide | Roku Developer Docs'
+  description: 'Integrate add-ons in your app using the Catalog 2.0 APIs, including GetCatalog, QueryPurchaseOptions, DoOrder, and GetAllPurchases ChannelStore commands.'
   robots: index
 next:
   description: ''
@@ -28,11 +28,11 @@ Publishers need to create a product in the Developer Dashboard for each add-on t
 
 1. In the [Developer Dashboard](https://developer.roku.com/developer), select **Product Catalog** under **Monetization**. You can also select **Manage Product Catalog** from the drop-down list on the left side of the pages within the Developer Dashboard. The **Product Catalog** page opens.
 
-   <Image alt="img - roku815px" border={false} src="https://image.roku.com/ZHZscHItMTc2/add-on-add-product.png" />
+   ![img - roku815px](https://image.roku.com/ZHZscHItMTc2/add-on-add-product.png)
 
 2. From the **Product List** tab, click **Add Product**. The **Add Product** page opens.
 
-   <Image alt="img - roku815px" border={false} src="https://image.roku.com/ZHZscHItMTc2/add-on-product-details.png?version=1&modificationDate=1700090583000&cacheVersion=1&api=v2&width=600&height=735" />
+   ![img - roku815px](https://image.roku.com/ZHZscHItMTc2/add-on-product-details.png?version=1\&modificationDate=1700090583000\&cacheVersion=1\&api=v2\&width=600\&height=735)
 
 3. Enter the following information for the add-on product:
 
@@ -48,7 +48,7 @@ Publishers need to create a product in the Developer Dashboard for each add-on t
 
 5. Accept the default purchase option, which is **Subscription**, and then click **Continue** to create the purchase option for the add-on.
 
-   <Image alt="img - roku600px" border={false} src="https://image.roku.com/ZHZscHItMTc2/rpay-catalog-purchase-type-dialog-no-cross-bundle.png" />
+   ![img - roku600px](https://image.roku.com/ZHZscHItMTc2/rpay-catalog-purchase-type-dialog-no-cross-bundle.png)
 
 You can create a subscription bundle that includes two base products or a single base product and one or more add-ons. To do this, click **Subscription bundle** and then select the products to be packaged together from the **Product** list. You may only select products that are not in the same product group. Click **Add another product to bundle** to include additional products in the bundle. Add-on products can only be bundled with their prerequisite base products.
 
@@ -62,7 +62,7 @@ To create a purchase option for an add-on product, follow these steps:
 
 2. Configure the following **Purchase Details** settings:
 
-   <Image alt="img - roku815px" border={false} src="https://image.roku.com/ZHZscHItMTc2/add-on-purchase-details.png?version=1&modificationDate=1700090583000&cacheVersion=1&api=v2&width=600&height=537" />
+   ![img - roku815px](https://image.roku.com/ZHZscHItMTc2/add-on-purchase-details.png?version=1\&modificationDate=1700090583000\&cacheVersion=1\&api=v2\&width=600\&height=537)
 
    | Purchase detail setting | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
    | :---------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -73,7 +73,7 @@ To create a purchase option for an add-on product, follow these steps:
 
 3. Configure the following **Products and billing plan** settings:
 
-   <Image alt="img - roku815px" border={false} src="https://image.roku.com/ZHZscHItMTc2/add-on-billing-plan-v2.png?version=1&modificationDate=1700090583000&cacheVersion=1&api=v2&width=600&height=397" />
+   ![img - roku815px](https://image.roku.com/ZHZscHItMTc2/add-on-billing-plan-v2.png?version=1\&modificationDate=1700090583000\&cacheVersion=1\&api=v2\&width=600\&height=397)
 
    <Table align={["left","left"]}>
      <thead>
@@ -81,58 +81,53 @@ To create a purchase option for an add-on product, follow these steps:
          <th>
            Billing plan setting
          </th>
-
          <th>
            Description
          </th>
        </tr>
      </thead>
-
      <tbody>
        <tr>
          <td>
            Product
          </td>
-
          <td>
            Select the add-on product for which you are creating a purchase option. Add-on products are tagged with a blue "ADD-ON" label in the drop-down list.
          </td>
        </tr>
-
        <tr>
          <td>
            Billing periods
          </td>
-
          <td>
            Select the billing period for the add-on product: **monthly**, **quarterly**, or **annual**. The billing period for the add-on must be the same as the base product.
          </td>
        </tr>
-
        <tr>
          <td>
            Regular price
          </td>
-
          <td>
-           Select one of the predefined price tiers for the product. Tiers are used to enforce 99-cent or 49-cent pricing (in USD) on app products.<br />
-
-           * One to three-digit tier numbers are used for 99-cent pricing. Subtract 1 cent from a tier to get the corresponding price. For example, Tier 1 is 99 cents, Tier 2 is $1.99, Tier 10 is $9.99, Tier 100 is $99.99 and so on. The highest tier is 400 ($399.99).
-           * Four-digit tier numbers are used for 49-cent pricing. Append 49 cents to the last digit or last two digits in the tier to get the corresponding price. For example, Tier 1000 is 49 cents, Tier 1001 is $1.49, Tier 1010 is $10.49, Tier 1020 is $20.49, and so on. The highest tier is 1030 ($30.49).
+           Select one of the predefined price tiers for the product. Tiers are used to enforce 99-cent or 49-cent pricing (in USD) on app products.
+           <br /><br />
+           <ul>
+             <li>One to three-digit tier numbers are used for 99-cent pricing. Subtract 1 cent from a tier to get the corresponding price. For example, Tier 1 is 99 cents, Tier 2 is $1.99, Tier 10 is $9.99, Tier 100 is $99.99 and so on. The highest tier is 400 ($399.99).</li>
+             <li>Four-digit tier numbers are used for 49-cent pricing. Append 49 cents to the last digit or last two digits in the tier to get the corresponding price. For example, Tier 1000 is 49 cents, Tier 1001 is $1.49, Tier 1010 is $10.49, Tier 1020 is $20.49, and so on. The highest tier is 1030 ($30.49).</li>
+           </ul>
          </td>
        </tr>
-
        <tr>
          <td>
            Base offer
          </td>
-
          <td>
-           The administrator (root account) can create free trial and introductory price offers for an add-on product. Roku Pay automatically handles the auto-renewals of the trial or discounted offers to paid full-price subscriptions. Separate products do not need to be created for free trial or introductory price offers. A single product may include both a base offer (the standard base price) and a trial/discount offer.Select one of the following base offers: <br />
-
-           * **None** (default). The purchase option does not include an offer.
-           * **Free trial**. Include a free trial period with the purchase option. In the **Trial length** box, enter the number of days or months in the trial offer and then select the unit of time (**Days** or **Months**).
-           * **Introductory price**. Include a discount with the purchase option. In the **Introductory period** box, enter the number of days, months, or years the introductory price is valid, and then select the pricing tier corresponding to the discounted price to be offered from the **Price** list.  Discounts cannot be specified using percentages or absolute currency units (for example, USD). Discounts may only be specified using the appropriate price tier. For example, the absolute discount from tier 9 to tier 6 is $3.00 ($8.99-5.99); the percentage discount is 33.4% ($(1-(5.99/8.99))x100).
+           The administrator (root account) can create free trial and introductory price offers for an add-on product. Roku Pay automatically handles the auto-renewals of the trial or discounted offers to paid full-price subscriptions. Separate products do not need to be created for free trial or introductory price offers. A single product may include both a base offer (the standard base price) and a trial/discount offer. Select one of the following base offers:
+           <br /><br />
+           <ul>
+             <li><strong>None</strong> (default). The purchase option does not include an offer.</li>
+             <li><strong>Free trial</strong>. Include a free trial period with the purchase option. In the <strong>Trial length</strong> box, enter the number of days or months in the trial offer and then select the unit of time (<strong>Days</strong> or <strong>Months</strong>).</li>
+             <li><strong>Introductory price</strong>. Include a discount with the purchase option. In the <strong>Introductory period</strong> box, enter the number of days, months, or years the introductory price is valid, and then select the pricing tier corresponding to the discounted price to be offered from the <strong>Price</strong> list. Discounts cannot be specified using percentages or absolute currency units (for example, USD). Discounts may only be specified using the appropriate price tier. For example, the absolute discount from tier 9 to tier 6 is $3.00 ($8.99-5.99); the percentage discount is 33.4% ($(1-(5.99/8.99))x100).</li>
+           </ul>
          </td>
        </tr>
      </tbody>
@@ -142,7 +137,7 @@ To create a purchase option for an add-on product, follow these steps:
 
 5. If you selected **Publish** in step 6, review the **Purchase details** and **Billing plan** settings, and then click **Confirm** to make the purchase option available to customers on your app. After you create an add-on, you can schedule limited-time offers and schedule price changes for it (see [Creating the Product Catalog](doc:product-catalog) for how to do this).
 
-   <Image alt="img - roku600px" border={false} src="https://image.roku.com/ZHZscHItMTc2/add-on-purchase-detail-confirmation.png" />
+   ![img - roku600px](https://image.roku.com/ZHZscHItMTc2/add-on-purchase-detail-confirmation.png)
 
 ## Updating the app
 
@@ -162,17 +157,17 @@ To update your app with the new Channel Store APIs, follow these steps:
 
 1. Initialize the ChannelStore API generic request framework. The following code monitors the **channelStore.requestStatus** field and fires the **onRequestStatus()** callback function when changes to the **requestStatus** field occur. The **onRequestStatus()** function determines which command was sent and sends the results to the dedicated parser for the command.
 
-   ```
+   ```brightscript
    function init()
        m.store = m.parent.FindNode("channelStore")
        m.store.observeField("requestStatus", "onRequestStatus")
    end function
-     
+
    ' Generic SDK API request callback
    function onRequestStatus()
        requestStatus = m.store.requestStatus
-     
-       if requestStatus = Invalid
+
+       if requestStatus = invalid
            print "Invalid requestStatus"
        else
            print "requestStatus", requestStatus
@@ -180,7 +175,7 @@ To update your app with the new Channel Store APIs, follow these steps:
            print "requestStatus.status", requestStatus.status
            print "requestStatus.statusMessage", requestStatus.statusMessage
            print "requestStatus.context", requestStatus.context
-     
+
            ' requestStatus.status:
            ' 2: Interrupted
            ' 1: Success
@@ -189,7 +184,7 @@ To update your app with the new Channel Store APIs, follow these steps:
            ' -2: Timeout
            ' -3: Unknown error
            ' -4: Invalid request
-     
+
            ' Generic request succeeded
            if requestStatus.status = 1 then
                if requestStatus.command = "GetCatalog" then
@@ -208,7 +203,7 @@ To update your app with the new Channel Store APIs, follow these steps:
 
 2. Send the **GetCatalog** command to get the list of purchase options. In all the requests within the add-on API workflow, the version field must be set to **2**.
 
-   ```
+   ```brightscript
    sub GetCatalog()
        request = {}
        request.command = "GetCatalog"
@@ -221,14 +216,14 @@ To update your app with the new Channel Store APIs, follow these steps:
 
 3. From the **OnGetCatalog()** callback function, store the **purchaseOptionsMap** and **productsMap** collections returned by the **GetCatalog** command.
 
-   ```
+   ```brightscript
    sub onGetCatalog(requestResult as object)
        print "requestResult.status", requestResult.status
        print "requestResult.statusMessage", requestResult.statusMessage
-      
+
        m.purchaseOptions = {}
        m.products = {}
-     
+
        ' GetCatalog succeeded
        if requestResult.status = 1 and type(requestResult.result) = "roAssociativeArray" then
            m.purchaseOptions = requestResult.result.purchaseOptionsMap
@@ -239,7 +234,7 @@ To update your app with the new Channel Store APIs, follow these steps:
 
 4. Use the **QueryPurchaseOptions** command to offer the customer base and bundle purchase options in the UI. The following example creates a map of base and bundle purchase options:
 
-   ```
+   ```brightscript
    sub queryBasePurchaseOptions()
        query = [
            {"billingType":"Subscription","base":true},
@@ -247,7 +242,7 @@ To update your app with the new Channel Store APIs, follow these steps:
        ]
        QueryPurchaseOptions("Base", query)
    end sub
-    
+
    sub QueryPurchaseOptions(queryType as String, query as Object)
        request = {
            "context": {
@@ -262,7 +257,7 @@ To update your app with the new Channel Store APIs, follow these steps:
        }
        m.store.request = request
    end sub
-    
+
    sub onQueryPurchaseOptions(context as object, requestResult as object)
        if context.queryType = "Base" then
            m.basePurchaseOptions = requestResult.purchaseOptionsMap
@@ -276,7 +271,7 @@ To update your app with the new Channel Store APIs, follow these steps:
 
 5. Offer the customer add-on purchase options in the UI. The following example creates a map of add-on purchase options that are available for the specified SKU of a base purchase option:
 
-   ```
+   ```brightscript
    sub queryAddonPurchaseOptions()
           query = [
               {"referenceSku":m.base,"addon":true}
@@ -297,7 +292,7 @@ To update your app with the new Channel Store APIs, follow these steps:
 
 6. Send the **DoOrder** command to purchase the base prerequisite product and any add-ons, and then check the order status.
 
-   ```
+   ```brightscript
    sub DoOrder()
        request = {}
        request.command = "DoOrder"
@@ -346,7 +341,7 @@ To update your app with the new Channel Store APIs, follow these steps:
                        keys = item.Keys()
                        for each key in keys
                            strField = AnyToString(item[key])
-                           if strField <> Invalid
+                           if strField <> invalid
                                if strField.len() > 0
                                    message += key + " = " + strField + chr(10)
                                else
@@ -368,7 +363,7 @@ To update your app with the new Channel Store APIs, follow these steps:
 
 7. Send the **GetAllPurchases** command to query the customer's purchases, and then check the order status. The response includes three arrays: **purchases**, **products**, and **entitlements**. If a cross-partner bundle subscription was purchased, its information is in the **entitlements** list.
 
-   ```
+   ```brightscript
    sub GetAllPurchases()
        request = {}
        request.command = "GetPurchases"
@@ -378,12 +373,12 @@ To update your app with the new Channel Store APIs, follow these steps:
        }
        m.store.request = request
    end sub
-     
+
    function onGetAllPurchases(requestResult as object) as void
        m.purchases = {}
        m.purchasedProducts = {}
        m.entitlements = []
-     
+
        print chr(10) + "onGetAllPurchases"
        dialog = CreateObject("roSGNode", "statusDialog")
        message = ""
@@ -410,7 +405,7 @@ To update your app with the new Channel Store APIs, follow these steps:
                for each field in fields
                    strKey = AnyToString(field.key)
                    strValue = AnyToString(field.value)
-                   if strValue <> Invalid
+                   if strValue <> invalid
                        if strValue.len() > 0
                            message += strKey + " = " + strValue + chr(10)
                        else
@@ -424,7 +419,7 @@ To update your app with the new Channel Store APIs, follow these steps:
                            for each field1 in fields1
                                strKey1 = AnyToString(field1.key)
                                strValue1 = AnyToString(field1.value)
-                               if strValue1 <> Invalid
+                               if strValue1 <> invalid
                                    if strValue1.len() > 0
                                        message += "- " + strKey1 + " = " + strValue1 + chr(10)
                                    else
@@ -439,7 +434,7 @@ To update your app with the new Channel Store APIs, follow these steps:
                                            for each field2 in fields2
                                                strKey2 = AnyToString(field2.key)
                                                strValue2 = AnyToString(field2.value)
-                                               if strValue2 <> Invalid
+                                               if strValue2 <> invalid
                                                    if strValue2.len() > 0
                                                        message += "--- " + strKey2 + " = " + strValue2 + chr(10)
                                                    else
@@ -452,7 +447,7 @@ To update your app with the new Channel Store APIs, follow these steps:
                                                    for each field3 in fields3
                                                        strKey3 = AnyToString(field3.key)
                                                        strValue3 = AnyToString(field3.value)
-                                                       if strValue3 <> Invalid
+                                                       if strValue3 <> invalid
                                                            if strValue3.len() > 0
                                                                message += "---- " + strKey3 + " = " + strValue3 + chr(10)
                                                            else
@@ -487,7 +482,7 @@ To update your app with the new Channel Store APIs, follow these steps:
                for each field in fields
                    strKey = AnyToString(field.key)
                    strValue = AnyToString(field.value)
-                   if strValue <> Invalid
+                   if strValue <> invalid
                        if strValue.len() > 0
                            message += strKey + " = " + strValue + chr(10)
                        else
@@ -502,7 +497,7 @@ To update your app with the new Channel Store APIs, follow these steps:
                                for each field1 in fields1
                                    strKey1 = AnyToString(field1.key)
                                    strValue1 = AnyToString(field1.value)
-                                   if strValue1 <> Invalid
+                                   if strValue1 <> invalid
                                        if strValue1.len() > 0
                                            message += "-- " + strKey1 + " = " + strValue1 + chr(10)
                                        else
@@ -531,7 +526,7 @@ To update your app with the new Channel Store APIs, follow these steps:
                for each field in fields
                    strKey = AnyToString(field.key)
                    strValue = AnyToString(field.value)
-                   if strValue <> Invalid
+                   if strValue <> invalid
                        if strValue.len() > 0
                            message += strKey + " = " + strValue + chr(10)
                        else
@@ -540,7 +535,7 @@ To update your app with the new Channel Store APIs, follow these steps:
                    end if
                end for
            end for
-       endif
+       end if
        print "message", message
        dialog.message = message
        m.top.getScene().dialog = dialog
@@ -549,7 +544,7 @@ To update your app with the new Channel Store APIs, follow these steps:
 
 ## Sample app
 
-The provided sample app demonstrates how to integrate add-ons and bundles in your app to offer customers premium content, additional channels, bundled packages, and other upgrades and features. It lets you purchase base subscription products and bundles in your product catalog, and then purchase any eligible add-ons.
+The [add-ons sample app](https://github.com/rokudev/samples/tree/master/roku%20pay/add-ons) demonstrates how to integrate add-ons and bundles in your app to offer customers premium content, additional channels, bundled packages, and other upgrades and features. It lets you purchase base subscription products and bundles in your product catalog, and then purchase any eligible add-ons.
 
 ## Appendix A: Catalog 2.0 APIs
 
@@ -736,7 +731,7 @@ Returns the list of current and historical (optional) purchases associated with 
 <li><strong>type</strong> (string): Indicates whether the purchase option represents a subscription, consumable/non-consumable, and so on. This may be set to one of the following values: "Consumable", "NonConsumable", "MonthlySub", "QuarterlySub", "YearlySub", "PhysicalGood", "Shipping", "Mixed".</li>
 <li><strong>addon</strong> (boolean): A flag indicating whether the purchase was for an add-on. </li>
 <li><strong>purchaseDate</strong> (string): The purchase date (in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a> format).</li>
-<li><strong>purchaseChannel</strong> (string): Indicates where the Roku Pay subscription purchase was made: <strong>web</strong> (purchased from <a href="http://roku.com/">Roku.com</a> [for example, through <a href="https://developer.roku.com/docs/developer-program/discovery/instant-signup.md">Instant Signup</a> during the device activation]) or <strong>device</strong> (purchased on the Roku device [through the on-device sign-up flow]).</li>
+<li><strong>purchaseChannel</strong> (string): Indicates where the Roku Pay subscription purchase was made: <strong>web</strong> (purchased from <a href="http://roku.com/">Roku.com</a> [for example, through <a href="https://developer.roku.com/docs/developer/discovery/instant-signup.md">Instant Signup</a> during the device activation]) or <strong>device</strong> (purchased on the Roku device [through the on-device sign-up flow]).</li>
 <li><strong>purchaseContext</strong> (string): Indicates how the subscription purchase was made: <strong>isu</strong> (purchased via Instant Signup) or <strong>iap</strong> (purchased in the app)</li>
 <li>
 <p><strong>billingPlans</strong> (roArray of roAssociativeArrays): A list of billing plans associated with the purchase. Each billing plan contains the following fields:</p>
@@ -1334,13 +1329,13 @@ The new catalog data structure has not changed any of the Roku Pay web service A
 
 When the **DoOrder** command is sent, the Roku Pay order confirmation screen lists each product being purchased, including base subscriptions and add-ons.
 
-<Image alt="img - roku600px" border={false} src="https://image.roku.com/ZHZscHItMTc2/two-items.jpg" />
+![img - roku600px](https://image.roku.com/ZHZscHItMTc2/two-items.jpg)
 
 If the purchase includes two or more add-ons, the customer can press the PLAY button on their Roku remote control to view an itemized list of products before confirming the purchase.
 
-<Image alt="img - roku600px" border={false} src="https://image.roku.com/ZHZscHItMTc2/2andmore.jpg" />
+![img - roku600px](https://image.roku.com/ZHZscHItMTc2/2andmore.jpg)
 
-<Image alt="img - roku600px" border={false} src="https://image.roku.com/ZHZscHItMTc2/fullorder.jpg" />
+![img - roku600px](https://image.roku.com/ZHZscHItMTc2/fullorder.jpg)
 
 ## Appendix D: Base subscription and add-on management workflow for customers
 
@@ -1358,24 +1353,24 @@ When an add-on is canceled, its entitlement is removed from the Roku customer ac
 
 The following images demonstrate how the on-device add-on management and cancelation workflow can be used to cancel base subscription products and add-ons:
 
-<Image alt="img - roku600px" border={false} src="https://image.roku.com/ZHZscHItMTc2/managesub.jpg" />
+![img - roku600px](https://image.roku.com/ZHZscHItMTc2/managesub.jpg)
 
-<Image alt="img - roku600px" border={false} src="https://image.roku.com/ZHZscHItMTc2/cancelsub.jpg" />
+![img - roku600px](https://image.roku.com/ZHZscHItMTc2/cancelsub.jpg)
 
-<Image alt="img - roku600px" border={false} src="https://image.roku.com/ZHZscHItMTc2/cancelbase.jpg" />
+![img - roku600px](https://image.roku.com/ZHZscHItMTc2/cancelbase.jpg)
 
-<Image alt="img - roku600px" border={false} src="https://image.roku.com/ZHZscHItMTc2/canceladdon.jpg" />
+![img - roku600px](https://image.roku.com/ZHZscHItMTc2/canceladdon.jpg)
 
 #### Online subscription management
 
 The following images demonstrate the online add-on management and cancellation workflow:
 
-<Image alt="img - roku600px" border={false} src="https://image.roku.com/ZHZscHItMTc2/manage-subscription-bundle.png" />
+![img - roku600px](https://image.roku.com/ZHZscHItMTc2/manage-subscription-bundle.png)
 
-<Image alt="img - roku600px" border={false} src="https://image.roku.com/ZHZscHItMTc2/manage-subscription-no-pause.png" />
+![img - roku600px](https://image.roku.com/ZHZscHItMTc2/manage-subscription-no-pause.png)
 
-<Image alt="img - roku600px" border={false} src="https://image.roku.com/ZHZscHItMTc2/manage-add-on.png" />
+![img - roku600px](https://image.roku.com/ZHZscHItMTc2/manage-add-on.png)
 
-<Image alt="img - roku600px" border={false} src="https://image.roku.com/ZHZscHItMTc2/cancel-add-on.png" />
+![img - roku600px](https://image.roku.com/ZHZscHItMTc2/cancel-add-on.png)
 
-<Image alt="img - roku600px" border={false} src="https://image.roku.com/ZHZscHItMTc2/remove-add-on.png" />
+![img - roku600px](https://image.roku.com/ZHZscHItMTc2/remove-add-on.png)

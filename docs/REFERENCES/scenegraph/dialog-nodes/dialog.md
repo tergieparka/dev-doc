@@ -1,11 +1,11 @@
 ---
 title: Dialog
-excerpt: ''
+excerpt: 'A modal pop-up dialog node for presenting information requiring immediate user attention'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Dialog'
+  description: 'The Dialog node class defines a modal pop-up dialog used to present the user with information requiring their immediate attention. Supports title, message, bullet text, graphic, and button regions.'
   robots: index
 next:
   description: ''

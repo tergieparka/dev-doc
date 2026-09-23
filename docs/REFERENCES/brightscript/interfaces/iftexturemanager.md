@@ -1,11 +1,11 @@
 ---
 title: "ifTextureManager"
-excerpt: ''
+excerpt: 'Interface for requesting and managing roBitmap textures via roTextureManager'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'ifTextureManager'
+  description: 'Interface implemented by roTextureManager that exposes RequestTexture, CancelRequest, UnloadBitmap, and Cleanup methods for managing roBitmap requests.'
   robots: index
 next:
   description: ''
@@ -43,7 +43,7 @@ Cancels the request specified by req, which should be an roTextureRequest previo
 
 | Name  | Type    | Description |
 | ----  | ------- | -------------- |
-| req | Object  | The previoulsy passed roTextureRequest to be cancelled. |
+| req | Object  | The previously passed roTextureRequest to be cancelled. |
 
 ### UnloadBitmap(url as String) as Void
 

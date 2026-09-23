@@ -1,18 +1,18 @@
 ---
 title: DynamicCustomKeyboard
-excerpt: ''
+excerpt: 'Voice-enabled keyboard node with a custom layout driven by a Key Definition File'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'DynamicCustomKeyboard'
+  description: 'The DynamicCustomKeyboard node enables developers to create a voice-enabled keyboard with a custom layout defined by a JSON-formatted Key Definition File.'
   robots: index
 next:
   description: ''
 ---
-Extends <Anchor label="DynamicKeyboardBase" title="DynamicKeyboardBase" href="https://roku-ent.readme.io/dev/docs/dynamic-keyboard-base">DynamicKeyboardBase</Anchor>
+Extends <Anchor label="DynamicKeyboardBase" title="DynamicKeyboardBase" href="/dev/docs/dynamic-keyboard-base">DynamicKeyboardBase</Anchor>
 
-The **DynamicCustomKeyboard** node enables developers to create a voice-enabled keyboard that has a custom layout. As specified in its parent <Anchor label="DynamicKeyboardBase" title="DynamicKeyboardBase" href="https://roku-ent.readme.io/dev/docs/dynamic-keyboard-base">DynamicKeyboardBase</Anchor>  class, the **DynamicCustomKeyboard** node has a built-in [**VoiceTextEditBox**](doc:voice-text-edit-box)  node for displaying the string of characters provided via text or voice entry, and it has a  [**DynamicKeyGrid**](doc:dynamic-key-grid)  node that provides keyboard functionality.
+The **DynamicCustomKeyboard** node enables developers to create a voice-enabled keyboard that has a custom layout. As specified in its parent <Anchor label="DynamicKeyboardBase" title="DynamicKeyboardBase" href="/dev/docs/dynamic-keyboard-base">DynamicKeyboardBase</Anchor>  class, the **DynamicCustomKeyboard** node has a built-in [**VoiceTextEditBox**](doc:voice-text-edit-box)  node for displaying the string of characters provided via text or voice entry, and it has a  [**DynamicKeyGrid**](doc:dynamic-key-grid)  node that provides keyboard functionality.
 
 <br />
 
@@ -24,7 +24,7 @@ The layout of the keyboard is customized based on a JSON-formatted Key Definitio
 
 The instance of the **DynamicKeyGrid** node is accessed via the **keyGrid** field of the **DynamicCustomKeyboard** node. The **keyGrid** field includes a **keyDefinitionUri** field, which must be set to a valid Key Definition File. Typically, this is done by creating an RSG component that extends the **DynamicCustomKeyboard** and then defining an **init()** function for that component as demonstrated in the following example:
 
-```
+```brightscript
 sub init()
         m.top.keyGrid.keyDefinitionUri = "pkg:/data/coolKeyboardLayoutKDF.json"
 end sub
@@ -48,29 +48,29 @@ It is recommended that developers create a component that extends the **DynamicC
 
 For most keys defined in the Key Definition File, the [default key selection handlers](#default-key-selection-handlers)  will provide the desired behavior. If custom handling is needed, the component that extends the **DynamicCustomKeyboard** node class can implement an interface function. To do this, include a function within the component's \<interface> element that has the following signature:
 
-```
-    function keySelected(key as string) as boolean
+```brightscript
+function keySelected(key as string) as boolean
 ```
 
 The _key_ parameter is set to the key's "strOut" field, if specified; otherwise, it is set to the key's "label" string.
 
-The function should return _true_ if it handles the key selection. Returning _false_ causes the [default key selection handler](#default-key-selection-handler)  behavior to be used.
+The function should return _true_ if it handles the key selection. Returning _false_ causes the [default key selection handler](#default-key-selection-handlers)  behavior to be used.
 
 #### Example custom key select handler
 
 The following example demonstrates a custom key handler:
 
 1. The Key Definition File for the component that extends **DynamicCustomKeyboard** node has a row that defines the following keys:
-   ```
+   ```json
    "keys": [
        { "label": "Aa", "strOut": "ChangeCase" },
        <OTHER KEYS>
-   ] 
+   ]
    ```
 
 2. When this key is selected, the keyboard's mode is changed from "UpperCase" to "LowerCase" (the Key Definition File would need to include grids for both modes). In this case, the child **DynamicCustomKeyboard** component includes a **keySelected()** function in its interface:
-   ```
-   <component name="MyCustomKeyboard" extends="DynamicCustomKeyboard>
+   ```xml
+   <component name="MyCustomKeyboard" extends="DynamicCustomKeyboard">
        <interface>
            <function name="keySelected" />
        </interface>
@@ -79,10 +79,10 @@ The following example demonstrates a custom key handler:
    ```
 
 3. In the corresponding BrightScript file for the child **DynamicCustomKeyboard** component, the **keySelected()** function includes the following business logic:
-   ```
+   ```brightscript
    function keySelected(key as string) as boolean
        if key = "ChangeCase"
-           if m.top.keyGrid.mode = "UpperCase"   ' m.top.keyGrid.mode would likely be initialized in the component's init()                                                
+           if m.top.keyGrid.mode = "UpperCase"   ' m.top.keyGrid.mode would likely be initialized in the component's init()
                m.top.keyGrid.mode = "LowerCase"  ' function just after m.top.keyGrid.keyDefinitionUri is set to the Key Definition File to use
            else
                m.top.keyGrid.mode = "UpperCase"
@@ -99,14 +99,14 @@ The following example demonstrates a custom key handler:
 In most cases, the default key selection handlers can be used for modifying the entered text string. However, if a custom key handler is used to do this, it must update the **cursorPosition** of the **DynamicCustomKeyboard**. The following example demonstrates a custom key handler that changes the text string:
 
 1. The Key Definition File includes a key definition with an action intended to duplicate the character to the left of the cursor position, positioning the cursor after the duplicated character:
-   ```
+   ```json
    "keys": [
        { "icon": "pkg:/images/Duplicate.png", "strOut": "DuplicateCharacter" },
        <OTHER KEYS>
    ]
    ```
 2. The **keySelected()** function includes the following business logic:
-   ```
+   ```brightscript
    function keySelected(key as string) as boolean
        if key = "DuplicateCharacter"
            currString = m.top.text
@@ -128,7 +128,7 @@ In most cases, the default key selection handlers can be used for modifying the 
 
 ## Fields
 
-See the <Anchor label="DynamicKeyboardBase" title="DynamicKeyboardBase" href="https://roku-ent.readme.io/dev/docs/dynamic-keyboard-base">DynamicKeyboardBase</Anchor> node and its base classes ([Group](doc:group) and [Node](doc:node)) for configuring the fields inherited by the **DynamicCustomKeyboard** node.
+See the <Anchor label="DynamicKeyboardBase" title="DynamicKeyboardBase" href="/dev/docs/dynamic-keyboard-base">DynamicKeyboardBase</Anchor> node and its base classes ([Group](doc:group) and [Node](doc:node)) for configuring the fields inherited by the **DynamicCustomKeyboard** node.
 
 <HTMLBlock>{`
 <table>
@@ -141,7 +141,6 @@ See the <Anchor label="DynamicKeyboardBase" title="DynamicKeyboardBase" href="ht
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>keyGrid</td>
@@ -168,7 +167,7 @@ See the <Anchor label="DynamicKeyboardBase" title="DynamicKeyboardBase" href="ht
 
 The following sample demonstrates a Key Definition File that defines five grids for **DynamicCustomKeyboard** node. See the [Key Definition File specification](doc:key-definition-file) for more information.
 
-```
+```json
 {
   "keyboardWidthFHD": 576,
   "keyboardHeightFHD": 432,
@@ -364,8 +363,8 @@ The following sample demonstrates a Key Definition File that defines five grids 
                   "strOut": "Delete"
                 },
                 {
-"label": "0"
-},
+                  "label": "0"
+                },
                 {
                   "icon": "theme:KeyboardClearOnBitmap",
                   "focusIcon": "theme:KeyboardClearOffBitmap",

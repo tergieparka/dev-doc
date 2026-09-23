@@ -1,11 +1,11 @@
 ---
 title: Setting the monetization method
-excerpt: ''
+excerpt: 'Select subscriptions or one-time purchases for an app using Roku Pay'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Setting the monetization method | Roku Developer Docs'
+  description: 'Specify the monetization methods for an SVOD or TVOD app implementing Roku Pay, including subscriptions and one-time purchases, in the Developer Dashboard.'
   robots: index
 next:
   description: ''
@@ -22,21 +22,21 @@ To add products to a subscription video on demand (SVOD) or transactional video 
 
 To select the monetization methods for an app, follow these steps:
 
-1. In the [Developer Dashboard](https://developer.roku.com/developer), select **Manage My Channels**, click **Preview and** **Update** on your test app, and then select **Monetization** from the drop-down list.
+1. In the [Developer Dashboard](https://developer.roku.com/developer), select **Manage My Apps**, click **Preview and** **Update** on your test app, and then select **Monetization** from the drop-down list.
 
-   If you have not created a test app yet, click **Add Channel**, select **Developer SDK**, mark the app as **public** or **beta**, enter an app name, and then select **Monetization** from the drop-down list.
+   If you have not created a test app yet, click **Add App**, select **Developer SDK**, mark the app as **public** or **beta**, enter an app name, and then select **Monetization** from the drop-down list.
 
 2. Select one or more of the following options:
 
-   <Image alt="roku815px - monetization-method.jpg" border={false} src="https://image.roku.com/ZHZscHItMTc2/monetization-method-v4c.png" />
+   ![roku815px - monetization-method.jpg](https://image.roku.com/ZHZscHItMTc2/monetization-method-v4c.png)
 
-   * **Customers will pay before installing my channel (pay-to-install)**. Pay-to-install apps are typically only used on the Roku platform for games and screensavers. Pay-to-install apps are not typically used for SVOD apps—they do not enable customers to browse the content before installing the app, and they do not support free trial offers. See [In-app products](doc:in-channel-products) for more information on configuring these fields.
+   * **Customers will pay before installing my channel (pay-to-install)**. Pay-to-install apps are typically only used on the Roku platform for games and screensavers. Pay-to-install apps are not typically used for SVOD apps—they do not enable customers to browse the content before installing the app, and they do not support free trial offers. See [In-app products](doc:product-catalog) for more information on configuring these fields.
 
    * **My channel contains in-channel subscriptions (SVOD)**. The app includes a monthly or annual subscription offering. Select this option for SVOD apps. See **In-app products** for more information on creating subscription products.
 
      > If you select this check box, you must [implement Roku Pay](doc:roku-pay) in your app and adhere to all [Roku Pay certification requirements](doc:roku-pay-requirements).
 
-   * **My channel contains in-channel one-time purchases (TVOD)**. The app offers transactional content such as movie rentals, sporting events, and pay-per-views. Select this option for TVOD-exclusive apps (app contains only transactional content) and SVOD apps that additionally offer one-time purchase products. See [Creating TVOD apps](doc:tvod-channel) for more information on creating one-time purchase products in the **In-App Products** page.
+   * **My channel contains in-channel one-time purchases (TVOD)**. The app offers transactional content such as movie rentals, sporting events, and pay-per-views. Select this option for TVOD-exclusive apps (app contains only transactional content) and SVOD apps that additionally offer one-time purchase products. See [Creating TVOD apps](doc:tvod-app-catalog) for more information on creating one-time purchase products in the **In-App Products** page.
 
      > If you select this check box, you must [implement Roku Pay](doc:roku-pay) in your app and adhere to all [Roku Pay certification requirements](doc:roku-pay-requirements).
 

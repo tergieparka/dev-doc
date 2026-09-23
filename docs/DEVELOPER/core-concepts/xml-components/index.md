@@ -2,7 +2,7 @@
 title: "XML components overview"
 excerpt: ''
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''
@@ -23,14 +23,14 @@ the built-in SceneGraph node types. For example, if a XML component
 named `Gizmo` has been defined, an instance of the component can be
 created by either declaring it in another XML component file:
 
-```
+```xml
 <Gizmo id="MyGizmo" />
 ```
 
 Or using the `createObject()` function to create an
 [**roSGNode**](doc:rosgnode) object:
 
-```
+```brightscript
 createObject("roSGNode", "Gizmo")
 ```
 

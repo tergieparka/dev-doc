@@ -1,11 +1,11 @@
 ---
 title: Creating a content feed
-excerpt: ''
+excerpt: 'Build a cloud-hosted content feed to connect your catalog to your Roku app'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Creating a content feed | Roku Developer Docs'
+  description: 'Learn how to create and host a content feed for your Roku app, including metadata fields like title, description, artwork, and URL for each catalog item.'
   robots: index
 next:
   description: ''
@@ -16,7 +16,7 @@ The content metadata in the feed is used to transfer the video and audio content
 
 The following example demonstrates the types of metadata included in the feed for a single content item:
 
-```
+```json
 {
     "id": "dev-summit-21-keynote-welcome-address",
     "title": "Keynote - Welcome address",

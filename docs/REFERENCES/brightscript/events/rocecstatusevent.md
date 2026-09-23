@@ -1,11 +1,11 @@
 ---
 title: "roCECStatusEvent"
-excerpt: ''
+excerpt: 'Event that reports active-source status changes via CEC message traffic'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'roCECStatusEvent'
+  description: 'roCECStatusEvent reports changes to the active-source status of a device by monitoring CEC message traffic and notifying subscribed apps via GetInfo().'
   robots: index
 next:
   description: ''
@@ -40,7 +40,7 @@ Returns an associative array with the following key/value pairs:
 
 A BrightScript app subscribes to roCECStatusEvent by creating an "roCECStatus" object. For example:
 
-~~~
+```brightscript
 cecstatus = CreateObject("roCECStatus")
 m.port = CreateObject("roMessagePort")
 cecstatus.SetMessagePort(m.port)
@@ -52,7 +52,7 @@ if msgType = "roCECStatusEvent"
     active = info["Active"]
     ...
 end if
-~~~
+```
 
 
 ## Expected Results

@@ -1,16 +1,16 @@
 ---
 title: ChannelStore
-excerpt: ''
+excerpt: 'Node interface to the Streaming Store for purchases and account data'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'ChannelStore'
+  description: 'The ChannelStore node provides an interface to the Streaming Store, enabling apps to issue commands for purchases, orders, and customer data.'
   robots: index
 next:
   description: ''
 ---
-Extends [**Node**](https://roku-ent.readme.io/dev/docs/node)
+Extends [**Node**](/dev/docs/node)
 
 The **ChannelStore** node class provides an interface to the Streaming Store. It provides functionality equivalent to the [roChannelStore](doc:ifchannelstore) component. In general, the **ChannelStore** node class allows developers to issue one of several commands, which involves the following steps:
 
@@ -35,14 +35,11 @@ Each of the commands starts a sequence of actions associated with the financial 
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>command</td>
       <td>string</td>
-
       <td />
-
       <td>READ\_WRITE</td>
       <td>Specifies the command to be executed:<br /><ul><li><a href="#getuserdata">getUserData</a></li><li><a href="#getuserregiondata">getUserRegionData</a></li><li><a href="#getcatalog">getCatalog</a> and <a href="#getstorecatalog">getStoreCatalog</a></li><li><a href="#doorder">doOrder</a></li><li><a href="#getpurchases">getPurchases</a> and <a href="#getallpurchases">getAllPurchases</a></li><li><a href="#storechannelcreddata">storeChannelCredData</a></li><li><a href="#getchannelcred">getChannelCred</a></li><li><a href="#getdeviceattestationtoken">getDeviceAttestationToken</a></li><li><a href="#requestpartnerorder">requestPartnerOrder</a></li><li><a href="#confirmpartnerorder">confirmPartnerOrder</a></li></ul></td>
     </tr>
@@ -61,7 +58,6 @@ Each of the commands starts a sequence of actions associated with the financial 
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>requestedUserData</td>
@@ -85,7 +81,6 @@ Each of the commands starts a sequence of actions associated with the financial 
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>requestedUserDataInfo</td>
@@ -93,7 +88,7 @@ Each of the commands starts a sequence of actions associated with the financial 
       <td>invalid</td>
       <td>READ\_WRITE</td>
       <td>Specifies whether the RFI screen is used for customer sign-ups or sign-ins. This may be one of the following values:<br /><table><thead><tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td>context</td><td>string</td><td>"signup"</td><td>Specifies the context of the RFI screen, which may be one of the following values:<ul>
-      <li>"signup": The RFI screen displays a "Let's create your account" title and lists the customer information specified in the <a href="#requesteduserdata"><strong>requestedUserData</strong> field</a>. The RFI screen uses the "signup" context by default. See <a href="https://roku-ent.readme.io/dev/docs/signup-best-practices">Sign-up requirements and best practices</a> for more information on implementing the app sign-up UI.</li><li>"signin: "The RFI screen displays a "Sign in" title and lists only email or phone attributes, if specified in the <a href="#requesteduserdata"><strong>requestedUserData</strong> field</a>. Other attributes are ignored, even if specified. See the <a href="#sign-in-example">Sign-in example</a> for how to use this field. See <a href="https://roku-ent.readme.io/dev/docs/signin-best-practices">Sign-in requirements and best practices</a> for more information on implementing the app sign-in UI.</li></ul>
+      <li>"signup": The RFI screen displays a "Let's create your account" title and lists the customer information specified in the <a href="#requesteduserdata"><strong>requestedUserData</strong> field</a>. The RFI screen uses the "signup" context by default. See <a href="/dev/docs/signup-best-practices">Sign-up requirements and best practices</a> for more information on implementing the app sign-up UI.</li><li>"signin: "The RFI screen displays a "Sign in" title and lists only email or phone attributes, if specified in the <a href="#requesteduserdata"><strong>requestedUserData</strong> field</a>. Other attributes are ignored, even if specified. See the <a href="#sign-in-example">Sign-in example</a> for how to use this field. See <a href="/dev/docs/signin-best-practices">Sign-in requirements and best practices</a> for more information on implementing the app sign-in UI.</li></ul>
       </td></tr><tr><td>forceShowData</td><td>Boolean</td><td>false</td><td>If true, the RFI signup screen displays the values of the requested customer information to be shared with the app (for example, Jone Doe, [jon.doe@emailaddress.com](mailto:jon.doe@emailaddress.com)).<br /><br />By default, this flag is set to false, which means that the default RFI screen for the region is used. For example, in the US, the RFI screen displays the type of customer information being requested (email address, name, and so on).<br /><br />This flag has no effect if the context field is set to "signin" (the RFI sign-in screen always displays the customer information values). <br /><br /><strong>Example</strong>:<br /><pre><code>store = CreateObject("roSGNode", "ChannelStore")<br />' Doesn't show user data in dialog unless necessary in the user's region.<br /> store.requestedUserData = "email,firstname,lastname,gender,birth"<br />store.command = "getUserData"<br />' Shows user data in dialog.<br />info = CreateObject("roSGNode", "ContentNode")<br />info.addFields(\{forceShowData: true})<br />store.requestedUserDataInfo = info<br />store.requestedUserData = "email"<br />store.command = "getUserData"</code></pre></td></tr></tbody></table></td>
     </tr>
   </tbody>
@@ -101,7 +96,7 @@ Each of the commands starts a sequence of actions associated with the financial 
 
 #### Sign-up example
 
-```
+```brightscript
 store = CreateObject("roSGNode", "ChannelStore")
 
 ' Request several properties for sign-up
@@ -117,7 +112,7 @@ store.command = "getUserData"
 
 #### Sign-in example
 
-```
+```brightscript
 store = CreateObject("roSGNode", "ChannelStore")
 
 ' Set sign-in context for RFI screen
@@ -145,7 +140,6 @@ store.command = "getUserData"
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>userData</td>
@@ -169,14 +163,13 @@ store.command = "getUserData"
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>order</td>
       <td>ContentNode</td>
       <td>invalid</td>
       <td>READ\_WRITE</td>
-      <td>Contains the order to be filled when the <a href="#doorder"><strong>doOrder</strong></a> command is executed. This ContentNode contains one child ContentNode for each of the items to be purchased. The child ContentNode must contain the following fields:<br /><table><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>code</td><td>string</td><td>Identifies the product to be purchased, as entered in the <strong>Product Identifier</strong> field on the <a href="https://developer.roku.com/products">In-App Product page in the Developer Dashboard</a> when the product was created. See <a href="#creating-an-order">Creating an order</a> for more information.</td></tr><tr><td>qty</td><td>Integer</td><td>The quantity of the item to be purchased, which is typically 1 for most in-app products.<br /><br />This is only typically more than 1 if the product is a "packet" of identical items (such as game points, number of viewings permitted of some item of content, and so on).</td></tr></tbody></table><br />To clear an order, set the <strong>order</strong> field to "invalid".<br /><br /><strong>For upgrades/downgrades only</strong>. You need to include an <strong>action</strong> field to specify a subscription plan change. <table><thead><tr><th>Field</th><th>Type</th><th>Access Permission</th><th>Description</th></tr></thead><tbody><tr><td>action</td><td>string</td><td>READ\_WRITE</td><td>Set this to "Upgrade" or "Downgrade" to change the subscription plan from a previous purchase (for example, <code>myOrder.action = "Upgrade"</code>). The required values are case-sensitive; do not pass "upgrade" or "downgrade". See <a href="https://roku-ent.readme.io/dev/docs/on-device-upgrade-downgrade">On-device upgrade and downgrade</a> for more information.</td></tr></tbody></table></td>
+      <td>Contains the order to be filled when the <a href="#doorder"><strong>doOrder</strong></a> command is executed. This ContentNode contains one child ContentNode for each of the items to be purchased. The child ContentNode must contain the following fields:<br /><table><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>code</td><td>string</td><td>Identifies the product to be purchased, as entered in the <strong>Product Identifier</strong> field on the <a href="https://developer.roku.com/products">In-App Product page in the Developer Dashboard</a> when the product was created. See <a href="#creating-an-order">Creating an order</a> for more information.</td></tr><tr><td>qty</td><td>Integer</td><td>The quantity of the item to be purchased, which is typically 1 for most in-app products.<br /><br />This is only typically more than 1 if the product is a "packet" of identical items (such as game points, number of viewings permitted of some item of content, and so on).</td></tr></tbody></table><br />To clear an order, set the <strong>order</strong> field to "invalid".<br /><br /><strong>For upgrades/downgrades only</strong>. You need to include an <strong>action</strong> field to specify a subscription plan change. <table><thead><tr><th>Field</th><th>Type</th><th>Access Permission</th><th>Description</th></tr></thead><tbody><tr><td>action</td><td>string</td><td>READ\_WRITE</td><td>Set this to "Upgrade" or "Downgrade" to change the subscription plan from a previous purchase (for example, <code>myOrder.action = "Upgrade"</code>). The required values are case-sensitive; do not pass "upgrade" or "downgrade". See <a href="/dev/docs/on-device-upgrade-downgrade">On-device upgrade and downgrade</a> for more information.</td></tr></tbody></table></td>
     </tr>
   </tbody>
 </table>
@@ -187,7 +180,7 @@ To create an order, this field needs to be set to a ContentNode that has one chi
 
 To set the `order` field directly, first create a ContentNode, then create one child ContentNode with the `"code"` and `"qty"` fields set for each item to be purchased. Assuming `m.channelStore` is a ChannelStore node object, the following Brightscript code shows how to do this:
 
-```
+```brightscript
 myOrder = CreateObject("roSGNode", "ContentNode")
 myFirstItem = myOrder.createChild("ContentNode")
 myFirstItem.addFields({ "code": "UPC2397", "qty": 1})
@@ -199,7 +192,7 @@ m.channelStore.order = myOrder
 
 The `order` field can be set indirectly as well, by setting the `deltaOrder` field to add or modify the desired quantity of an item. Assuming `m.channelStore` is a ChannelStore node object, the following results in the `order` field containing the same items as the previous example:
 
-```
+```brightscript
 m.channelStore.deltaOrder = { "code": "UPC2397", "qty": 1}
 m.channelStore.deltaOrder = { "code": "UPC4321", "qty": 1}
 ```
@@ -216,16 +209,13 @@ m.channelStore.deltaOrder = { "code": "UPC4321", "qty": 1}
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>deltaOrder</td>
       <td>associative array</td>
-
       <td>
         {}
       </td>
-
       <td>WRITE\_ONLY</td>
       <td>Enables the <a href="#order"><strong>order</strong></a> field to be populated incrementally. Each time this field is set, the <strong>order</strong> field is modified.<br /><br />The <strong>deltaOrder</strong> associative array should contain a "code" string that identifies an available item, and a "qty" integer value to indicate how the children of the order field <strong>ContentNode</strong> should be modified.  <br /><br />For example, if the order is invalid, setting the deltaOrder field to the following associative array:  <br /><br />  <code>\{ "code": "Merchandise1", "qty": 1 }</code>  <br /><br />Would cause an order field to be set to a <strong>ContentNode</strong>, with one child <strong>ContentNode</strong> with a "code" field set to "Merchandise1", and a "qty" field set to 1.  <br /><br />If the deltaOrder field was then set to:  <br /><br />  <code>\{ "code": "MyItem2", "qty": 1 }</code>  <br /><br />The order field <strong>ContentNode</strong> would have a second <strong>ContentNode</strong> child appended to it, with the specified "code" and "qty" field values.  <br /><br />The "qty" field can be set to a negative value to remove an item from an order. For example, if the order field was set as above, and the deltaOrder field was set to:  <br /><br />  <code>\{ "code" MyItem2", "qty": -1 }</code>  <br /><br />The order field <strong>ContentNode</strong> would have the second child <strong>ContentNode</strong> removed.</td>
     </tr>
@@ -234,7 +224,7 @@ m.channelStore.deltaOrder = { "code": "UPC4321", "qty": 1}
 
 #### requestPartnerOrder
 
-> See [Creating TVOD apps](https://roku-ent.readme.io/dev/docs/tvod-channel) for how to use this field for transactional purchases.
+> See [Creating TVOD apps](/dev/docs/tvod-channel) for how to use this field for transactional purchases.
 
 <table>
   <thead>
@@ -246,7 +236,6 @@ m.channelStore.deltaOrder = { "code": "UPC4321", "qty": 1}
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>requestPartnerOrder</td>
@@ -260,7 +249,7 @@ m.channelStore.deltaOrder = { "code": "UPC4321", "qty": 1}
 
 #### confirmPartnerOrder
 
-> See [Creating TVOD apps](https://roku-ent.readme.io/dev/docs/tvod-channel) for how to use this field for transactional purchases.
+> See [Creating TVOD apps](/dev/docs/tvod-channel) for how to use this field for transactional purchases.
 
 <table>
   <thead>
@@ -272,7 +261,6 @@ m.channelStore.deltaOrder = { "code": "UPC4321", "qty": 1}
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>confirmPartnerOrder</td>
@@ -332,14 +320,13 @@ m.channelStore.deltaOrder = { "code": "UPC4321", "qty": 1}
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>fakeServer</td>
       <td>Boolean</td>
       <td>false</td>
       <td>READ\_WRITE</td>
-      <td>Enables a test mode for the <strong>ChannelStore</strong> node. The test mode disables communication by the ChannelStore node with the Streaming Store server, and it causes responses to asynchronous queries and operations to come from XML test configuration files rather than the server. <br /><br />To use this test method, create a <strong>csFake</strong> folder and add the following XML files to it in order to simulate web service request and response data: <ul><li><strong>csfake/GetCatalog.xml</strong>: Simulates the list of products available for purchase in the app.</li><li><strong>csfake/GetPurchases.xml</strong>: Simulates the list of products already purchased by the user.</li><li><strong>csfake/PlaceOrder.xml</strong>: Contains information about the product to be ordered.</li><li><strong>csfake/CheckOrder.xml</strong>: Verifies the validity of the order placed. For example, if the <strong>order</strong> and <strong>id</strong> values in the PlaceOrder and CheckOrder XML files do not match, the fake server will report an error in the order processing.</li></ul><br /><br />See the <a href="https://github.com/rokudev/samples/tree/master/roku%20pay/SimpleChannelStore/csfake">SimpleChannelStore sample app</a> for how to use this testing method.<br /><br />The <strong>fakeServer</strong> field must be set to false in a published app to allow actual <a href="https://roku-ent.readme.io/dev/docs/in-channel-products">In-App Product</a> purchases by users.It is recommended that developers use <a href="https://roku-ent.readme.io/dev/docs/billing-testing">billing testing</a> instead of the fakeServer.</td>
+      <td>Enables a test mode for the <strong>ChannelStore</strong> node. The test mode disables communication by the ChannelStore node with the Streaming Store server, and it causes responses to asynchronous queries and operations to come from XML test configuration files rather than the server. <br /><br />To use this test method, create a <strong>csFake</strong> folder and add the following XML files to it in order to simulate web service request and response data: <ul><li><strong>csfake/GetCatalog.xml</strong>: Simulates the list of products available for purchase in the app.</li><li><strong>csfake/GetPurchases.xml</strong>: Simulates the list of products already purchased by the user.</li><li><strong>csfake/PlaceOrder.xml</strong>: Contains information about the product to be ordered.</li><li><strong>csfake/CheckOrder.xml</strong>: Verifies the validity of the order placed. For example, if the <strong>order</strong> and <strong>id</strong> values in the PlaceOrder and CheckOrder XML files do not match, the fake server will report an error in the order processing.</li></ul><br /><br />See the <a href="https://github.com/rokudev/samples/tree/master/roku%20pay/SimpleChannelStore/csfake">SimpleChannelStore sample app</a> for how to use this testing method.<br /><br />The <strong>fakeServer</strong> field must be set to false in a published app to allow actual <a href="/dev/docs/in-channel-products">In-App Product</a> purchases by users.It is recommended that developers use <a href="/dev/docs/billing-testing">billing testing</a> instead of the fakeServer.</td>
     </tr>
   </tbody>
 </table>
@@ -352,7 +339,7 @@ Each of the actions associated with a command string are described in detail bel
 
 Displays the Roku Pay Request for Information (RFI) screen, which prompts customers to confirm that Roku may share their Roku customer account information with the calling app in order to sign up/sign in to that app. This enables apps to create and update customer accounts in their system without requiring customers to manually enter their personal information in an account creation screen.
 
-> To pass [certification](https://roku-ent.readme.io/dev/docs/certification#2-purchases), all authenticated apps (SVOD, TVOD, other subscription services, and AVOD) must use the [getUserData](https://roku-ent.readme.io/dev/docs/channelstore#getuserdata) command to display a Request For Information (RFI) screen during the sign-up and sign-in workflows to enable customers to share their Roku account information with the app. Only if the user declines the request may apps require the customer to manually enter their information.
+> To pass [certification](/dev/docs/certification#2-purchases), all authenticated apps (SVOD, TVOD, other subscription services, and AVOD) must use the [getUserData](/dev/docs/channelstore#getuserdata) command to display a Request For Information (RFI) screen during the sign-up and sign-in workflows to enable customers to share their Roku account information with the app. Only if the user declines the request may apps require the customer to manually enter their information.
 
 To use this command, follow these steps:
 
@@ -388,74 +375,62 @@ Overall, the [**userData** field](#userdata) field may contain the following Rok
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>firstName</td>
       <td>string</td>
       <td>The user first name</td>
     </tr>
-
     <tr>
       <td>lastName</td>
       <td>string</td>
       <td>The user last name</td>
     </tr>
-
     <tr>
       <td>email</td>
       <td>string</td>
       <td>The user email address</td>
     </tr>
-
     <tr>
       <td>street1</td>
       <td>string</td>
       <td>The first line of the user street address</td>
     </tr>
-
     <tr>
       <td>street2</td>
       <td>string</td>
       <td>The second line of the user street address</td>
     </tr>
-
     <tr>
       <td>city</td>
       <td>string</td>
       <td>The city where the user lives</td>
     </tr>
-
     <tr>
       <td>state</td>
       <td>string</td>
       <td>The state where the user lives</td>
     </tr>
-
     <tr>
       <td>zip</td>
       <td>string</td>
       <td>The user postal code</td>
     </tr>
-
     <tr>
       <td>country</td>
       <td>string</td>
       <td>The country where the user lives</td>
     </tr>
-
     <tr>
       <td>phone</td>
       <td>string</td>
       <td>The user phone number</td>
     </tr>
-
     <tr>
       <td>birth</td>
       <td>string</td>
       <td><br /><br />The user birthdate (YYYY-MM).</td>
     </tr>
-
     <tr>
       <td>gender</td>
       <td>string</td>
@@ -464,7 +439,7 @@ Overall, the [**userData** field](#userdata) field may contain the following Rok
   </tbody>
 </table>
 
-> For authenticated free and AVOD apps that are not enrolled in the [Roku Partner Payouts Program](https://roku-ent.readme.io/dev/docs/partner-payouts), the [**userData** field](#userdata) contains a limited set of account information fields:
+> For authenticated free and AVOD apps that are not enrolled in the [Roku Partner Payouts Program](/dev/docs/partner-payouts), the [**userData** field](#userdata) contains a limited set of account information fields:
 >
 > * **Sign-up RFI screen**: email, phone, and zip.
 > * **Sign-in RFI screen**: email and phone.
@@ -483,7 +458,7 @@ When this command is invoked, the ContentNode stored in the **userRegionData** f
 
 ### getCatalog
 
-Lists the [In-App Products](https://roku-ent.readme.io/dev/docs/in-channel-products) that are linked to the running app. When this command completes, the **catalog** the completion status:
+Lists the [In-App Products](/dev/docs/in-channel-products) that are linked to the running app. When this command completes, the **catalog** the completion status:
 
 <table>
   <thead>
@@ -493,14 +468,12 @@ Lists the [In-App Products](https://roku-ent.readme.io/dev/docs/in-channel-produ
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>status</td>
       <td>integer</td>
       <td>Contains the command completion status. which may be one of the following values:<br /> <ul><li>2:  Interrupted</li><li>1:  Success</li><li>0:  Network error</li><li>-1: HTTP Error/Timeout</li><li>-2: Timeout</li><li>-3: Unknown Error</li><li>-4: Invalid request</li></ul></td>
     </tr>
-
     <tr>
       <td>statusMessage</td>
       <td>string</td>
@@ -528,7 +501,7 @@ If the command is successful, the **catalog** or **storeCatalog** ContentNode co
 
 ### getStoreCatalog
 
-Lists the globally available [In-App Products](https://roku-ent.readme.io/dev/docs/in-channel-products), which are available to all apps. When the command completes, the **storeCatalog** field is set to a ContentNode containing completion status. If successful, the **storeCatalog** field ContentNode has child **ContentNodes** for each available item. See the [**getCatalog**](#getcatalog) command for the fields related to the product that are available in the child ContentNode.
+Lists the globally available [In-App Products](/dev/docs/in-channel-products), which are available to all apps. When the command completes, the **storeCatalog** field is set to a ContentNode containing completion status. If successful, the **storeCatalog** field ContentNode has child **ContentNodes** for each available item. See the [**getCatalog**](#getcatalog) command for the fields related to the product that are available in the child ContentNode.
 
 ### doOrder
 
@@ -546,7 +519,6 @@ When the command completes, the [**orderStatus** field](#orderstatus) is set to 
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>status</td>
@@ -566,7 +538,7 @@ If this command is successful, the [**orderStatus** field](#orderstatus) Content
 | qty        | integer | The quantity purchased                                                                                                                                                                            |
 | total      | string  | Localized total of the item purchased (including tax if applicable) with local currency symbol                                                                                                    |
 
-> As of Roku OS 9.4, if the back button is pressed from the **Order Confirmation** dialog, the **doOrder** command returns only a status of 2 ("interrupted"). Error handling in apps may need to be updated based on this behavior.
+> As of [Roku OS 9.4](doc:release-notes#roku-os-94), if the back button is pressed from the **Order Confirmation** dialog, the **doOrder** command returns only a status of 2 ("interrupted"). Error handling in apps may need to be updated based on this behavior.
 
 ### getPurchases
 
@@ -582,7 +554,6 @@ When this command completes, the [**purchases** field](#purchases) is set to a C
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>status</td>
@@ -602,110 +573,92 @@ If this command is successful, the [**purchases** field](#purchases) ContentNode
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>code</td>
       <td>string</td>
       <td>The product identifier, as entered in the <strong>Product Identifier</strong> field on the <a href="https://developer.roku.com/products">In-App Product page in the Developer Dashboard</a> when the product was created.</td>
     </tr>
-
     <tr>
       <td>cost</td>
       <td>string</td>
       <td>Localized cost of the item (prior to purchase) with local currency symbol</td>
     </tr>
-
     <tr>
       <td>expirationDate</td>
       <td>string</td>
       <td>The subscription expiration date (<a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a> format)</td>
     </tr>
-
     <tr>
       <td>freeTrialQuantity</td>
       <td>integer</td>
       <td>The free trial amount associated with the freeTrialType. For example, <strong>1</strong> for a 1-month free trial or <strong>7</strong> for a 7-day free trial.</td>
     </tr>
-
     <tr>
       <td>freeTrialType</td>
       <td>string</td>
       <td>The free trial type ("Days" or "Months")</td>
     </tr>
-
     <tr>
       <td>inDunning</td>
       <td>string</td>
       <td>A flag that indicates whether the purchased subscription is past due state because of an invalid method of payment.<br /><br />This flag is set to "true" if the subscription is in the dunning state. In this case, check the <strong>status</strong> field to determine whether to grant the customer access to content:<br /><ul><li>If the <strong>status</strong> field is set to "Valid", the subscription is in a grace period and the viewer can access content.  </li><li>If the <strong>status</strong> field is set to "Invalid", the subscription is on hold and the viewer cannot access content. If the viewer adds a valid method of payment, the subscription will be automatically renewed and the status will become "Valid".</li></ul></td>
     </tr>
-
     <tr>
       <td>name</td>
       <td>string</td>
       <td>The item name (this name will also be set as the description).</td>
     </tr>
-
     <tr>
       <td>productType</td>
       <td>string</td>
       <td>The product type (ex. "MonthlySub")</td>
     </tr>
-
     <tr>
       <td>purchaseChannel</td>
       <td>string</td>
-      <td>Indicates where the Roku Pay subscription purchase was made:<br /><ul><li><strong>web</strong>. Subscription was purchased from <a href="http://roku.com/">Roku.com</a> (for example, through <a href="https://roku-ent.readme.io/dev/docs/instant-signup">Instant Signup</a> during the device activation).</li><li><strong>device</strong>. Subscription was purchased on the Roku device (through the on-device sign-up flow).</li></ul></td>
+      <td>Indicates where the Roku Pay subscription purchase was made:<br /><ul><li><strong>web</strong>. Subscription was purchased from <a href="http://roku.com/">Roku.com</a> (for example, through <a href="/dev/docs/instant-signup">Instant Signup</a> during the device activation).</li><li><strong>device</strong>. Subscription was purchased on the Roku device (through the on-device sign-up flow).</li></ul></td>
     </tr>
-
     <tr>
       <td>purchaseContext</td>
       <td>string</td>
-      <td>Indicates how the subscription purchase was made:<br /><ul><li><strong>isu</strong>. Subscription was purchased via <a href="https://roku-ent.readme.io/dev/docs/instant-signup">Instant Signup</a>.</li><li><strong>iap</strong>. Subscription was purchased via an in-application purchase.</li></ul></td>
+      <td>Indicates how the subscription purchase was made:<br /><ul><li><strong>isu</strong>. Subscription was purchased via <a href="/dev/docs/instant-signup">Instant Signup</a>.</li><li><strong>iap</strong>. Subscription was purchased via an in-application purchase.</li></ul></td>
     </tr>
-
     <tr>
       <td>purchaseDate</td>
       <td>string</td>
       <td>The purchase date (<a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a> format)</td>
     </tr>
-
     <tr>
       <td>purchaseId</td>
       <td>string</td>
       <td>The transaction ID</td>
     </tr>
-
     <tr>
       <td>qty</td>
       <td>integer</td>
       <td>The quantity purchased</td>
     </tr>
-
     <tr>
       <td>renewalDate</td>
       <td>string</td>
       <td>The subscription renewal date (<a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a> format)</td>
     </tr>
-
     <tr>
       <td>status</td>
       <td>string</td>
       <td>Indicates whether the purchase is for a current subscription ("Valid") or for a subscription that has been canceled, expired, or terminated ("Invalid")</td>
     </tr>
-
     <tr>
       <td>trialCost</td>
       <td>integer</td>
       <td>If the product uses introductory pricing, the discounted price.</td>
     </tr>
-
     <tr>
       <td>trialQuantity</td>
       <td>integer</td>
       <td>If the product uses introductory pricing, the number of months the discounted pricing is applicable.</td>
     </tr>
-
     <tr>
       <td>trialType</td>
       <td>string</td>
@@ -728,7 +681,6 @@ When this command completes, the [**purchases** field](#purchases) is set to a C
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>status</td>
@@ -748,110 +700,92 @@ If this command is successful, the [**purchases** field](#purchases) ContentNode
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>code</td>
       <td>string</td>
       <td>The product identifier, as entered in the <strong>Product Identifier</strong> field on the <a href="https://developer.roku.com/products">In-App Product page in the Developer Dashboard</a> when the product was created.</td>
     </tr>
-
     <tr>
       <td>cost</td>
       <td>string</td>
       <td>Localized cost of the item (prior to purchase) with local currency symbol</td>
     </tr>
-
     <tr>
       <td>expirationDate</td>
       <td>string</td>
       <td>The subscription expiration date (<a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a> format)</td>
     </tr>
-
     <tr>
       <td>freeTrialQuantity</td>
       <td>integer</td>
       <td>If the product has a free trial offer, the length of the trial period. For example, <strong>1</strong> for a 1-month free trial or <strong>7</strong> for a 7-day free trial.</td>
     </tr>
-
     <tr>
       <td>freeTrialType</td>
       <td>string</td>
       <td>If the product has a free trial offer, the unit of time used by the trial ("Days" or "Months")</td>
     </tr>
-
     <tr>
       <td>inDunning</td>
       <td>string</td>
       <td>A flag that indicates whether the purchased subscription is past due state because of an invalid method of payment.<br /><br />This flag is set to "true" if the subscription is in the dunning state. In this case, check the <strong>status</strong> field to determine whether to grant the customer access to content:<br /><ul><li>If the <strong>status</strong> field is set to "Valid", the subscription is in a grace period and the viewer can access content.  </li><li>If the <strong>status</strong> field is set to "Invalid", the subscription is on hold and the viewer cannot access content. If the viewer adds a valid method of payment, the subscription will be automatically renewed and the status will become "Valid".</li></ul></td>
     </tr>
-
     <tr>
       <td>name</td>
       <td>string</td>
       <td>The item name (this name will also be set as the description).</td>
     </tr>
-
     <tr>
       <td>productType</td>
       <td>string</td>
       <td>The product type (ex. "MonthlySub")</td>
     </tr>
-
     <tr>
       <td>purchaseChannel</td>
       <td>string</td>
-      <td>Indicates where the Roku Pay subscription purchase was made:<br /><ul><li><strong>web</strong>. Subscription was purchased from <a href="http://roku.com/">Roku.com</a> (for example, through <a href="https://roku-ent.readme.io/dev/docs/instant-signup">Instant Signup</a> during the device activation).</li><li><strong>device</strong>. Subscription was purchased on the Roku device (through the on-device sign-up flow).</li></ul></td>
+      <td>Indicates where the Roku Pay subscription purchase was made:<br /><ul><li><strong>web</strong>. Subscription was purchased from <a href="http://roku.com/">Roku.com</a> (for example, through <a href="/dev/docs/instant-signup">Instant Signup</a> during the device activation).</li><li><strong>device</strong>. Subscription was purchased on the Roku device (through the on-device sign-up flow).</li></ul></td>
     </tr>
-
     <tr>
       <td>purchaseContext</td>
       <td>string</td>
-      <td>Indicates how the subscription purchase was made:<br /><ul><li><strong>isu</strong>. Subscription was purchased via <a href="https://roku-ent.readme.io/dev/docs/instant-signup">Instant Signup</a>.</li><li><strong>iap</strong>. Subscription was purchased via an in-application purchase.</li></ul></td>
+      <td>Indicates how the subscription purchase was made:<br /><ul><li><strong>isu</strong>. Subscription was purchased via <a href="/dev/docs/instant-signup">Instant Signup</a>.</li><li><strong>iap</strong>. Subscription was purchased via an in-application purchase.</li></ul></td>
     </tr>
-
     <tr>
       <td>purchaseDate</td>
       <td>string</td>
       <td>The purchase date (<a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a> format)</td>
     </tr>
-
     <tr>
       <td>purchaseId</td>
       <td>string</td>
       <td>The transaction ID</td>
     </tr>
-
     <tr>
       <td>qty</td>
       <td>integer</td>
       <td>The quantity purchased</td>
     </tr>
-
     <tr>
       <td>renewalDate</td>
       <td>string</td>
       <td>The subscription renewal date (<a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a> format)</td>
     </tr>
-
     <tr>
       <td>status</td>
       <td>string</td>
       <td>Indicates whether the purchase is for a current subscription ("Valid") or for a subscription that has been canceled, expired, or terminated ("Invalid")</td>
     </tr>
-
     <tr>
       <td>trialCost</td>
       <td>Integer</td>
       <td>If the product uses introductory pricing, the discounted price.</td>
     </tr>
-
     <tr>
       <td>trialQuantity</td>
       <td>integer</td>
       <td>If the product uses introductory pricing, the number of months the discounted pricing is applicable.</td>
     </tr>
-
     <tr>
       <td>trialType</td>
       <td>string</td>
@@ -862,9 +796,9 @@ If this command is successful, the [**purchases** field](#purchases) ContentNode
 
 ### storeChannelCredData
 
-Stores an OAuth token, custom token, or other custom data, which you can then retrieve with the [getChannelCred](#getchannelcred) command (the token is stored in the **channelCred.json.channel_data** field). This data is stored securely in the Roku cloud and can be retrieved by other devices linked to the same Roku account. As a result, users do not have to re-enter their account credentials when setting up new devices associated with the same Roku account. For more information, see [Automatic Account Link](https://roku-ent.readme.io/dev/docs/universal-authentication-protocol-for-single-sign-on).
+Stores an OAuth token, custom token, or other custom data, which you can then retrieve with the [getChannelCred](#getchannelcred) command (the token is stored in the **channelCred.json.channel_data** field). This data is stored securely in the Roku cloud and can be retrieved by other devices linked to the same Roku account. As a result, users do not have to re-enter their account credentials when setting up new devices associated with the same Roku account. For more information, see [Automatic Account Link](/dev/docs/universal-authentication-protocol-for-single-sign-on).
 
-```
+```brightscript
 function init():
     m.store.ObserveField("storeChannelCredDataStatus", "onStoreChannelCredData")
     m.store.ObserveField("channelCred", "onGetChannelCred")
@@ -928,14 +862,12 @@ This command returns an roAssociativeArray with the following values:
       <th>Value</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>response</td>
       <td>json</td>
       <td>A string in JSON format, with the following key-value pairs: <br /><table><thead><tr><th>Key</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>status</td><td>string</td><td>The request status, which may be "success" or "failure".</td></tr><tr><td>error</td><td>string</td><td>A description of the error (if any). This will be set to "none" for a successful request.</td></tr><tr><td>error\_detail</td><td>string</td><td>A detailed description of the service error (if any). This value will be null (uninitialized) for a successful request.</td></tr></tbody></table><br /><br />if billing is not enabled for the app, this field will include a string with a service error message.</td>
     </tr>
-
     <tr>
       <td>status</td>
       <td>Integer</td>
@@ -946,7 +878,7 @@ This command returns an roAssociativeArray with the following values:
 
 ### getChannelCred
 
-Retrieves an oAuth token, custom token, or other authentication artifact (`channel_data`), or a Roku Partner Unique Customer Identifier (`roku_pucid`) if the app is using the [Roku single-sign on (SSO) authentication service](https://roku-ent.readme.io/dev/docs/roku-sso-authentication-protocol) for authenticating users. If successful, the ContentNode stored in the `channelCred` field represents the app credentials with the following fields:
+Retrieves an oAuth token, custom token, or other authentication artifact (`channel_data`), or a Roku Partner Unique Customer Identifier (`roku_pucid`) if the app is using the [Roku single-sign on (SSO) authentication service](/dev/docs/roku-sso-authentication-protocol) for authenticating users. If successful, the ContentNode stored in the `channelCred` field represents the app credentials with the following fields:
 
 <table>
   <thead>
@@ -956,32 +888,27 @@ Retrieves an oAuth token, custom token, or other authentication artifact (`chann
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>channelID</td>
       <td>string</td>
       <td>A string representing the app ID (ex. "2213" for Roku Media Player)</td>
     </tr>
-
     <tr>
       <td>errorCode</td>
       <td>string</td>
       <td>A description of the service error (if any). This will be an empty string for a successful request.</td>
     </tr>
-
     <tr>
       <td>json</td>
       <td>string</td>
       <td>A string in JSON format, with the following key-value pairs: <br /><table><thead><tr><th>Key</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>error</td><td>string</td><td>A string containing an error message (if any). This value will be null (uninitialized) for a successful request.</td></tr><tr><td>roku\_pucid</td><td>string</td><td>An agnostic ID (in UUID format) representing the user. This value will be identical when retrieved in the same app across devices linked to the same Roku account. <br /><br />If an app is storing an access token in the Roku cloud, this field does not contain a PUCID value.</td></tr><tr><td>token\_type</td><td>string</td><td>Type of the returned token, e.g. "urn:roku:pucid:token\_type:pucid\_token"</td></tr><tr><td>channel\_data</td><td>String</td><td>The access token, oAuth token, or other authentication artifact stored by the app in the Roku cloud via the <a href="#storechannelcreddata">StoreChannelCredData</a> command. <br /><br />This field is not returned if the <a href="#storechannelcreddata">StoreChannelCredData</a> command is not used to store an artifact in the Roku cloud.</td></tr></tbody></table><br /> If the request fails, this json string will be empty.</td>
     </tr>
-
     <tr>
       <td>publisherDeviceID</td>
       <td>string</td>
       <td>A unique identifier of the device.</td>
     </tr>
-
     <tr>
       <td>status</td>
       <td>integer</td>
@@ -994,7 +921,7 @@ Retrieves an oAuth token, custom token, or other authentication artifact (`chann
 
 Generates a signed JSON web token (JWT) in the Roku cloud and returns it to the app. This token can then be used by the publisher's web services to verify that a message originated from a genuine Roku device. The following example demonstrates how to generate the device attestation token:
 
-```
+```brightscript
 sub handleData(event)
   data = event.getData()
   print data.status
@@ -1012,7 +939,7 @@ m.channelstore_node.command = "getDeviceAttestationToken"
 
 The following demonstrates a sample JWT that is returned to the app. Developers can use a [JWT debugger](https://jwt.io/#debugger-io) to decode this token.
 
-```
+```text
 eyJ4NXUiOiJodHRwczovL2V4YW1wbGUucm9rdS5jb20vc2FtcGxlY2VydCIsInR5cCI6IkpXVCIsImFsZyI6IlJTMjU2In0.eyJuYmYiOjE2NTYzNzQyNzQsIngtcm9rdS1hdHRlc3RhdGlvbi1kYXRhIjp7Im5vbmNlIjoiNUUwNjkyRTBBMzg5RjRGNiIsImNoYW5uZWxJZCI6ImRldiIsImRldmVsb3BlcklkIjoiY2FhNzNmYmI1ZTc1YTQ2YTRiNjExNGRlNTFhNWFkYTdkNjE2ZTJlZCIsInRpbWVzdGFtcE1zIjoxNjU2Mzc3ODczOTkwfSwiaXNzIjoidXJuOnJva3U6Y2xvdWQtc2VydmljZXM6ZGV2aWNlLWF0dGVzdGF0aW9uIiwiZXhwIjoxNjU2NDY0Mjc0fQ.nywDvSUys27oeaQZ3yXwNBfOnXbO-TUDuekOPZYjSssfZhNhWwRXvPLbJKHcNMR5Z0vFOQLVDFeqEVGauIMxMEke5UFLuCRxhr3ayBJJPt_BPfrEFbAvYjFEGdKkxJqYUhuFE38R8lU2k7dhO0iFxDw1Qq7W4w8_7CjmDy4YFf7IfyhV7Vf2kGiOx5C94Niw5N2td3s21F3z77Rq_bofQ51DOKIwo_cDVuvPQnDyxG-CNEydZKCZZwGPYCKEHMPrIOOXJ-S9ZjArgaEpBUpMXWJibFxnkpVUVzbC22GEaqz_SjOJXFMQU7TaCKkDeCYVKylgKwCvbvHRDlgogf7kqg
 
 ```
@@ -1025,7 +952,7 @@ To verify the JWT, developers must [download the Roku device attestation token c
 
 The decoded JWT contains the following fields:
 
-```
+```brightscript
 "x-roku-attestation-data": {
     "nonce": "5E0692E0A389F4F6",
     "channelId": "dev",
@@ -1036,7 +963,7 @@ The decoded JWT contains the following fields:
 
 ### requestPartnerOrder
 
-> See [Creating TVOD channels](https://roku-ent.readme.io/dev/docs/tvod-channel) for how to use this command for transactional purchases.
+> See [Creating TVOD Apps](/dev/docs/tvod-channel) for how to use this command for transactional purchases.
 
 Checks the user's billing status for transactional purchases. This is a prerequisite for sending the [confirmPartnerOrder command](#confirmpartnerorder).
 
@@ -1059,7 +986,7 @@ If this command fails, the [**requestPartnerOrderStatus** field](#requestpartner
 
 ### confirmPartnerOrder
 
-> See [Creating TVOD channels](https://roku-ent.readme.io/dev/docs/tvod-channel) for how to use this command for transactional purchases.
+> See [Creating TVOD Apps](/dev/docs/tvod-channel) for how to use this command for transactional purchases.
 
 This command is equivalent to the **doOrder** command for transaction purchases. The user's billing status must first be confirmed with the [requestPartnerOrder command](#requestpartnerorder) before sending this command.
 

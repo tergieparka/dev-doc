@@ -1,18 +1,18 @@
 ---
 title: "ifAudioGuide"
-excerpt: ''
+excerpt: 'Interface providing Say, Flush, and Silence methods for text to speech control'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'ifAudioGuide'
+  description: 'Documents the ifAudioGuide interface, which provides Say, Flush, and Silence methods for text to speech playback and screen reader control.'
   robots: index
 next:
   description: ''
 ---
 
 
-> Please note this component is only available on the following devices: Roku Streaming Stick (3600X), Roku Express (3700X) and Express+ (3710X), Roku Premiere (4620X) and Premiere+ (4630X), Roku Ultra (4640X), and any Roku TV running Roku OS version 7.5 and later.
+> Please note this component is only available on the following devices: Roku Streaming Stick (3600X), Roku Express (3700X) and Express+ (3710X), Roku Premiere (4620X) and Premiere+ (4630X), Roku Ultra (4640X), and any Roku TV running [Roku OS version 7.5](doc:release-notes#roku-os-75) and later.
 
 
 ## Implemented by

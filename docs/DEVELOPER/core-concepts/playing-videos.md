@@ -1,11 +1,11 @@
 ---
 title: Playing Videos
-excerpt: ''
+excerpt: 'Play videos using the Video node, ContentNode, and Content Meta-Data'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Playing Videos | Roku Developer Docs'
+  description: 'Play videos in your app using the Video node, a ContentNode, and Content Meta-Data attributes to configure playback, buffering, playlists, and trick play.'
   robots: index
 next:
   description: ''
@@ -18,11 +18,11 @@ Roku Player:
 
 * the video files must have been encoded in one of the formats
   supported by a Roku Player (see [Streaming
-  specifications](doc:streaming-specifications))
+  specifications](doc:media#supported-video-codecs))
 * if you want to use an adaptive bitrate switching scheme, the video
   files must be configured to use the supported adaptive bitrate
   scheme you want (see [Streaming
-  specifications](doc:streaming-specifications))
+  specifications](doc:media#adaptive-streaming-protocols))
 * you must also include any supporting files for special playback
   options you want, such as _trick
   play_ (see [Trick mode](doc:trick-mode))
@@ -133,7 +133,7 @@ video playback is interrupted by an unexpected slowdown in the video
 stream transfer rate. (Video playback interruptions are more likely to
 occur if you do not take advantage of some type of adaptive bitrate
 configuration of the video playback, such as using a segmented adaptive
-video playback scheme such as HLS, as described in [Streaming specifications](doc:streaming-specifications).)
+video playback scheme such as HLS, as described in [Streaming specifications](doc:media#hls-streams).)
 
 To indicate to the user that the video stream is buffering,
 the Video node class includes two instances of an
@@ -169,7 +169,7 @@ and partially defined in XML markup, you must use
 the `findNode()` function to declare the node object and access the
 internal retrieving bar node fields:
 
-```
+```brightscript
 m.video = m.top.findNode("channel_video_node_id")
 ...
 m.video.retrievingBar.internal_node_field = internal_node_field_value
@@ -203,7 +203,7 @@ the `control` field in a callback function triggered by the
 screen focus event as
 follows:
 
-```
+```brightscript
 sub setDetailsScreenFocus()
   if m.top.isInFocusChain() and not m.buttons.hasFocus() and not m.videoPlayer.hasFocus() then
     m.buttons.setFocus(true)
@@ -216,7 +216,7 @@ end sub
 Then write the callback function for the playback button press event
 that includes:
 
-```
+```brightscript
 m.videoPlayer.control = "start"
 ```
 
@@ -240,7 +240,7 @@ assign the ContentNode to the `content` field of
 the Video node, then set the Video node `control` field value
 to `play` to start the video. For example:
 
-```
+```brightscript
 videoContent = createObject("RoSGNode", "ContentNode")
 videoContent.url = "video_URI"
 videoContent.streamformat = "hls"
@@ -371,48 +371,42 @@ a Video node that plays the video.
 
 **Example video Content Meta-Data Task node**
 
-```
-<component name = "MetaDataCR" extends = "Task" >
-
+```xml
+<component name="MetaDataCR" extends="Task">
   <interface>
-    <field id = "metadatauri" type = "uri" value = "" />
-    <field id = "videocontent" type = "node" />
+    <field id="metadatauri" type="uri" value="" />
+    <field id="videocontent" type="node" />
   </interface>
 
-  <script type = "text/brightscript" >
-
+  <script type="text/brightscript">
     <![CDATA[
+      sub init()
+        m.top.functionName = "getContent"
+      end sub
 
-    sub init()
-      m.top.functionName = "getContent"
-    end sub
+      sub getContent()
+        videocontent = createObject("RoSGNode", "ContentNode")
+        metadataxml = createObject("roXMLElement")
 
-    sub getContent()
-      videocontent = createObject("RoSGNode","ContentNode")
-      metadataxml = createObject("roXMLElement")
+        ' uncomment/conditionalize for development package XML transfers (pkg:/server/foo.xml)
+        xmlstring = ReadAsciiFile(m.top.metadatauri)
+        metadataxml.parse(xmlstring)
 
-      ' uncomment/conditionalize for development package XML transfers (pkg:/server/foo.xml)
-      xmlstring = ReadAsciiFile(m.top.metadatauri)
-      metadataxml.parse(xmlstring)
+        ' uncomment/conditionalize for published channel Internet XML transfers (http://serverdomain/foo.xml)
+        ' readInternet = createObject("roUrlTransfer")
+        ' readInternet.setUrl(m.top.metadatauri)
+        ' metadataxml.parse(readInternet.GetToString())
 
-      ' uncomment/conditionalize for published channel Internet XML transfers (http://serverdomain/foo.xml)
-      ' readInternet = createObject("roUrlTransfer")
-      ' readInternet.setUrl(m.top.metadatauri)
-      ' metadataxml.parse(readInternet.GetToString())
-
-      if metadataxml.getName()="MetaData"
-        for each video in metadataxml.GetNamedElements("video")
-          videoitem = videocontent.createChild("ContentNode")
-          videoItem.setFields(video.getAttributes())
-        end for
-      end if
-      m.top.videocontent = videocontent
-    end sub
-
+        if metadataxml.getName() = "MetaData"
+          for each video in metadataxml.GetNamedElements("video")
+            videoitem = videocontent.createChild("ContentNode")
+            videoItem.setFields(video.getAttributes())
+          end for
+        end if
+        m.top.videocontent = videocontent
+      end sub
     ]]>
-
   </script>
-
 </component>
 ```
 

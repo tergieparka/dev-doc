@@ -1,11 +1,11 @@
 ---
 title: "roInt"
-excerpt: ''
+excerpt: 'Object wrapper for the intrinsic Integer type with ifInt and ifIntOps support'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'roInt'
+  description: 'roInt is the object equivalent of the intrinsic Integer type, exposing the ifInt, ifIntOps, and ifToStr interfaces for integer operations.'
   robots: index
 next:
   description: ''
@@ -32,7 +32,7 @@ This is useful in the following situations:
 
 **Example**
 
-~~~
+```brightscript
 BrightScript> o=CreateObject("roInt")
 BrightScript> o.SetInt(555)
 BrightScript> print o
@@ -41,7 +41,7 @@ BrightScript> print o.GetInt()
 555
 BrightScript> print o-55
 500
-~~~
+```
 
 
 ## Supported interfaces

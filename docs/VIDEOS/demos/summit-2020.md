@@ -1,16 +1,16 @@
 ---
 title: Developer Summit 2020
-excerpt: ''
+excerpt: 'Recorded sessions from the 2020 Roku developer summit held online on October 13'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Developer Summit 2020 | Roku Developer Docs'
+  description: 'Video recordings from the Roku Developer Summit 2020, covering Roku OS 9.4, certification updates, Roku Pay, the Demand API, and channel growth strategies.'
   robots: index
 next:
   description: ''
 ---
-Roku held their annual developer summit online on October 13, 2020. Topics covered included the Fall 2020 product lineup, new features in Roku OS 9.4, and channel certification updates. The Roku Pay and Roku advertising teams gave presentations, and the Partner Growth Management team explained how to maximize reach, engagement, and revenue through the lifecycle of an app. The team also hosted a panel with some of the top streaming services discussing their success with building and monetizing audiences on the Roku platform. The event concluded with a panel discussion, as Roku engineers answered live questions from the Roku developer community.
+Roku held their annual developer summit online on October 13, 2020. Topics covered included the Fall 2020 product lineup, new features in [Roku OS 9.4](doc:release-notes#roku-os-94), and channel certification updates. The Roku Pay and Roku advertising teams gave presentations, and the Partner Growth Management team explained how to maximize reach, engagement, and revenue through the lifecycle of an app. The team also hosted a panel with some of the top streaming services discussing their success with building and monetizing audiences on the Roku platform. The event concluded with a panel discussion, as Roku engineers answered live questions from the Roku developer community.
 
 ## Introduction
 
@@ -66,7 +66,7 @@ This section provides links to the major topics covered within each presentation
 * [BrightScript exception handling](doc:error-handling)
 * [Static Analysis testing](doc:static-analysis-tool)
 * [Channel behavior testing publishing window](doc:channel-publishing-guide)
-* [Channel publishing scheduler](doc:channel-publishing-guide)
+* [App publishing scheduler](doc:channel-publishing-guide)
 * [Deep linking app publishing window](doc:channel-publishing-guide)
 
 #### Certification update
@@ -77,7 +77,7 @@ This section provides links to the major topics covered within each presentation
 * [AppDialog signal beacon](doc:measuring-channel-performance)
 * [Trickplay thumbnails](doc:trick-mode)
 * [Demand API](doc:demand-api)
-* [Subscription product groups](doc:in-channel-products)
+* [Subscription product groups](doc:product-catalog)
 * [Automatic Account Link](doc:universal-authentication-protocol-for-single-sign-on)
 * [Voice controls](doc:transport-controls)
 
@@ -87,7 +87,7 @@ This section provides links to the major topics covered within each presentation
 * [Roku Pay training video](doc:subscriptions)
 * [Instant Signup](doc:instant-signup)
 * [Subscription upgrade/downgrade](doc:on-device-upgrade-downgrade)
-* [Subscription product groups](doc:in-channel-products)
+* [Subscription product groups](doc:product-catalog)
 * [Automatic Account Link](doc:universal-authentication-protocol-for-single-sign-on)
 
 #### Demand API

@@ -1,52 +1,119 @@
 ---
-title: "Roku Pay web services reference"
-excerpt: ''
+title: Roku Pay web services reference
+excerpt: RESTful APIs for managing Roku Pay billing transactions and entitlements
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: Roku Pay web services reference | Roku Developer Docs
+  description: >-
+    Use the Roku Pay APIs to validate transactions, cancel and refund
+    subscriptions, and issue service credits to Roku
+    accounts.
   robots: index
 next:
   description: ''
 ---
-
-
-The Roku Pay APIs are RESTful web services that use standard HTTP methods for transferring billing transaction data between the Roku platform and the publisher's backend system. The Roku Pay APIs enable publishers to validate entitlements to products; refund and cancel subscriptions; issue service credits; and update customer billing cycles.
+The Roku Pay APIs are RESTful web services that use standard HTTP methods for transferring billing transaction data between the Roku platform and the publisher's backend system. The Roku Pay APIs enable publishers to validate entitlements to products; refund and cancel subscriptions; and issue service credits.
 
 ## Getting started
 
 The following table summarizes the basic information for the Roku Pay web services:
 
-| Item         | Description                                                  |
-| :----------- | :----------------------------------------------------------- |
-| URL          | The base URL for the Roku Pay APIs is **https://apipub.roku.com/listen/transaction-service.svc**. The resource name for the API is then appended to the URL.<br /><br />For example, the URL for the `validate-transaction` API is **https://apipub.roku.com/listen/transaction-service.svc/validate-transaction**. |
-| Protocol     | Roku Pay API calls may be sent using either HTTP or HTTPS.   |
-| Format       | Roku Pay APIs support both JSON and XML-formatted data. Format the `accept` header as follows: $\{format-list\} |
-| HTTP Methods | Roku Pay APIs support GET and POST methods for retrieving and managing transaction data: $\{http-methods-list\} |
-| API Key      | All Roku Pay API requests must include the developer's API key. See [Setting up Roku Pay web services](doc:setting-up-web-services) for more information about getting and managing the key. For all requests, the app associated with the transaction ID or refund ID passed into the call must be owned by the developer associated with the Roku Pay API Key. |
+<Table align={["left","left"]}>
+  <thead>
+    <tr>
+      <th>
+        Item
+      </th>
 
-\{#format-list\}
-- **JSON**: accept: application/json
-- **XML**: accept: application/xml
+      <th>
+        Description
+      </th>
+    </tr>
+  </thead>
 
-\{#http-methods-list\}
+  <tbody>
+    <tr>
+      <td>
+        URL
+      </td>
 
-- **GET**: All GET requests must include the Roku Pay API key and the ID of the item being validated in the URL (transaction or refund ID).
-- **POST**: All POST requests require JSON or XML-formatted data in the body. The Roku Pay API key must be included in the body.
+      <td>
+        The base URL for the Roku Pay APIs is **[https://apipub.roku.com/listen/transaction-service.svc](https://apipub.roku.com/listen/transaction-service.svc)**. The resource name for the API is then appended to the URL.<br /><br />For example, the URL for the `validate-transaction` API is **[https://apipub.roku.com/listen/transaction-service.svc/validate-transaction](https://apipub.roku.com/listen/transaction-service.svc/validate-transaction)**.
+      </td>
+    </tr>
 
-##  APIs
+    <tr>
+      <td>
+        Protocol
+      </td>
+
+      <td>
+        Roku Pay API calls may be sent using either HTTP or HTTPS.
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Format
+      </td>
+
+      <td>
+        Roku Pay APIs support both JSON and XML-formatted data. Format the <code>accept</code> header as follows:
+
+        <br />
+
+        <br />
+
+        <ul>
+          <li><strong>JSON</strong>: accept: application/json</li>
+          <li><strong>XML</strong>: accept: application/xml</li>
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        HTTP Methods
+      </td>
+
+      <td>
+        Roku Pay APIs support GET and POST methods for retrieving and managing transaction data:
+
+        <br />
+
+        <br />
+
+        <ul>
+          <li><strong>GET</strong>: All GET requests must include the Roku Pay API key and the ID of the item being validated in the URL (transaction or refund ID).</li>
+          <li><strong>POST</strong>: All POST requests require JSON or XML-formatted data in the body. The Roku Pay API key must be included in the body.</li>
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        API Key
+      </td>
+
+      <td>
+        All Roku Pay API requests must include the developer's API key. See [Setting up Roku Pay web services](doc:setting-up-web-services) for more information about getting and managing the key. For all requests, the app associated with the transaction ID or refund ID passed into the call must be owned by the developer associated with the Roku Pay API Key.
+      </td>
+    </tr>
+  </tbody>
+</Table>
+
+## APIs
 
 The Roku Pay platform provides the following APIs for managing billing transaction data:
 
-| Method | API                                           | Description                                                  |
-| :----- | :-------------------------------------------- | :----------------------------------------------------------- |
-| GET    | [validate-transaction](#validate-transaction) | Check whether a customer is entitled to an in-app product such as a Roku Pay subscription or one-time purchase (for example, movie rental, sporting event, pay-per-view) |
-| GET    | [validate-refund](#validate-refund)           | Check whether a refund has been issued.                      |
-| POST   | [cancel-subscription](#cancel-subscription)   | Cancel a Roku Pay subscription.                              |
-| POST   | [refund-subscription](#refund-subscription)   | Refund a Roku Pay subscription.                              |
-| POST   | [update-bill-cycle](#update-billing-cycle)    | Change the billing cycle data for a Roku Pay subscription (for example, to provide a customer a free week of service due to a service outage, you can delay their next billing date by one week). |
-| POST   | [issue-service-credit](#issue-service-credit) | Give a service credit to a Roku account. (More on service credits below.) |
+| Method | API                                           | Description                                                                                                                                                                                       |
+| :----- | :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| GET    | [validate-transaction](#validate-transaction) | Check whether a customer is entitled to an in-app product such as a Roku Pay subscription or one-time purchase (for example, movie rental, sporting event, pay-per-view)                          |
+| GET    | [validate-refund](#validate-refund)           | Check whether a refund has been issued.                                                                                                                                                           |
+| POST   | [cancel-subscription](#cancel-subscription)   | Cancel a Roku Pay subscription.                                                                                                                                                                   |
+| POST   | [refund-subscription](#refund-subscription)   | Refund a Roku Pay subscription.                                                                                                                                                                   |
+| POST   | [issue-service-credit](#issue-service-credit) | Give a service credit to a Roku account. (More on service credits below.)                                                                                                                         |
 
 > **transactionId** format: The transactionIds returned by the Roku Pay APIs are ASCII strings of variable length that may be up to 1024 bytes.
 
@@ -60,7 +127,7 @@ For TVOD apps,  the `isEntitled` flag is set to "false"; therefore, your entitle
 
 #### Request example:
 
-```
+```http
 GET https://apipub.roku.com/listen/transaction-service.svc/validate-transaction/{partnerAPIKey}/{transactionid}
 ```
 
@@ -68,7 +135,7 @@ GET https://apipub.roku.com/listen/transaction-service.svc/validate-transaction/
 
 **XML**:
 
-```
+```xml
 <result xmlns="http://api.roku.com/transaction" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
     <errorCode i:nil="true" xmlns=""/>
     <errorDetails i:nil="true" xmlns=""/>
@@ -80,7 +147,6 @@ GET https://apipub.roku.com/listen/transaction-service.svc/validate-transaction/
     <channelId>251682</channelId>
     <channelName>Pizzazzy Channel</channelName>
     <couponCode i:nil="true"/>
-    <creditsApplied i:nil="true"/>
     <currency>usd</currency>
     <expirationDate>2020-02-06T23:51:02</expirationDate>
     <isEntitled>true</isEntitled>
@@ -102,7 +168,7 @@ GET https://apipub.roku.com/listen/transaction-service.svc/validate-transaction/
 
 **JSON**:
 
-```
+```json
 {
     "errorCode": null,
     "errorDetails": null,
@@ -114,7 +180,6 @@ GET https://apipub.roku.com/listen/transaction-service.svc/validate-transaction/
     "channelId": 251682,
     "channelName": "Pizzazzy Channel",
     "couponCode": null,
-    "creditsApplied": null,
     "currency": "usd",
     "expirationDate": "/Date(1581033062000+0000)/",
     "isEntitled": true,
@@ -146,9 +211,7 @@ To execute the nightly recovery sync with the `validate-transaction` API, follow
 
 1. Iterate over all subscriptions that expired that day or payment is attempting to be recovered (the `expirationDate` parameter is the current date or a past date).
 
-
 2. For each subscription in recovery, call the `validate-transaction` API with the `transactionId` of the subscription.
-
 
 3. Read the `isEntitled` flag and the `expirationDate` parameter.
 
@@ -162,96 +225,96 @@ To execute the nightly recovery sync with the `validate-transaction` API, follow
 
 The following table summarizes the action to be taken after checking the `expirationDate`:
 
-| **expirationDate**   | **isEntitled** | **Subscription state** | **Action to be taken by the app** |
+| **expirationDate**   | **isEntitled** | **Subscription state** | **Action to be taken by the app**     |
 | :------------------- | :------------- | :--------------------- | :------------------------------------ |
 | Future date          | true           | active                 | Entitle user                          |
-| Current or past date | true           | recovery                | Entitle user and check again next day |
+| Current or past date | true           | recovery               | Entitle user and check again next day |
 | Past date            | false          | canceled               | Cancel subscription                   |
 
 #### Managing upgrades/downgrades
 
 Roku Pay supports on-device upgrades and downgrades between subscription products. Once an upgrade/downgrade has been completed, apps should call the `validate-transaction` API with the transaction ID from the `purchaseid` field of the [**doOrder** command](doc:channelstore) to update their system. For subscription upgrades and downgrades, the `validate-transaction` API response includes the following fields to identify the transaction:
 
-- `purchase_type:` Indicates whether the transaction is an `UPGRADE` or `DOWNGRADE`.
+* `purchase_type:` Indicates whether the transaction is an `UPGRADE` or `DOWNGRADE`.
 
-- `cancelled_transaction_ids`: The transaction ID of the original subscription purchase that was upgraded/downgraded.
+* `cancelled_transaction_ids`: The transaction ID of the original subscription purchase that was upgraded/downgraded.
 
-- `purchase_status`: Indicates the current state of the subscription. The following table outlines how this field relates to the `isEntitled` and `cancelled` fields:
+* `purchase_status`: Indicates the current state of the subscription. The following table outlines how this field relates to the `isEntitled` and `cancelled` fields:
 
-  | purchase_ status | isEntitled | cancelled | Description                                                  |
-  | :--------------- | :--------- | :-------- | :----------------------------------------------------------- |
-  | Active           | true       | false     |                                                              |
-  | Inactive         | false      | true      |                                                              |
-  | Pending_Active   | false      | false     | The "downgrade" subscription will be activated sometime in the future (the expiration date of the original plan); therefore, the downgrade is set to `Pending_Active`. The status will be set to `valid` at the time of activation. |
-  | Pending_Inactive | true       | true      | When a free trial is offered with the upgrade subscription, the original subscription becomes `Pending_Inactive`. Should the user cancel the upgrade, the original subscription will be reinstated (but *will not renew* after the entitlement period). Upon the first successful renewal of the upgraded subscription, the original subscription will be set to `Inactive`. |
+  | purchase_ status | isEntitled | cancelled | Description                                                                                                                                                                                                                                                                                                                                                                  |
+  | :--------------- | :--------- | :-------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  | Active           | true       | false     |                                                                                                                                                                                                                                                                                                                                                                              |
+  | Inactive         | false      | true      |                                                                                                                                                                                                                                                                                                                                                                              |
+  | Pending_Active   | false      | false     | The "downgrade" subscription will be activated sometime in the future (the expiration date of the original plan); therefore, the downgrade is set to `Pending_Active`. The status will be set to `valid` at the time of activation.                                                                                                                                          |
+  | Pending_Inactive | true       | true      | When a free trial is offered with the upgrade subscription, the original subscription becomes `Pending_Inactive`. Should the user cancel the upgrade, the original subscription will be reinstated (but _will not renew_ after the entitlement period). Upon the first successful renewal of the upgraded subscription, the original subscription will be set to `Inactive`. |
 
 **Upgrade Response Example (JSON)**:
 
-```
+```json
   {
-     "errorCode":null,
-     "errorDetails":null,
-     "errorMessage":"",
-     "status":0,
-     "OriginalTransactionId":"a800b90755be491d821aabad017d6674",
-     "amount":4.99,
-     "cancelled":false,
-     "cancelledTransactionIds":[
+     "errorCode": null,
+     "errorDetails": null,
+     "errorMessage": "",
+     "status": 0,
+     "OriginalTransactionId": "a800b90755be491d821aabad017d6674",
+     "amount": 4.99,
+     "cancelled": false,
+     "cancelledTransactionIds": [
         "b0f7e477e89e48d0aa13abad017d4ee9"
      ],
-     "channelId":000000,
-     "channelName":"ESPRIMU",
-     "couponCode":null,
-     "currency":"usd",
-     "expirationDate":"\/Date(1588892919000+0000)\/",
-     "isEntitled":true,
-     "originalPurchaseDate":"\/Date(1588288117000+0000)\/",
-     "partnerReferenceId":"1969",
-     "productId":"Y6ZFym7Xl2agLakTcxMB_MonthlySubFreeTrial",
-     "productName":"Y6ZFym7Xl2agLakTcxMB_MonthlySubFreeTrial",
-     "purchaseDate":"\/Date(1588288117000+0000)\/",
-     "purchaseStatus":"Active",
-     "purchaseType":"UPGRADE",
-     "quantity":1,
-     "rokuCustomerId":"99999999999999999999999999999999",
-     "tax":0.0000,
-     "total":0.0000,
-     "transactionId":"a800b90755be491d821aabad017d6674"
+     "channelId": "000000",
+     "channelName": "ESPRIMU",
+     "couponCode": null,
+     "currency": "usd",
+     "expirationDate": "\/Date(1588892919000+0000)\/",
+     "isEntitled": true,
+     "originalPurchaseDate": "\/Date(1588288117000+0000)\/",
+     "partnerReferenceId": "1969",
+     "productId": "Y6ZFym7Xl2agLakTcxMB_MonthlySubFreeTrial",
+     "productName": "Y6ZFym7Xl2agLakTcxMB_MonthlySubFreeTrial",
+     "purchaseDate": "\/Date(1588288117000+0000)\/",
+     "purchaseStatus": "Active",
+     "purchaseType": "UPGRADE",
+     "quantity": 1,
+     "rokuCustomerId": "99999999999999999999999999999999",
+     "tax": 0.0000,
+     "total": 0.0000,
+     "transactionId": "a800b90755be491d821aabad017d6674"
   }
 ```
 
 **Downgrade Response Example (JSON)**
 
-```
+```json
 {
-     "errorCode":null,
-     "errorDetails":null,
-     "errorMessage":"",
-     "status":0,
-     "OriginalTransactionId":"e8515e538c2b4e9e9039abac0165b4e1",
-     "amount":2.99,
-     "cancelled":false,
-     "cancelledTransactionIds":[
+     "errorCode": null,
+     "errorDetails": null,
+     "errorMessage": "",
+     "status": 0,
+     "OriginalTransactionId": "e8515e538c2b4e9e9039abac0165b4e1",
+     "amount": 2.99,
+     "cancelled": false,
+     "cancelledTransactionIds": [
         "03c3ac6f-50864601b87aabac0165abed"
      ],
-     "channelId":000000,
-     "channelName":"ESPRIMU",
-     "couponCode":null,
-     "currency":"usd",
-     "expirationDate":"\/Date(1588801334000+0000)\/",
-     "isEntitled":true,
-     "originalPurchaseDate":"\/Date(1588196542000+0000)\/",
-     "partnerReferenceId":"1969",
-     "productId":"ZTtL0DvuGNX1sO4tJGNp_MonthlySubFreeTrial",
-     "productName":"ZTtL0DvuGNX1sO4tJGNp_MonthlySubFreeTrial",
-     "purchaseDate":"\/Date(1588196542000+0000)\/",
-     "purchaseStatus":"PendingActive",
-     "purchaseType":"DOWNGRADE",
-     "quantity":1,
-     "rokuCustomerId":"99999999999999999999999999999999",
-     "tax":0.0000,
-     "total":0.0000,
-     "transactionId":"e8515e538c2b4e9e9039abac0165b4e1"
+     "channelId": "000000",
+     "channelName": "ESPRIMU",
+     "couponCode": null,
+     "currency": "usd",
+     "expirationDate": "\/Date(1588801334000+0000)\/",
+     "isEntitled": true,
+     "originalPurchaseDate": "\/Date(1588196542000+0000)\/",
+     "partnerReferenceId": "1969",
+     "productId": "ZTtL0DvuGNX1sO4tJGNp_MonthlySubFreeTrial",
+     "productName": "ZTtL0DvuGNX1sO4tJGNp_MonthlySubFreeTrial",
+     "purchaseDate": "\/Date(1588196542000+0000)\/",
+     "purchaseStatus": "PendingActive",
+     "purchaseType": "DOWNGRADE",
+     "quantity": 1,
+     "rokuCustomerId": "99999999999999999999999999999999",
+     "tax": 0.0000,
+     "total": 0.0000,
+     "transactionId": "e8515e538c2b4e9e9039abac0165b4e1"
   }
 ```
 
@@ -261,7 +324,7 @@ The `validate-refund` API is used to verify that a Roku Pay purchase has been re
 
 **Request syntax:**
 
-```
+```http
 GET https://apipub.roku.com/listen/transaction-service.svc/validate-refund/{partnerAPIKey}/{refundId}
 ```
 
@@ -269,7 +332,7 @@ GET https://apipub.roku.com/listen/transaction-service.svc/validate-refund/{part
 
 **XML**
 
-```
+```xml
 <result xmlns="http://api.roku.com/transaction" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
     <errorCode i:nil="true" xmlns=""/>
     <errorDetails i:nil="true" xmlns=""/>
@@ -300,7 +363,7 @@ GET https://apipub.roku.com/listen/transaction-service.svc/validate-refund/{part
 
 **JSON**
 
-```
+```json
 {
     "errorCode": null,
     "errorDetails": null,
@@ -337,13 +400,13 @@ The `cancel-subscription` API cancels the subscription corresponding to the spec
 
 **Method/URL**
 
-```
+```http
 POST https://apipub.roku.com/listen/transaction-service.svc/cancel-subscription
 ```
 
 **XML body**
 
-```
+```xml
 <cancel>
    <cancellationDate>2020-01-10T18:34:51.380355</cancellationDate>
    <dontNotifyUser>false</dontNotifyUser>
@@ -355,7 +418,7 @@ POST https://apipub.roku.com/listen/transaction-service.svc/cancel-subscription
 
 **JSON body**
 
-```
+```json
 {
    "cancellationDate": "2020-01-10T18:44:01.034020",
    "dontNotifyUser": false,
@@ -369,7 +432,7 @@ POST https://apipub.roku.com/listen/transaction-service.svc/cancel-subscription
 
 **XML**
 
-```
+```xml
 <result xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
    <errorCode i:nil="true" />
    <errorDetails i:nil="true" />
@@ -380,7 +443,7 @@ POST https://apipub.roku.com/listen/transaction-service.svc/cancel-subscription
 
 **JSON**
 
-```
+```json
 {
     "errorCode": null,
     "errorDetails": null,
@@ -395,10 +458,10 @@ The `refund-subscription` API refunds the subscription corresponding to the spec
 
 The refund value must be:
 
-- specified (cannot be omitted)
-- greater than $0.00
-- less than (or equal to) the pre-tax price of the original transaction
-- tax-exclusive (must not include the tax portion of the refund).
+* specified (cannot be omitted)
+* greater than $0.00
+* less than (or equal to) the pre-tax price of the original transaction
+* tax-exclusive (must not include the tax portion of the refund).
 
 Roku Pay automatically calculates and handles any tax that should be included in the refund.
 
@@ -410,13 +473,13 @@ The sum of all partial refunds applied against any given transaction cannot exce
 
 **Method/URL**
 
-```
+```http
 POST https://apipub.roku.com/listen/transaction-service.svc/refund-subscription
 ```
 
 **XML body**
 
-```
+```xml
 <refund>
     <amount>0.99</amount>
     <comments>Customer was not impressed</comments>
@@ -428,7 +491,7 @@ POST https://apipub.roku.com/listen/transaction-service.svc/refund-subscription
 
 **JSON body**
 
-```
+```json
 {
     "amount": 0.99,
     "comments": "Customer was not impressed",
@@ -442,7 +505,7 @@ POST https://apipub.roku.com/listen/transaction-service.svc/refund-subscription
 
 **XML**
 
-```
+```xml
 <RefundResponseData xmlns="http://schemas.datacontract.org/2004/07/ASConnect.MessageData.v2" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
     <errorCode i:nil="true" xmlns=""/>
     <errorDetails i:nil="true" xmlns=""/>
@@ -454,7 +517,7 @@ POST https://apipub.roku.com/listen/transaction-service.svc/refund-subscription
 
 **JSON**
 
-```
+```json
 {
     "errorCode": null,
     "errorDetails": null,
@@ -464,79 +527,20 @@ POST https://apipub.roku.com/listen/transaction-service.svc/refund-subscription
 }
 ```
 
-### Update billing cycle
-
-The `update-bill-cycle` API updates the billing cycle of the subscription corresponding to the specified `transactionId`.
-
-Set the `newBillCycleDate` to the updated date on which the user should be billed (for example, the user can be billed on the 6th instead of the 4th). The updated date should be within the next billing period (the current expiration date plus the billing interval year or month).
-
-**Request syntax:**
-
-**Method/URL**
-
-```
-POST https://apipub.roku.com/listen/transaction-service.svc/update-bill-cycle
-```
-
-**XML body**
-
-```
-<billCycleUpdate>
-    <partnerAPIKey>F05447A57F8DF275FC30EC835FCAD10A19B6</partnerAPIKey>
-    <newBillCycleDate>2020-02-12T08:17:09</newBillCycleDate>
-    <transactionId>de054ad85a454db38800ab3e014687a6</transactionId>
-</billCycleUpdate>
-```
-
-**JSON body**
-
-```
-{
-    "transactionId": "fc51c9b9ba324923ae6dab3e01449eb5",
-    "newBillCycleDate": "2020-02-12T08:17:09",
-    "partnerAPIKey": "F05447A57F8DF275FC30EC835FCAD10A19B6"
-
-}
-```
-
-**Response example:**
-
-**XML**:
-
-```
-<result xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
-    <errorCode i:nil="true"/>
-    <errorDetails i:nil="true"/>
-    <errorMessage/>
-    <status>Success</status>
-</result>
-```
-
-**JSON**:
-
-```
-{
-    "errorCode": null,
-    "errorDetails": null,
-    "errorMessage": "",
-    "status": 0
-}
-```
-
 ### Issue service credit
 
 The `issue-service-credit` API is used to issue a service credit to the specified Roku account. A service credit functions as the customer's method of payment until its balance reaches $0.00. Once this occurs, the method of payment on file is charged. For example, when a customer makes a purchase, the service credit is first subtracted from the product's price. Any remaining amount due is charged to the method of payment on file.
 
 Service credits may be issued for:
 
-- An app. In this case, the `channelID` must be included in the request body.
-- An in-app product. In this case, the `channelID` and `productID` must be included in the request body.
+* An app. In this case, the `channelID` must be included in the request body.
+* An in-app product. In this case, the `channelID` and `productID` must be included in the request body.
 
 The response will include a `partnerReferenceId` that can be used later to find the service credit in the Roku Pay system.
 
 **Request example:**
 
-```
+```http
 POST https://apipub.roku.com/listen/transaction-service.svc/issue-service-credit
 ```
 
@@ -544,7 +548,7 @@ POST https://apipub.roku.com/listen/transaction-service.svc/issue-service-credit
 
 **XML**:
 
-```
+```xml
 <serviceCredit>
     <partnerAPIKey>F05447A57F8DF275FC30EC835FCAD10A19B6</partnerAPIKey>
     <amount>9.99</amount>
@@ -558,15 +562,15 @@ POST https://apipub.roku.com/listen/transaction-service.svc/issue-service-credit
 
 **JSON**:
 
-```
+```json
 {
-  "partnerAPIKey":"F05447A57F8DF275FC30EC835FCAD10A19B6",
-  "amount":5.00,
-  "channelId":"251682",
-  "comments":"Content Incorrect",
-  "partnerReferenceId":"4l2v9t9101",
-  "productId":"2365C2E9-D75B-D1B6-DFC0-837161653CC6",
-  "rokuCustomerId":"1f529e15cb15426be4ddb23a4933be2d"
+  "partnerAPIKey": "F05447A57F8DF275FC30EC835FCAD10A19B6",
+  "amount": 5.00,
+  "channelId": "251682",
+  "comments": "Content Incorrect",
+  "partnerReferenceId": "4l2v9t9101",
+  "productId": "2365C2E9-D75B-D1B6-DFC0-837161653CC6",
+  "rokuCustomerId": "1f529e15cb15426be4ddb23a4933be2d"
 }
 ```
 
@@ -574,7 +578,7 @@ POST https://apipub.roku.com/listen/transaction-service.svc/issue-service-credit
 
 **XML**:
 
-```
+```xml
 <TransactionReferenceResponseData xmlns="http://schemas.datacontract.org/2004/07/ASConnect.MessageData.v2" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
     <errorCode i:nil="true" xmlns=""/>
     <errorDetails i:nil="true" xmlns=""/>
@@ -586,7 +590,7 @@ POST https://apipub.roku.com/listen/transaction-service.svc/issue-service-credit
 
 **JSON**:
 
-```
+```json
 {
     "errorCode": null,
     "errorDetails": null,
@@ -595,3 +599,26 @@ POST https://apipub.roku.com/listen/transaction-service.svc/issue-service-credit
     "ReferenceId": "47674"
 }
 ```
+
+## Rate limiting
+
+The Roku Pay APIs enforce a rate limit of **20 requests per second (rps) per API key**. 
+
+### Rate limit error response
+
+Requests that exceed this limit will receive a 429 error response code (too many requests). 
+
+```
+HTTP/1.1 429 Too Many Requests
+ content-length: 0
+(empty body)
+```
+
+### Best practices 
+
+To handle rate limiting, implement exponential backoff and retry logic. Specifically, do the following:
+
+* **Distribute requests over time**: For high-volume operations such as nightly subscription reconciliations, spread API calls over an extended time window rather than sending bursts of requests. The time window should be proportional to the number of subscriptions.
+* **Implement exponential backoff**:  When you receive a 429 response, wait before retrying. Start with a 1-second delay and double the delay with each successive retry, up to a maximum of 60 seconds.
+* **Avoid immediate retries**: Immediate retries without backoff will result in continued rate limiting and do not improve throughput.
+* **Monitor request rates**:  If your integration consistently approaches the rate limit, extend the request window or limit reconciliation to subscriptions nearing expiration or in dunning states.

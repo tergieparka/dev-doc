@@ -1,11 +1,11 @@
 ---
 title: "roBitmap"
-excerpt: ''
+excerpt: 'Image data component with ifDraw2D support for offscreen drawing operations'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'roBitmap'
+  description: 'roBitmap stores image data with 32-bits per pixel and provides the ifDraw2D interface for drawing, compositing, sprites, and double buffers up to 2048x2048.'
   robots: index
 next:
   description: ''
@@ -34,7 +34,7 @@ An roBitmap can also load its image data from a file:
 
 **Example**
 
-~~~
+```brightscript
 ' Draw three bitmaps as fast as we can
 '
 Screen=CreateObject("roScreen")
@@ -42,17 +42,17 @@ bm1=CreateObject("roBitmap", "pkg:/images/myphoto1.jpg")
 bm2=CreateObject("roBitmap", "pkg:/images/myphoto2.jpg")
 bm3=CreateObject("roBitmap", "pkg:/images/myphoto3.jpg")
 bmarray=[bm1, bm2, bm3]
-While true
-    For each bitmap in bmarray
+while true
+    for each bitmap in bmarray
         Screen.DrawObject(0,0, bitmap)
         Screen.Finish()
-    End for
-End While
-~~~
+    end for
+end while
+```
 
 **Example: Double buffering with roBitmap**
 
-~~~
+```brightscript
 screen1=CreateObject("roScreen")
 off=CreateObject("roBitmap", {width:1280, height:720, AlphaEnable:false})
 off.Clear(white)
@@ -60,11 +60,11 @@ dfDrawImage(off, "pkg:/images/myimage.png", 50, 50)
 off.DrawRect(150, 150, 200, 200, &hFF) ' black, alpha: all source
 screen1.DrawObject(0, 0, off)
 Screen1.Finish()
-~~~
+```
 
 ## Supported image formats
 
-See the [Roku streaming specification](doc:streaming-specifications) for the image formats supported by this component.
+See the [Roku streaming specification](doc:media#supported-image-formats) for the image formats supported by this component.
 
 ## Supported interfaces
 

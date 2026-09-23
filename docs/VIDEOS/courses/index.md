@@ -1,11 +1,11 @@
 ---
 title: Development courses
-excerpt: ''
+excerpt: 'Instructor-led video courses covering Roku app development from the ground up'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Development courses | Roku Developer Docs'
+  description: 'Index of online development courses for Roku developers, featuring instructor-led video lessons on building apps, integrating features, and testing.'
   robots: index
 next:
   description: ''
@@ -32,6 +32,6 @@ You can watch the videos in these courses from this site or from your TV.
 
   <Image alt="rdp-channel-youtube" border={false} src="https://image.roku.com/ZHZscHItMTc2/roku-dev-youtube-v2.jpg" />
 
-* **TV**:  Install the [Roku Developers channel](https://go.roku.com/-VkGoU0ve) on your Roku device.
+* **TV**:  Install the [Roku Developers app](https://go.roku.com/-VkGoU0ve) on your Roku device.
 
   <Image alt="rdp-channel-home" border={false} src="https://image.roku.com/ZHZscHItMTc2/roku-dev-channel-home-v2.jpg" title="rdp-channel-home" />

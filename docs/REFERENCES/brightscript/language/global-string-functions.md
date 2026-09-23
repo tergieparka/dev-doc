@@ -1,11 +1,11 @@
 ---
 title: "Global string functions"
-excerpt: ''
+excerpt: 'Global functions for string conversion, search, and formatting'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Global string functions | Roku Developer Docs'
+  description: 'Global string functions including UCase, LCase, Asc, Chr, Instr, Left, Len, Mid, Right, Str, StrI, Val, String, StringI, Substitute, and related helpers.'
   robots: index
 next:
   description: ''
@@ -17,17 +17,17 @@ next:
 
 Converts the string to all upper case.
 
-~~~
+```brightscript
  print UCase("Hello")  ' prints: HELLO
-~~~
+```
 
 ## LCase(s as String) as String
 
 Converts the string to all lower case.
 
-~~~
+```brightscript
  print LCase("Hello")  ' prints: hello
-~~~
+```
 
 ## Asc(letter as String) as Integer
 
@@ -36,9 +36,9 @@ specified string.
 
 An empty string argument will return 0.
 
-~~~ 
+```brightscript
  print Asc("C") ' prints: 67
-~~~
+```
 
 ## Chr(ch as Integer) as String
 
@@ -48,17 +48,17 @@ whose character has the specified Unicode value.
 Returns empty string if the specified value is 0 or an invalid Unicode
 value.
 
-~~~ 
+```brightscript
  print Chr(67) ' prints: C
-~~~
+```
 
 By using Chr, you can create strings containing characters which cannot
 be contained in quotes, such as newline or the quote character
 itself.
 
-~~~
+```brightscript
  print (Chr(34) + "hello" + Chr(34))  ' prints: "hello"
-~~~
+```
 
 ## Instr(start as Integer, text as String, substring as String) as Integer
 
@@ -68,27 +68,27 @@ starting at the specified start position.
 Returns 0 if the substring is not found. Unlike the ifString.Instr()
 method, the first position is 1.
 
-~~~
+```brightscript
  print Instr(1, "this is a test", "t")  ' prints: 1
  print Instr(2, "this is a test", "t")  ' prints: 11
  print Instr(1, "this is a test", "is") ' prints: 3
-~~~
+```
 
 ## Left(s as String, n as Integer) as String
 
 Returns the first *n* characters of *s.* 
 
-~~~
+```brightscript
  print Left("timothy", 3) ' prints: tim
-~~~
+```
 
 ## Len(s as String) as Integer
 
 Returns the number of characters in the specified string.
 
-~~~
+```brightscript
  print Len("timothy") ' prints: 7
-~~~
+```
 
 ## Mid(s as String, p as Integer\[, n as Integer\]) as String
 
@@ -100,17 +100,17 @@ the end of the string is returned.
 Unlike the [ifStringOps.Mid()](doc:ifstringops) method, the first character in the string is
 position 1.
 
-~~~ 
+```brightscript
  print mid("timothy", 4, 3) ' prints: oth
-~~~
+```
 
 ## Right(s as String, n as Integer) as String
 
 Returns the last n characters of s.
 
-~~~
+```brightscript
  print right("timothy", 3) ' prints: thy
-~~~
+```
 
 ## Str(value as Float) as String
 
@@ -145,11 +145,11 @@ lowercase letters to represent those digits in bases greater than 10.
 
 For example:
 
-~~~
+```brightscript
 print StrI(255, 16) '= "ff"
 
 print StrI(9, 2) '= "1001"
-~~~
+```
 
 ## String(n as Integer, str as String ) as String
 
@@ -158,9 +158,9 @@ concatenated together.
 
 For example,
 
-~~~
+```brightscript
  print String(4, "ab") ' prints: abababab
-~~~
+```
 
 ## StringI(n as Integer, ch as Integer) as String
 
@@ -169,9 +169,9 @@ value is the second argument.
 
 For example,
 
-~~~
+```brightscript
  print StringI(5, 67) ' prints: CCCCC
-~~~
+```
 
 ## Val(s as String) as Float
 
@@ -196,13 +196,13 @@ valid.
 
 For example:
 
-~~~
+```brightscript
 print Val("0x80", 0) '= 128
 
 print Val("FF", 16) '= 255
 
 print Val("1001", 2) '= 9
-~~~
+```
 
 ## Substitute(str as String, arg0 as String, arg1 = "" as String, arg2 = "" as String, arg3 = "" as String) as String
 
@@ -210,11 +210,11 @@ Replaces all instances of {0} or \^0 in a string with arg0. Similarly, replaces 
 
 **Example**
 
-~~~
+```brightscript
 thing = "book"
 color = "red"
 print Substitute("My {0} is {1}.", thing, color) ' prints "My book is red."
-~~~
+```
 
 ## Arg(arg%1 as String, arg%2 as String, arg%3 as String,str as String, , arg1 as String = "",
 
@@ -222,6 +222,6 @@ Replaces %*n* placeholders (for example, %1, %2, etc.) with arg1, arg2, and so o
 
 **Example**
 
-```
+```brightscript
 currentPlanText = Substitute(tr("Current plan: %1 %2 %3/%4", tierDisplayName, LCase(getPlanName(currentPlan.productType)), cost, currentPlan.renewalPeriodNounTextAbbrv)
 ```

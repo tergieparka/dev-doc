@@ -1,11 +1,11 @@
 ---
 title: Instant Resume
-excerpt: ''
+excerpt: 'Save app state on exit and restore live or VOD playback on relaunch'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Instant Resume | Roku Developer Docs'
+  description: 'Implement Instant Resume to save app state on exit and restore live or VOD playback within seconds when users relaunch the app on their Roku device.'
   robots: index
 next:
   description: ''
@@ -26,7 +26,7 @@ To integrate Instant Resume, you must have a Roku test device that meets the fol
 
 * **Multi-core ARM processor**. Instant Resume is supported only on Roku devices with multi-core, ARM processors. Although Instant Resume will be enabled on other devices, its effectiveness will vary by platform memory profile. See the [Hardware specifications](doc:hardware) for processor and memory capabilities of all Roku devices.
 
-* **Roku OS 10.0 (or higher)**. Instant Resume is supported only on devices that can run Roku OS 10.0 or higher. See the [Hardware specifications](doc:hardware) for the list of current and updatable Roku devices.
+* **[Roku OS 10.0](doc:release-notes#roku-os-100) (or higher)**. Instant Resume is supported only on devices that can run [Roku OS 10.0](doc:release-notes#roku-os-100) or higher. See the [Hardware specifications](doc:hardware) for the list of current and updatable Roku devices.
 
 > Implementing Instant Resume in an app does not guarantee that the Roku OS can relaunch it in its suspended state. The Roku OS stores as many suspended apps as possible in memory; however, it removes suspended apps when additional memory is needed by the active app. If a suspended app is removed from memory, re-launching the app is done without Instant Resume.
 
@@ -36,7 +36,7 @@ Instant Resume entails suspending the app state in the device RAM and then resum
 
 To implement Instant Resume in an app, do the following:
 
-1. [Update the manifest with required attributes](#updating-the-channel-manifest).
+1. [Update the manifest with required attributes](#updating-the-manifest).
 
 2. [Implement the required suspend and resume handlers](#implementing-suspend-and-resume-handlers).
 
@@ -48,9 +48,9 @@ To implement Instant Resume in an app, do the following:
 
 The [manifest](doc:channel-manifest) must include the following attributes for an app to leverage Instant Resume:
 
-* **sdk_instant_resume=1**. Indicates the channel's request to participate in Instant Resume. Acknowledges that the channel has implemented all the requirements and protocols described in this document.
+* **sdk_instant_resume=1**. Indicates the app's request to participate in Instant Resume. Acknowledges that the app has implemented all the requirements and protocols described in this document.
 
-* **run_as_process=1**. Enables the Roku OS to preserve the channel state in the device RAM when the channel is suspended. If this attribute is not enabled, a channel implementing Instant Resume still functions; however, channel relaunches do not leverage this feature.
+* **run_as_process=1**. Enables the Roku OS to preserve the app state in the device RAM when the app is suspended. If this attribute is not enabled, an app implementing Instant Resume still functions; however, app relaunches do not leverage this feature.
 
 ### Implementing suspend and resume handlers
 
@@ -60,7 +60,7 @@ When the Home key or labeled app key on the Roku remote control is pressed, the 
 
 When the user later returns to the app, the Roku OS invokes the matching **customResume** handler. In the **customResume** handler, apps implement logic to determine the playback experience upon re-launch. Using VOD content for example, the **customResume** handler can check whether a Video node is on the screen stack and remove it if it is in order to display the content's Details screen.
 
-> As of Roku OS 12.0, pressing the "Back" key to exit an app generates an interruption. This means that apps without an Exit Confirmation dialog can support Instant Resume.
+> As of [Roku OS 12.0](doc:release-notes#roku-os-120), pressing the "Back" key to exit an app generates an interruption. This means that apps without an Exit Confirmation dialog can support Instant Resume.
 >
 > ***
 >
@@ -72,7 +72,7 @@ When the user later returns to the app, the Roku OS invokes the matching **custo
 
 In the SceneGraph XML file of the app's Scene node, insert `customization suspendhandler` and `customization resumehandler` tags and set them to `customSuspend` and `customResume`, respectively:
 
-```
+```xml
 <customization suspendhandler="customSuspend" />
 <customization resumehandler="customResume" />
 ```
@@ -81,7 +81,7 @@ In the SceneGraph XML file of the app's Scene node, insert `customization suspen
 
 The following BrightScript code demonstrates how to execute the `customSuspend` and `customResume` handlers in the Scene. The **customResume** handler includes logic for managing the playback experience, which includes handling any deep link requests sent to the app upon relaunch. Details for each of these handlers, including the tasks to be performed within them, are provided after.
 
-```
+```brightscript
 function customSuspend(arg as dynamic)
      for each key in arg
        print " " key "=" arg[key]
@@ -144,7 +144,7 @@ Once an Instant Resume app is suspended, it should return the user to the Roku h
 
 To enable an Instant Resume app to execute background tasks, set the **allowBackgroundTask** field of the **Scene** node. The following BrightScript code demonstrates how to do this:
 
-```
+```brightscript
 scene = screen.CreateScene("BackgroundTaskTestScene")
 scene.allowBackgroundTask = true
 ```
@@ -208,13 +208,13 @@ It is recommended that apps use a basic implementation for the playback of VOD c
 
 The following code snippet illustrates logic that could be used to resume an app when a video node has already been created and is on the screen stack. In this case, it closes the video node, removes it from the screen stack, and switches focus on the previous screen, which is typically the Details Screen.
 
-```
+```brightscript
 ' Callback function when the app is suspended from an app exit.
 ' In this example, we are only printing to the brightscript console
 ' that the app is being suspended.
-sub onMainSceneSuspend(arg as dynamic)  
-  print "***** Suspending Channel ***** CALLED FROM"; arg.lastSuspendOrResumeReason
-end sub  
+sub onMainSceneSuspend(arg as dynamic)
+  print "***** Suspending App ***** CALLED FROM"; arg.lastSuspendOrResumeReason
+end sub
 
 ' Callback function when the app resumes after an app exit. The
 ' sample will check if a video node has been created. If it has, then we
@@ -222,10 +222,10 @@ end sub
 ' screen. Otherwise, it will resume with the last screen the user was previously
 ' on before the app was suspended.
 sub onMainSceneResume(arg as dynamic) as boolean
-  print "***** Resuming Channel ***** CALLED FROM"; arg.lastSuspendOrResumeReason  
+  print "***** Resuming App ***** CALLED FROM"; arg.lastSuspendOrResumeReason
   if m.videoPlayer <> invalid and lcase(m.videoPlayer.subtype()) = "video"
       print "***** Closing video screen... *****"
-      CloseScreen(m.videoPlayer)  
+      CloseScreen(m.videoPlayer)
   end if
 end sub
 ```
@@ -239,6 +239,6 @@ end sub
 
 ## Sample app
 
-If your device is running Roku OS 10.0 (or later), you can download and install a [sample app](https://github.com/rokudev/instant-resume) that demonstrates how to implement Instant Resume in an app. You can customize the handling of suspend and resume events in the sample to meet your app's needs.
+If your device is running [Roku OS 10.0](doc:release-notes#roku-os-100) (or later), you can download and install a [sample app](https://github.com/rokudev/instant-resume) that demonstrates how to implement Instant Resume in an app. You can customize the handling of suspend and resume events in the sample to meet your app's needs.
 
 The `onMainSceneSuspend()` and `onMainSceneResume()` methods shown in the VOD playback code sample are taken from the **components/UILogic/VideoPlayerLogic.brs** file in the sample app. They are used as the controlling the `customSuspend()` and `customResume()` methods in the **components/MainScene.xml** file.

@@ -2,7 +2,7 @@
 title: "Conditional compilation"
 excerpt: ''
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''
@@ -25,11 +25,11 @@ and has the form:
 
 **Examples of valid expressions**
 
-~~~~
+```brightscript
 #const someFlag = true
 #const anotherFlag = false
 #const someOtherFlag = someFlag
-~~~~
+```
 
 -----
 
@@ -66,39 +66,29 @@ There are a variety of ways Conditional compilation can be used:
 
 **Example demonstrating use of manifest constants**
 
-~~~
+```brightscript
 #if someFlag
-
     'code to execute when someFlag is true
-
 #else if anotherFlag
-
     'code to execute when anotherFlag is true
-
 #end if
-~~~
+```
 
 
 **Example demonstrating locally scoped constants**
 
-~~~~
+```brightscript
 #const FeatureA = true
 #const FeatureB = false
 
 #if FeatureA
-
     'code for Feature A
-
 #else if FeatureB
-
     'code for Feature B
-
 #else
-
     'production code
-
 #end if
-~~~~
+```
 
 
 An `#error` constant can also be used to force a compilation error with an error message:
@@ -106,7 +96,7 @@ An `#error` constant can also be used to force a compilation error with an error
 
 **Example demonstrating usage of \#error constant**
 
-~~~~
+```brightscript
 #const FeatureAImplemented = true
 
 #if FeatureAImplemented
@@ -114,7 +104,7 @@ An `#error` constant can also be used to force a compilation error with an error
 #else
     #error TO DO: implement feature A
 #end if
-~~~~
+```
 
 
 ### Block comments
@@ -124,38 +114,28 @@ Conditional compilation can also be used to form block comments. Previously, eac
 
 **Example of code block comments**
 
-~~~~
+```brightscript
 #if false
-
     This is a function that does nothing.
-
     This function takes no parameters.
-
     This function does not return anything.
-
 #end if
 
-Function foo() as void
-
+function foo() as void
     'do nothing
-
-End Function
-~~~~
+end function
+```
 
 
 **Example of commenting out code**
 
-~~~~
+```brightscript
 #if false
-
-Function Order66() as void
-
-    'code for Order66
-
-End Function
-
+    function Order66() as void
+        'code for Order66
+    end function
 #end if
-~~~~
+```
 
 
 Calling this function would result in a compile time error. To re-enable this function, change `#if false` to `#if true`.

@@ -1,11 +1,11 @@
 ---
 title: "ListPanel"
-excerpt: ''
+excerpt: 'ListPanel node for panels containing a LabelList or MarkupList with focus handling'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'ListPanel'
+  description: 'Documents the ListPanel node, which creates a Panel containing a LabelList or MarkupList with automatic key focus handling and create-next-panel functionality.'
   robots: index
 next:
   description: ''
@@ -97,7 +97,7 @@ If you set the list field to a MarkupList node, because the MarkupList is by nat
 <td>Node</td>
 <td>false</td>
 <td>WRITE_ONLY</td>
-<td>When the createNextPanelOnItemFocus field is true, the nextPanel field should be set to a Panel node to the next panel to add to the PanelSet in response to the createNextPanelIndex field being set. It must be set immediately in repsonse to the createNextPanelIndex field being set.</td>
+<td>When the createNextPanelOnItemFocus field is true, the nextPanel field should be set to a Panel node to the next panel to add to the PanelSet in response to the createNextPanelIndex field being set. It must be set immediately in response to the createNextPanelIndex field being set.</td>
 </tr>
 <tr>
 <td>createNextPanelOnItemFocus</td>
@@ -113,10 +113,10 @@ If you set the list field to a MarkupList node, because the MarkupList is by nat
 
 > If you are creating the list field(either a LabelList or MarkupList) associated with a ListPanel in script of a component that extends ListPanel, you also need to add the list as a child of the ListPanel. For example, in a component that extends ListPanel, where m.top is that component, you would associate the list field with a LabelList as follows:
 
-~~~~
+```brightscript
 list = m.top.createChild("LabelList")
 m.top.list = list
-~~~~
+```
 
 ## Data bindings
 

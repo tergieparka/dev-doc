@@ -2,7 +2,7 @@
 title: Threads
 excerpt: ''
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''
@@ -54,7 +54,7 @@ The entire interface to a node, including field creation, setting, and getting, 
 - Nodes owned by a Task thread are not accessible outside that thread.
 - Task nodes are owned by the Render thread, so Task nodes and their fields can only be accessed by rendezvous from threads other than the Render thread. This includes threads launched by the Task node itself.
 
-> Use the [**logrendezvous** command](https://roku-ent.readme.io/dev/docs/debugging#scenegraph-debug-server-port-8080-commands) in the SceneGraph debug console to identify performance issues in the Task thread caused by a rendezvous. This command indicates whether a rendezvous is occurring and its duration (in milliseconds).
+> Use the [**logrendezvous** command](/dev/docs/debugging#scenegraph-debug-server-port-8080-commands) in the SceneGraph debug console to identify performance issues in the Task thread caused by a rendezvous. This command indicates whether a rendezvous is occurring and its duration (in milliseconds).
 
 ### BrightScript operations without SceneGraph node objects
 
@@ -74,21 +74,21 @@ Since Task nodes are owned by the Render thread, setting Task node fields from a
 
 #### Render Thread
 
-```
+```brightscript
 my_task = CreateObject("roSGNode", "MyTask")
-# setting fields from the Render thread WILL NOT rendezvous
+' setting fields from the Render thread WILL NOT rendezvous
 my_task.my_field = "some value"
-# observer will run on the Render thread
+' observer will run on the Render thread
 my_task.ObserveField("my_field", "OnMyFieldChanged")
 ```
 
 #### Task Thread
 
-```
-# setting fields from the Task thread WILL rendezvous
+```brightscript
+' setting fields from the Task thread WILL rendezvous
 m.top.my_field = "some value"
 cn = CreateObject("roSGNode", "ContentNode")
-# observer will run on the Task thread
+' observer will run on the Task thread
 cn.ObserveField("title", "OnTitleChaned")
 ```
 

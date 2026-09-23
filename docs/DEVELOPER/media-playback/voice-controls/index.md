@@ -1,11 +1,11 @@
 ---
 title: Voice controls
-excerpt: ''
+excerpt: 'Handle voice commands for playback control and profile selection in your app'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Voice controls | Roku Developer Docs'
+  description: 'Voice controls enable apps to handle commands from the Roku voice remote and mobile app to control content playback and select user profiles.'
   robots: index
 next:
   description: ''
@@ -30,7 +30,7 @@ With voice controls, your app can respond to the following types of voice comman
   For more information on handling basic and enhanced voice controls, see [Implementing voice controls](doc:transport-controls).
 
 
-> Apps that have streamed more than an average of 5 million hours per month over the last three months must implement all basic, enhanced, and additonal enhanced voice controls to pass [certification](doc:certification). This is also applicable to new apps projected to reach the specified streaming hours threshold shortly after launch.
+> Apps that have streamed more than an average of 5 million hours per month over the last three months must implement all basic, enhanced, and additional enhanced voice controls to pass [certification](doc:certification). This is also applicable to new apps projected to reach the specified streaming hours threshold shortly after launch.
 
 ## Profile selection
 

@@ -1,11 +1,11 @@
 ---
 title: ComponentLibrary
-excerpt: ''
+excerpt: 'Node type for downloading custom component libraries into an application'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'ComponentLibrary'
+  description: 'The ComponentLibrary node downloads a library of custom components to an application, with fields for uri, id, and a loadStatus indicating download progress.'
   robots: index
 next:
   description: ''
@@ -20,7 +20,7 @@ In addition to the custom components you create specifically for your applicatio
 
 To do this, define a ComponentLibrary node in the Scene node for your application. Set the id field of the node to a unique library ID for your application, and specify the URL to download the library from in the uri field of the node. As the SceneGraph scene is constructed, the library will be downloaded from the specified URL, and component instances will be created as needed for the application.
 
-> _Since Roku OS 9.4_, compilation info/failure messages for Roku SceneGraph component libraries when running side-loaded apps appear on the developer console, port 8085. (Previously, such messages were sent to port 8885.)
+> _Since [Roku OS 9.4](doc:release-notes#roku-os-94)_, compilation info/failure messages for Roku SceneGraph component libraries when running side-loaded apps appear on the developer console, port 8085. (Previously, such messages were sent to port 8885.)
 
 Component libraries can be packaged and signed the same way that apps are packaged and signed. You sideload your library, package it using the packaging tool, and then host it on the server of your choosing.
 
@@ -36,7 +36,7 @@ A component library must include a separate [manifest file](doc:channel-manifest
 
 Components declared in a component library can be used inside the app just like custom components. Make sure to specify it in format _libraryName_:_componentName_. So say if a component named LoadingIndicator is defined in the SampleComponentLib library, then it may be used like this:
 
-```
+```xml
 <SampleComponentLib:LoadingIndicator imageUri="pkg:/images/loader.png" translation="[700, 200]"/>
 ```
 
@@ -54,593 +54,53 @@ Component libraries do not need to be packaged or signed with the same devid as 
 
 ## Fields
 
-<Table align={["left","left","left","left","left","left","left","left","left","left","left","left","left","left","left"]}>
+<table>
   <thead>
     <tr>
-      <th>
-        Field
-      </th>
-
-      <th>
-        Type
-      </th>
-
-      <th>
-        Default
-      </th>
-
-      <th>
-        Access Permission
-      </th>
-
-      <th>
-        Description
-      </th>
-
-      <th>
-
-      </th>
-
-      <th>
-
-      </th>
-
-      <th>
-
-      </th>
-
-      <th>
-
-      </th>
-
-      <th>
-
-      </th>
-
-      <th>
-
-      </th>
-
-      <th>
-
-      </th>
-
-      <th>
-
-      </th>
-
-      <th>
-
-      </th>
-
-      <th>
-
-      </th>
+      <th scope="col">Field</th>
+      <th scope="col">Type</th>
+      <th scope="col">Default</th>
+      <th scope="col">Access Permission</th>
+      <th scope="col">Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
-      <td>
-        loadStatus
-      </td>
-
-      <td>
-        value string
-      </td>
-
-      <td>
-        "none"
-      </td>
-
-      <td>
-        READ_ONLY
-      </td>
-
+      <td>loadStatus</td>
+      <td>value string</td>
+      <td>"none"</td>
+      <td>READ_ONLY</td>
       <td>
         Indicates the progress of the library download. The possible values are:
-
         <table>
-          <tr>
-            <td>Value</td>
-            <td>Meaning</td>
-          </tr>
-
-          <tr>
-            <td>none</td>
-            <td>The default if the library is not being downloaded</td>
-          </tr>
-
-          <tr>
-            <td>loading</td>
-            <td>Library is downloading</td>
-          </tr>
-
-          <tr>
-            <td>ready</td>
-            <td>Library has downloaded successfully</td>
-          </tr>
-
-          <tr>
-            <td>failed</td>
-            <td>Download of the library has failed</td>
-          </tr>
+          <thead>
+            <tr>
+              <th scope="col">Value</th>
+              <th scope="col">Meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>none</td><td>The default if the library is not being downloaded</td></tr>
+            <tr><td>loading</td><td>Library is downloading</td></tr>
+            <tr><td>ready</td><td>Library has downloaded successfully</td></tr>
+            <tr><td>failed</td><td>Download of the library has failed</td></tr>
+          </tbody>
         </table>
       </td>
-
-      <td>
-        Value
-      </td>
-
-      <td>
-        Meaning
-      </td>
-
-      <td>
-        none
-      </td>
-
-      <td>
-        The default if the library is not being downloaded
-      </td>
-
-      <td>
-        loading
-      </td>
-
-      <td>
-        Library is downloading
-      </td>
-
-      <td>
-        ready
-      </td>
-
-      <td>
-        Library has downloaded successfully
-      </td>
-
-      <td>
-        failed
-      </td>
-
-      <td>
-        Download of the library has failed
-      </td>
     </tr>
-
     <tr>
-      <td>
-        Value
-      </td>
-
-      <td>
-        Meaning
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
+      <td>id</td>
+      <td>string</td>
+      <td>no default</td>
+      <td>READ_WRITE</td>
+      <td>Set to a unique ID for the library for the application</td>
     </tr>
-
     <tr>
-      <td>
-        none
-      </td>
-
-      <td>
-        The default if the library is not being downloaded
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        loading
-      </td>
-
-      <td>
-        Library is downloading
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        ready
-      </td>
-
-      <td>
-        Library has downloaded successfully
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        failed
-      </td>
-
-      <td>
-        Download of the library has failed
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        id
-      </td>
-
-      <td>
-        string
-      </td>
-
-      <td>
-        no default
-      </td>
-
-      <td>
-        READ_WRITE
-      </td>
-
-      <td>
-        Set to a unique ID for the library for the application
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        uri
-      </td>
-
-      <td>
-        uri
-      </td>
-
-      <td>
-        no default
-      </td>
-
-      <td>
-        READ_WRITE
-      </td>
-
-      <td>
-        The URL of the library to be downloaded
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
-
-      <td>
-
-      </td>
+      <td>uri</td>
+      <td>uri</td>
+      <td>no default</td>
+      <td>READ_WRITE</td>
+      <td>The URL of the library to be downloaded</td>
     </tr>
   </tbody>
-</Table>
+</table>

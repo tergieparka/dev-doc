@@ -1,11 +1,11 @@
 ---
 title: Content engagement
-excerpt: ''
+excerpt: 'Overview of promotional and discovery tools for driving app engagement on Roku'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Content engagement | Roku Developer Docs'
+  description: 'Documents the content engagement tools available to app publishers, including Roku Search, Instant Signup, Featured Free, and home screen display ads.'
   robots: index
 next:
   description: ''
@@ -24,7 +24,7 @@ See [Implementing Roku Search](doc:implementing-search) to integrate your app in
 
 <Image alt="roku815px - roku-search-results" border={false} src="https://image.roku.com/ZHZscHItMTc2/roku-discovery-search-v3.png" />
 
-By participating in Roku Search, your app is eligible for three more discovery programs that provide additional exposure: [Visual Search Results for Roku Voice](#visual-search-results-for-roku-voice), [Roku Zones](#roku-zones) and [My Feed](#my-feed).
+By participating in Roku Search, your app is eligible for three more discovery programs that provide additional exposure: [Visual Search Results for Roku Voice](#visual-search-results-for-roku-voice), [Roku Zones](#roku-zones) and [Save List](#save-list).
 
 ### Visual Search Results for Roku Voice
 
@@ -82,7 +82,7 @@ In addition, Roku offers self-serve tools that you can use to purchase display a
 
 ### Roku home screen display ads
 
-Apps can purchase targeted display ads that appear on the Roku home screen to the right of the My Channels section. This provides apps with an opportunity to target specific groups of Roku users with relevant ads in order to increase their visibility on the Roku platform and drive engagement and sign-ups.
+Apps can purchase targeted display ads that appear on the Roku home screen to the right of the My Apps section. This provides apps with an opportunity to target specific groups of Roku users with relevant ads in order to increase their visibility on the Roku platform and drive engagement and sign-ups.
 
 See [Self-Serve Promotions](doc:self-serve-promotions) for more information on purchasing display ads on the Roku home screen.
 

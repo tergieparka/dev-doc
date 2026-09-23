@@ -1,11 +1,11 @@
 ---
 title: "Vector2DFieldInterpolator"
-excerpt: ''
+excerpt: 'Keyframe interpolator for animating Vector2D fields such as node translation'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Vector2DFieldInterpolator'
+  description: 'Vector2DFieldInterpolator defines a keyframe animation sequence applied to a Vector2D field, most typically used to animate the translation field of a node.'
   robots: index
 next:
   description: ''
@@ -24,7 +24,7 @@ For values of fraction between 0.0 and 0.4 (e.g. 0.2 or 20%), the field value is
 
 For this example, if the field being interpolated were the translation field of a Poster node parented to the Scene node, the Poster would originally be positioned with its top/left corner at the upper, left corner of the screen. As the animation proceeded from 0% to 40% complete, the Poster would slide horizontally to the right until it's top/left corner was at x=500.0, y=0.0. As the animation continued from 40% to 100% complete, the Poster would slide vertically down until its top/left corner was at x=500.0, y=200.0.
 
-If the first keyframe has a key percentage greater than zero, then the field value will be equal to the keyValue of the first keyframe until fraction reaches the first keyframe's key percentage. Similarly, if the last keyframe has a key percentage less than one, the field value will be set to the keyValue of the last keyframe from when fraction equals the the last keyframe's key percentage and will not change as fraction increases from that value to 1.0.
+If the first keyframe has a key percentage greater than zero, then the field value will be equal to the keyValue of the first keyframe until fraction reaches the first keyframe's key percentage. Similarly, if the last keyframe has a key percentage less than one, the field value will be set to the keyValue of the last keyframe from when fraction equals the last keyframe's key percentage and will not change as fraction increases from that value to 1.0.
 
 > While linearly interpolation is used to compute the keyValue's for fraction values between successive keys, non-linear easing functions may be applied to the fraction values computed by the Animation node, so the overall animation may vary in speed. 
 
@@ -34,50 +34,42 @@ The following scrolls the text string "Application Development Made Easy!" back 
 
 #### Vector2DFieldInterpolator Node Class Example
 
-~~~
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
- 
-<!--********** Copyright 2015 Roku Corp.  All Rights Reserved. **********-->
- 
-<component name="animationv2dtest" extends="Group" >
- 
-    <script type="text/brightscript" >
-        <![CDATA[
-            function init()
-                m.top.setFocus(true)
-            end function
-        ]]>
-    </script>
- 
-<children>
- 
+<component name="animationv2dtest" extends="Group">
+  <script type="text/brightscript">
+    <![CDATA[
+      function init()
+        m.top.setFocus(true)
+      end function
+    ]]>
+  </script>
+
+  <children>
     <Label
-        id="testLabel"
-        height="44"
-        width="0"
-        font="font:MediumBoldSystemFont"
-        text = "Application Development Made Easy!"
-        horizAlign = "left"
-        vertAlign = "center"
-        translation="[318,8]" />
- 
-        <Animation
-            id="testAnimation"
-            duration="10"
-            repeat="true"
-            control="start"
-            easeFunction="linear">
-            <Vector2DFieldInterpolator
-                id = "testVector2D"
-                key="[0.0, 0.5, 1.0]"
-                keyValue="[ [318.0, 8.0], [656.0, 8.0], [318.0, 8.0] ]"
-                fieldToInterp="testLabel.translation"   />
- 
-        </Animation>
-</children>
- 
+      id="testLabel"
+      height="44"
+      width="0"
+      font="font:MediumBoldSystemFont"
+      text="Application Development Made Easy!"
+      horizAlign="left"
+      vertAlign="center"
+      translation="[318,8]" />
+    <Animation
+      id="testAnimation"
+      duration="10"
+      repeat="true"
+      control="start"
+      easeFunction="linear">
+      <Vector2DFieldInterpolator
+        id="testVector2D"
+        key="[0.0, 0.5, 1.0]"
+        keyValue="[ [318.0, 8.0], [656.0, 8.0], [318.0, 8.0] ]"
+        fieldToInterp="testLabel.translation" />
+    </Animation>
+  </children>
 </component>
-~~~
+```
 
 ## Fields
 

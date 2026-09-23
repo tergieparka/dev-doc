@@ -1,11 +1,11 @@
 ---
 title: "FloatFieldInterpolator"
-excerpt: ''
+excerpt: 'Keyframe animation sequence for a floating point field of a node'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'FloatFieldInterpolator'
+  description: 'The FloatFieldInterpolator node specifies a keyframe animation sequence applied to a floating point field of a node, such as opacity, width, or height.'
   robots: index
 next:
   description: ''
@@ -22,7 +22,7 @@ For example, if a FloatFieldInterpolator had three keyframes, (0.0, 10.0), (0.4,
 
 For values of fraction between 0.0 and 0.4 (e.g. 0.2 or 20%), the field value is determined by linearly interpolating the keyValues for the first two keyframes. In this case, since the key of 0.2 is halfway between the key at 0.0 and the key at 0.4, the field would be set to 10.0 + 0.5 * (10.0 + 200.0) = 105.0. Similarly, when fraction is between the second and third keys (i.e. between 0.4 and 1.0), the field value is determined by linearly interpolating the keyValues of the second and third keyframes.
 
-If the first keyframe has a key percentage greater than zero, then the field value will be equal to the keyValue of the first keyframe until fraction reaches the first keyframe's key percentage. Similarly, if the last keyframe has a key percentage less than one, the field value will be set to the keyValue of the last keyframe from when fraction equals the the last keyframe's key percentage and will not change as fraction increases from that value to 1.0.
+If the first keyframe has a key percentage greater than zero, then the field value will be equal to the keyValue of the first keyframe until fraction reaches the first keyframe's key percentage. Similarly, if the last keyframe has a key percentage less than one, the field value will be set to the keyValue of the last keyframe from when fraction equals the last keyframe's key percentage and will not change as fraction increases from that value to 1.0.
 
 > While linearly interpolation is used to compute the keyValue's for fraction values between successive keys, non-linear easing functions may be applied to the fraction values computed by the Animation node, so the overall animation may vary in speed.
 
@@ -32,32 +32,25 @@ The following changes the opacity of a graphical image, gradually making it invi
 
 #### FloatFieldInterpolator Node Class Example
 
-~~~
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
- 
-<!--********** Copyright 2015 Roku Corp.  All Rights Reserved. **********-->
- 
-    <component name="animationfloattest" extends="Group" >
- 
-        <script type="text/brightscript" >
-            <![CDATA[
-                function init()
-                    m.top.setFocus(true)
-                end function
-            ]]>
-        </script>
- 
-<children>
- 
-    <Poster  id="testPoster"  uri="pkg:/images/rokuowds.png"  width="0.0"  height="0.0"  translation="[160,8]"  opacity="0.0" />
-    <Animation   id="testAnimation"  duration="10"  repeat="true"  control="start"  easeFunction="linear" >
-        <FloatFieldInterpolator    id = "testFloat"   key="[0.0, 0.5, 1.0]"    keyValue="[ 1.0, 0.0, 1.0 ]"       fieldToInterp="testPoster.opacity"   />
+<component name="animationfloattest" extends="Group">
+  <script type="text/brightscript">
+    <![CDATA[
+      function init()
+        m.top.setFocus(true)
+      end function
+    ]]>
+  </script>
+
+  <children>
+    <Poster id="testPoster" uri="pkg:/images/rokuowds.png" width="0.0" height="0.0" translation="[160,8]" opacity="0.0" />
+    <Animation id="testAnimation" duration="10" repeat="true" control="start" easeFunction="linear">
+      <FloatFieldInterpolator id="testFloat" key="[0.0, 0.5, 1.0]" keyValue="[ 1.0, 0.0, 1.0 ]" fieldToInterp="testPoster.opacity" />
     </Animation>
- 
-</children>
- 
+  </children>
 </component>
-~~~
+```
 
 ## Fields
 

@@ -2,7 +2,7 @@
 title: Fast video start
 excerpt: ''
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''
@@ -51,7 +51,7 @@ effect.
 
 The following code demonstrates this use case.
 
-```
+```brightscript
 port = CreateObject( "roMessagePort" )
 
 content = {

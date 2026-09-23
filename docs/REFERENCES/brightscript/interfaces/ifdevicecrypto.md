@@ -1,10 +1,11 @@
 ---
 title: ifDeviceCrypto
+excerpt: 'Encrypt and decrypt data using device-, app-, or model-scoped keys'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'ifDeviceCrypto'
+  description: 'ifDeviceCrypto provides Encrypt and Decrypt methods for securing data using a key scoped to a device, app, or model on a Roku device.'
   robots: index
 next:
   description: ''
@@ -50,14 +51,12 @@ Decrypts data stored on a device that was previously encoded with the [**Encrypt
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>EncryptedData</td>
       <td>roByteArray</td>
       <td>The previously encoded data to be decrypted.</td>
     </tr>
-
     <tr>
       <td>encType</td>
       <td>String</td>
@@ -75,19 +74,20 @@ An roByteArray containing the decrypted data.
 You can use the `Encrypt()` and `Decrypt()` methods to encrypt plaintext on a Roku device
 and then decode it, as demonstrated in the following example:
 
-```
+```brightscript
   ' store plaintext to be encrypted in an roByteArray
   ba = CreateObject("roByteArray")
-  ba.FromAsciiString("plain text1")  
+  ba.FromAsciiString("plain text1")
 
   ' create roDeviceCrypto object and specify a device key
-  dc = CreateObject("roDeviceCrypto") encType = "device"
+  dc = CreateObject("roDeviceCrypto")
+  encType = "device"
 
   ' encrypt plaintext using the device key and store the encoded data in an roByteArray
   encrypted = dc.Encrypt(ba, encType)
 
   ' decode the encrypted data and store the decrypted data in an roByteArray
   if encrypted <> invalid then
-  	decrypted = dc.Decrypt(encrypted,encType)
+      decrypted = dc.Decrypt(encrypted, encType)
   end if
 ```

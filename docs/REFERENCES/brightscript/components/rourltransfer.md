@@ -1,11 +1,11 @@
 ---
 title: "roUrlTransfer"
-excerpt: ''
+excerpt: 'Transfers data to or from remote servers and supports mutual authentication'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'roUrlTransfer'
+  description: 'roUrlTransfer transfers data to or from remote servers specified by URLs and can perform mutual authentication with a web server.'
   robots: index
 next:
   description: ''
@@ -32,11 +32,11 @@ The web server can authenticate that the requested connection is from a Roku Str
 
 In order for your web server to perform the steps above to authenticate your Roku Streaming Player, your application needs to call the following functions before performing any https requests:
 
-~~~
+```brightscript
 object.SetCertificatesFile("common:/certs/ca-bundle.crt")
 object.AddHeader("X-Roku-Reserved-Dev-Id", "")
 object.InitClientCertificates()
-~~~
+```
 
 
 ## Supported interfaces

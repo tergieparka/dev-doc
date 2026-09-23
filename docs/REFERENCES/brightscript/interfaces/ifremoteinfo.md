@@ -1,11 +1,11 @@
 ---
 title: "ifRemoteInfo"
-excerpt: ''
+excerpt: 'Interface for querying model, wake state, and features of a Roku remote'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'ifRemoteInfo'
+  description: 'Documents the ifRemoteInfo interface, which provides methods to get the model number, check wake state, and query features of a Roku remote control.'
   robots: index
 next:
   description: ''
@@ -101,7 +101,7 @@ Checks if the specified Roku remote control supports the passed in feature strin
 <tr>
 <td>feature</td>
 <td>String</td>
-<td>The feature to be checked, which may be one of the following values: <ul><li>"bluetooth"</li><li>"wifi"</li><li>"motion"</li><li>"audio"</li><li>"voicecapture"</li><li>"findremote"</li><li>"hasMuteSwitch" (<em>Available since Roku OS 13.0</em>; enables developers to check whether a Roku remote control includes a hands-free voice switch).</li></ul></td>
+<td>The feature to be checked, which may be one of the following values: <ul><li>"bluetooth"</li><li>"wifi"</li><li>"motion"</li><li>"audio"</li><li>"voicecapture"</li><li>"findremote"</li><li>"hasMuteSwitch" (<em>Available since [Roku OS 13.0](doc:release-notes#roku-os-130)</em>; enables developers to check whether a Roku remote control includes a hands-free voice switch).</li></ul></td>
 </tr>
 <tr>
 <td>remoteIndex</td>

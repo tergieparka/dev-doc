@@ -1,11 +1,11 @@
 ---
 title: "ifArrayJoin"
-excerpt: ''
+excerpt: 'Interface providing Join to concatenate array elements into a single string'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'ifArrayJoin'
+  description: 'The ifArrayJoin interface provides the Join method, which concatenates all string elements of an array into a single string separated by a specified separator.'
   robots: index
 next:
   description: ''
@@ -40,16 +40,16 @@ A String containing the array elements.
 
 #### Examples
 
-~~~
-    a = ["ant","bat","cat"] 
+```brightscript
+    a = ["ant","bat","cat"]
     s = a.Join(",")
     print """" + s + """"
-    REM "ant,bat,cat"
-    
+    ' "ant,bat,cat"
+
     a = "abc".Split("")
     s = a.Join("--")
     print """" + s + """"
-    REM "a--b--c"
-~~~
+    ' "a--b--c"
+```
 
 

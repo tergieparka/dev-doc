@@ -1,11 +1,11 @@
 ---
 title: Closed caption
-excerpt: ''
+excerpt: 'Implement closed caption formats and meet certification requirements in your app'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Closed caption | Roku Developer Docs'
+  description: 'Configure closed caption support in your app using SMPTE-TT, EIA-608/708, and WebVTT formats, meeting certification requirements for caption tracks.'
   robots: index
 next:
   description: ''
@@ -63,7 +63,7 @@ fired, and the **[Video node](doc:video)** is playing full
 screen and setFocus is enabled i.e., the Video node is in focus, as displayed in the following code
 example:
 
-```
+```brightscript
 sub init()
     m.top.setFocus(true)
     setVideo()

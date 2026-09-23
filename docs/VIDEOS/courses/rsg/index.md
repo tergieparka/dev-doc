@@ -1,18 +1,18 @@
 ---
 title: "SceneGraph Developers: Build an App"
-excerpt: ''
+excerpt: '13-lesson video course for building a certification-ready Roku app from scratch'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'SceneGraph Developers: Build an App | Roku Developer Docs'
+  description: 'Video course teaching novice Roku developers how to build an app from the ground up using the Roku SDK, covering 13 lessons and a master sample app.'
   robots: index
 next:
   description: ''
 ---
 
 
-The **SceneGraph Developers: Build a Channel** course teaches novice Roku developers how to develop an app from the ground up with the Roku SDK. This course features a set of 13 video lessons and a comprehensive [sample app](https://github.com/rokudev/scenegraph-master-sample) that walks developers through each step in building a basic, high-performance Roku app that passes certification. This course is ideal for developers that are new to the Roku platform and want a simple, streamlined path for quickly understanding Roku development.
+The **SceneGraph Developers: Build an App** course teaches novice Roku developers how to develop an app from the ground up with the Roku SDK. This course features a set of 13 video lessons and a comprehensive [sample app](https://github.com/rokudev/scenegraph-master-sample) that walks developers through each step in building a basic, high-performance Roku app that passes certification. This course is ideal for developers that are new to the Roku platform and want a simple, streamlined path for quickly understanding Roku development.
 
 ## Course content
 

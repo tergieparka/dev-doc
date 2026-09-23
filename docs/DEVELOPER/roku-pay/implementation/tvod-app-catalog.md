@@ -2,7 +2,7 @@
 title: Creating TVOD apps (Catalog 2.0)
 excerpt: ''
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''
@@ -12,11 +12,11 @@ next:
 ---
 Publishers participating in Roku Pay can monetize content by making it available for rental or purchase. Implementing the transactional video on demand (TVOD) model in a Roku app allows publishers to generate revenue from sporting events, pay-per-views, recent movie releases, and other popular content in their catalog. This enables viewers to enjoy the convenience of consuming a publisher's must-see content on-demand.
 
-<Image alt="roku815px - tvod-sample-UI" border={false} src="https://image.roku.com/ZHZscHItMTc2/tvod-buy-1.jpg" />
+![roku815px - tvod-sample-UI](https://image.roku.com/ZHZscHItMTc2/tvod-buy-1.jpg)
 
 ## Overview
 
-Offering transactional content in an app entails [creating products and purchase options](doc:product-catalog) for the content in the Developer Dashboard and using the [ChannelStore node](doc:channelstore) to [check the user's billing status](doc:channelstore) and [complete the rental or purchase transaction](doc:channelstore).
+Offering transactional content in an app entails [creating products and purchase options](doc:product-catalog) for the content in the Developer Dashboard and using the [ChannelStore node](doc:channelstore) to [check the user's billing status](doc:channelstore#requestpartnerorder) and [complete the rental or purchase transaction](doc:channelstore#confirmpartnerorder).
 
 > This workflow is intended for:
 >
@@ -35,7 +35,7 @@ When creating a product for transactional content, make sure to do the following
 
 * **Product Name**. Enter a name that generically describes the rental or purchase product (for example, "movie rental", "movie purchase", and so on).
 
-  <Image alt="roku600px - tvod-product" border={false} src="https://image.roku.com/ZHZscHItMTc2/tvod-product-edit.jpg" />
+  ![roku600px - tvod-product](https://image.roku.com/ZHZscHItMTc2/tvod-product-edit.jpg)
 
 ### Purchase option guidelines
 
@@ -43,13 +43,13 @@ When creating a purchase option for a TVOD product, make sure to do the followin
 
 * **Purchase Type**. You must select **One-Time Purchase. consumable**.
 
-  <Image alt="roku600px - tvod-purchase-option-consumable-create" border={false} src="https://image.roku.com/ZHZscHItMTc2/tvod-purchase-option-consumable-create.jpg" />
+  ![roku600px - tvod-purchase-option-consumable-create](https://image.roku.com/ZHZscHItMTc2/tvod-purchase-option-consumable-create.jpg)
 
 * **Quantity** (TVOD-exclusive app only): Select **1**.
 
 * **Price Tier**: Select any price tier. The price passed in the ChannelStore APIs overrides the price corresponding to the selected price tier.
 
-  <Image alt="roku600px - tvod-purchase-option-billing" border={false} src="https://image.roku.com/ZHZscHItMTc2/tvod-purchase-option-billing.jpg" />
+  ![roku600px - tvod-purchase-option-billing](https://image.roku.com/ZHZscHItMTc2/tvod-purchase-option-billing.jpg)
 
 ## Handling transactional purchases
 
@@ -59,17 +59,17 @@ To update your app with the new **DoOrder** API, follow these steps:
 
 1. Initialize the ChannelStore API generic request framework. The following code monitors the **channelStore.requestStatus** field and fires the **onRequestStatus()** callback function when changes to the **requestStatus** field occur. The **onRequestStatus()** function determines which command was sent and sends the results to the dedicated parser for the command.
 
-   ```
+   ```brightscript
    function init()
        m.store = m.parent.FindNode("channelStore")
        m.store.observeField("requestStatus", "onRequestStatus")
    end function
-     
+
    ' Generic SDK API request callback
    function onRequestStatus()
        requestStatus = m.store.requestStatus
-     
-       if requestStatus = Invalid
+
+       if requestStatus = invalid
            print "Invalid requestStatus"
        else
            print "requestStatus", requestStatus
@@ -77,7 +77,7 @@ To update your app with the new **DoOrder** API, follow these steps:
            print "requestStatus.status", requestStatus.status
            print "requestStatus.statusMessage", requestStatus.statusMessage
            print "requestStatus.context", requestStatus.context
-     
+
            ' requestStatus.status:
            ' 2: Interrupted
            ' 1: Success
@@ -86,7 +86,7 @@ To update your app with the new **DoOrder** API, follow these steps:
            ' -2: Timeout
            ' -3: Unknown error
            ' -4: Invalid request
-     
+
            ' Generic request succeeded
            if requestStatus.status = 1 then
                if requestStatus.command = "DoOrder" then
@@ -99,12 +99,12 @@ To update your app with the new **DoOrder** API, follow these steps:
 
 2. Send the **DoOrder** command to purchase the transactional content, and then check the order status.
 
-   ```
+   ```brightscript
    sub makeTVODPurchase(requestData as dynamic)
      print  "calling makeTVODPurchase"
      'myOrder = { "code": request.productCode, "name": request.productName, "qty": 1}
      'myOrder = CreateObject("roSGNode", "ContentNode")
-     
+
      print "request.sku: "; requestData.productCode
      newOrder = []
      order = {
@@ -156,7 +156,7 @@ To update your app with the new **DoOrder** API, follow these steps:
                      keys = item.Keys()
                      for each key in keys
                          strField = AnyToString(item[key])
-                         if strField <> Invalid
+                         if strField <> invalid
                              if strField.len() > 0
                                  message += key + " = " + strField + chr(10)
                              else
@@ -179,7 +179,7 @@ To update your app with the new **DoOrder** API, follow these steps:
        print "Error - can't happen, orderType= "; m.orderType
      end if
      m.orderType = ""
-     
+
    end function
    ```
 
@@ -297,7 +297,7 @@ To update your app with the new **DoOrder** API, follow these steps:
 
    Displays the Roku Pay order confirmation screen, which is populated with information about the current order (product, name, and price). The customer can then either approve and complete the purchase, or cancel the purchase.
 
-   <Image alt="roku815px - tvod-sample-UI" border={false} src="https://image.roku.com/ZHZscHItMTc2/tvod-buy-2.jpg" />
+   ![roku815px - tvod-sample-UI](https://image.roku.com/ZHZscHItMTc2/tvod-buy-2.jpg)
 
    #### request
 

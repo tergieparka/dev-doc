@@ -1,11 +1,11 @@
 ---
 title: "roLocalization"
-excerpt: ''
+excerpt: 'Provides functions to assist in localizing assets via ifLocalization'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'roLocalization'
+  description: 'Reference page for roLocalization. roLocalization provides functions to assist in localization of assets.'
   robots: index
 next:
   description: ''
@@ -22,10 +22,10 @@ It is created with no parameters:
 
 **Example**
 
-~~~
+```brightscript
 loc = CreateObject("roLocalization")
 image = loc.GetLocalizedAsset("images", "splash.png")
-~~~
+```
 
 
 ## Supported interfaces

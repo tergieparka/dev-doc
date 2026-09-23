@@ -1,11 +1,11 @@
 ---
 title: "ifPath"
-excerpt: ''
+excerpt: 'Interface methods for validating and manipulating file system paths'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'ifPath'
+  description: 'Documents the ifPath interface, which provides Change, IsValid, and Split methods for working with relative and absolute file system paths.'
   robots: index
 next:
   description: ''
@@ -71,7 +71,7 @@ A flag indicating whether the current path is valid.
 
 #### Description
 
-Returns an [roAssociativeArray](https://sdkdocs-archive.staging.web.roku.com/roAssociativeArray_1611481.html) containing keys for the parent directories, extensions, and file name in the file path.
+Returns an [roAssociativeArray](/docs/references/brightscript/components/roassociativearray.md) containing keys for the parent directories, extensions, and file name in the file path.
 
 #### Return Value
 
@@ -80,7 +80,7 @@ An [roAssociativeArray](doc:roassociativearray) that contains the following keys
 
 #### Example (Brightscript Debugger Interactive Shell)
 
-~~~
+```bash
 > mypath = CreateObject("roPath", "pkg:/source/appMain.brs")
 > ? myPath.Split()
 parent: pkg:/source/
@@ -88,4 +88,4 @@ extension: .brs
 phy: pkg:
 basename: appMain
 filename: appMain.brs
-~~~
+```

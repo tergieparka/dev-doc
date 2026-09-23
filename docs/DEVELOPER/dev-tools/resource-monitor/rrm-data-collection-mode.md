@@ -1,8 +1,8 @@
 ---
-title: Using Roku Resouce Monitor in Data Collection Mode
+title: Using Roku Resource Monitor in Data Collection Mode
 excerpt: ''
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''
@@ -20,19 +20,19 @@ To use RRM in Data Collection Mode, open a console application and enter the fol
 
 ### Linux
 
-```
+```bash
 ./roku-resource-monitor-linux64.AppImage --help
 ```
 
 ### MacOS
 
-```
+```bash
 ./roku-resource-monitor.app/Contents/MacOS/roku-resource-monitor --help
 ```
 
 ### Windows
 
-```
+```bash
 roku-resource-monitor.bat --help
 ```
 
@@ -40,7 +40,7 @@ roku-resource-monitor.bat --help
 
 The following table lists the options you can enter:
 
-<table><thead><tr><th>Option</th><th>Description</th><th>Required/Optional</th></tr></thead><tbody><tr><td>--help</td><td>Displays a help message and exit</td><td>Optional</td></tr><tr><td>--headless</td><td>Runs RRM in Data Collection Mode (CLI mode without user interface)</td><td>Requried</td></tr><tr><td>--device-ip \<ip\></td><td>Enter the IP address of the test Roku device (for example, 192.168.0.0)</td><td>Required</td></tr><tr><td>--channel-id \<id\></td><td>Enter the channel ID of the app to be monitored.</td><td>Required</td></tr><tr><td>--output-file \<path\></td><td>Enter the file or directory to output the collected data (for example, /home/Downloads)</td><td>Optional</td></tr><tr><td>--panels \<ids\></td><td>Enter a comma-separated list of the metrics to be collected:<ul><li>memory</li><li>graphics_memory</li><li>cpu</li><li>scenegraph_nodes</li><li>frame_rate</li><li>registry_usage</li><li>sgrendezvous</li><li>object_byte_count</li></ul><p><strong>MacOS Example (with options)</strong></p><pre><code>roku-resource-monitor --headless --device-ip=192.168.0.0 --channel-id=1 --output-file=/home/Downloads --panels=cpu,memory --polling-interval=1</code></pre></td><td>Optional</td></tr><tr><td>--polling-interval \<sec\></td><td>Set how frequently data is collected (by default <strong>1</strong>-second intervals are used).</td><td>Optional</td></tr></tbody></table>
+<table><thead><tr><th>Option</th><th>Description</th><th>Required/Optional</th></tr></thead><tbody><tr><td>--help</td><td>Displays a help message and exit</td><td>Optional</td></tr><tr><td>--headless</td><td>Runs RRM in Data Collection Mode (CLI mode without user interface)</td><td>Required</td></tr><tr><td>--device-ip \<ip\></td><td>Enter the IP address of the test Roku device (for example, 192.168.0.0)</td><td>Required</td></tr><tr><td>--channel-id \<id\></td><td>Enter the channel ID of the app to be monitored.</td><td>Required</td></tr><tr><td>--output-file \<path\></td><td>Enter the file or directory to output the collected data (for example, /home/Downloads)</td><td>Optional</td></tr><tr><td>--panels \<ids\></td><td>Enter a comma-separated list of the metrics to be collected:<ul><li>memory</li><li>graphics_memory</li><li>cpu</li><li>scenegraph_nodes</li><li>frame_rate</li><li>registry_usage</li><li>sgrendezvous</li><li>object_byte_count</li></ul><p><strong>MacOS Example (with options)</strong></p><pre><code>roku-resource-monitor --headless --device-ip=192.168.0.0 --channel-id=1 --output-file=/home/Downloads --panels=cpu,memory --polling-interval=1</code></pre></td><td>Optional</td></tr><tr><td>--polling-interval \<sec\></td><td>Set how frequently data is collected (by default <strong>1</strong>-second intervals are used).</td><td>Optional</td></tr></tbody></table>
 
 ## Using the Docker CLI to run data collection mode
 
@@ -48,7 +48,7 @@ You can add RRM in a Docker image and run data collection mode.
 
 ### Docker file
 
-The following Dockerfile creates a containerized environment for running the Roku Resource Monitor (RRM). 
+The following Dockerfile creates a containerized environment for running the Roku Resource Monitor (RRM).
 
 #### Build Command:
 `docker build -t rrm:latest .`
@@ -56,7 +56,7 @@ The following Dockerfile creates a containerized environment for running the Rok
 #### Run Command:
 `docker run --shm-size=2g -v [docker host output dir]:/output --env-file=[env file path] rrm:latest`
 
-```
+```bash
 # ==============================================================================
 # Roku Resource Monitor Docker Image
 # ==============================================================================
@@ -105,7 +105,7 @@ CMD ["/bin/sh", "/bin/startup.sh"]
 
 The following script handles the setup and execution of RRM. It downloads the latest RRM release, extracts it, configures the necessary services, and launches the application in headless mode.
 
-```
+```bash
 #!/bin/sh
 # ==============================================================================
 # Roku Resource Monitor Startup Script
@@ -152,7 +152,7 @@ xvfb-run -a \
 
 The following Docker Compose file enables you to run the Roku Resource Monitor in a containerized environment:
 
-```
+```bash
 # ==============================================================================
 # Roku Resource Monitor Docker Compose Configuration
 # ==============================================================================
@@ -204,12 +204,12 @@ Configure your environment variables and local output directory directly in the 
 
 #### Docker Compose usage
 
-```
+```bash
 docker compose up --build
 ```
 
 #### Docker usage
 
-```
+```bash
 docker build -t roku-resource-monitor:latest . docker run --shm-size=2g -v [docker host output dir]:/output --env-file=[env file path] roku-resource-monitor
 ```

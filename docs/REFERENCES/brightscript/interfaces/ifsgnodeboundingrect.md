@@ -1,11 +1,11 @@
 ---
 title: "ifSGNodeBoundingRect"
-excerpt: ''
+excerpt: 'Queries the bounding rectangle of a subject node as an associative array'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'ifSGNodeBoundingRect'
+  description: 'The ifSGNodeBoundingRect interface queries the bounding rectangle of a subject node, returning an associative array with x, y, width, and height elements.'
   robots: index
 next:
   description: ''
@@ -247,7 +247,7 @@ We start with the following code example:
 
 The scene has the following parenting structure:
 
-~~~~
+```xml
 Scene
 RectangleGroup
 Rectangle (Green)
@@ -259,7 +259,7 @@ Rectangle (Yellow)
         </Rectangle>
    </Group>
 </Scene>
-~~~~
+```
 
 
 Initially, the illustration shows the local coordinates systems of each of these nodes.

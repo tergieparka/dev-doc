@@ -1,11 +1,11 @@
 ---
 title: "VoiceTextEditBox"
-excerpt: ''
+excerpt: 'Text edit box node with voice dictation and configurable entry modes'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'VoiceTextEditBox'
+  description: 'VoiceTextEditBox extends TextEditBox with voice entry functionality, exposing voiceEnabled, voiceEntryType, isDictating, and voiceInputRegexFilter fields.'
   robots: index
 next:
   description: ''
@@ -44,7 +44,7 @@ The **VoiceTextEditBox** node is similar to the [legacy **TextEditBox** node](do
 <td>float</td>
 <td>FHD: 321HD: 214</td>
 <td>READ_WRITE</td>
-<td>The maximum width of the voice hint tootip. The height scales based on the specified width.</td>
+<td>The maximum width of the voice hint tooltip. The height scales based on the specified width.</td>
 </tr>
 <tr>
 <td>voiceEntryType</td>

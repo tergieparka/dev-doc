@@ -1,17 +1,17 @@
 ---
-title: "Channel behavior analysis tests"
-excerpt: ''
+title: "App Behavior Analysis tests"
+excerpt: 'Run automated certification tests on your app using the App Behavior Analysis tool'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'App Behavior Analysis tests | Roku Developer Docs'
+  description: 'The App Behavior Analysis tool lets developers run self-serve automated certification tests to verify performance and deep linking requirements for their apps.'
   robots: index
 next:
   description: ''
 ---
 
 
-> Subscription (SVOD), ad-supported (AVOD), and free apps must pass automated certification testing in order to published to the Streaming Store. Apps cannot be submitted for publishing without passing automated certification testing.
+> Subscription (SVOD), ad-supported (AVOD), and free apps must pass automated certification testing in order to publish to the Streaming Store. Apps cannot be submitted for publishing without passing automated certification testing.
 
-The [Channel Behavior Analysis tool](doc:channel-publishing-guide), which is a part of the app builder flow in the Developer Dashboard, enables developers to run self-serve automated certification tests on their apps. The tool verifies whether apps meet the following [performance](doc:certification) and [deep linking](doc:certification) certification requirements:
+The [App Behavior Analysis tool](doc:channel-publishing-guide), which is a part of the app builder flow in the Developer Dashboard, enables developers to run self-serve automated certification tests on their apps. The tool verifies whether apps meet the following [performance](doc:certification) and [deep linking](doc:certification) certification requirements:

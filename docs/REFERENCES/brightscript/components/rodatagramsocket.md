@@ -1,11 +1,11 @@
 ---
 title: "roDataGramSocket"
-excerpt: ''
+excerpt: 'Component for sending and receiving UDP packets via Berkeley-style sockets'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'roDataGramSocket'
+  description: 'The roDataGramSocket component enables apps to send and receive UDP packets through an interface modeled on standard Berkeley sockets, with roSocketEvent.'
   robots: index
 next:
   description: ''
@@ -20,11 +20,11 @@ This object is created without any arguments:
 
 **Example**
 
-~~~
+```brightscript
 ' UDP 2-way peer-to-peer asynchronous comm on port 54321
 ' periodically sends out a message to a specific address and port
 ' prints any message it receives
-Function UDPPeer()
+function UDPPeer()
     msgPort = createobject("roMessagePort")
     udp = createobject("roDatagramSocket")
     udp.setMessagePort(msgPort) 'notifications for udp come to msgPort
@@ -39,24 +39,23 @@ Function UDPPeer()
     message = "Datagram from " + deviceName
     udp.sendStr(message)
     continue = udp.eOK()
-    While continue
+    while continue
         event = wait(timeout, msgPort)
-        If type(event)="roSocketEvent"
-        If event.getSocketID()=udp.getID()
-                If udp.isReadable()
+        if type(event)="roSocketEvent"
+        if event.getSocketID()=udp.getID()
+                if udp.isReadable()
                     message = udp.receiveStr(512) ' max 512 characters
                     print "Received message: '"; message; "'"
-                End If
-            End If
-        Else If event=invalid
+                end if
+            end if
+        else if event=invalid
             print "Timeout"
             udp.sendStr(message) ' periodic send
-        End If
-    End While
+        end if
+    end while
     udp.close() ' would happen automatically as udp goes out of scope
-
-End Function
-~~~
+end function
+```
 
 > GetDeviceUniqueId() was deprecated in Spring OS 2019.
 

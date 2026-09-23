@@ -1,11 +1,11 @@
 ---
 title: "ZoomRowList"
-excerpt: ''
+excerpt: 'Vertically scrolling list that zooms the focused row to a larger size'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'ZoomRowList'
+  description: 'ZoomRowList is a vertically scrolling list where the focused row smoothly zooms to a larger size, with per-row zoom heights and custom row decoration.'
   robots: index
 next:
   description: ''
@@ -572,7 +572,7 @@ Note that the fields are updated in the order presented in the table below. Most
 <tr>
 <th>Field Name</th>
 <th>Field Type</th>
-<th>Access Permisson</th>
+<th>Access Permission</th>
 <th>Description</th>
 </tr>
 </thead>

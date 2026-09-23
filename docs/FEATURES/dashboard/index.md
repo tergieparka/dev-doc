@@ -1,22 +1,22 @@
 ---
 title: Developer Dashboard
-excerpt: ''
+excerpt: 'Central hub for managing apps, Roku Pay products, analytics, and more'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Developer Dashboard | Roku Developer Docs'
+  description: 'The Developer Dashboard is the central hub for managing apps, Roku Pay products, search feeds, analytics, and the partner payouts program.'
   robots: index
 next:
   description: ''
 ---
 The [Developer Dashboard](http://developer.roku.com/dev/dashboard) serves as the central control center from which a developer can manage apps, Roku Pay products, or search feeds, as well as view analytics and enroll in the partner payouts program.
 
-## My channels
+## My apps
 
-The **My channels** section provides easy access to recently updated apps, enabling developers to quickly click into their most high-touch projects.
+The **My apps** section provides easy access to recently updated apps, enabling developers to quickly click into their most high-touch projects.
 
-<Image alt="roku815px - My channels screen shot" border={false} src="https://image.roku.com/ZHZscHItMTc2/My-Channels.png" />
+<Image alt="roku815px - My apps screen shot" border={false} src="https://image.roku.com/ZHZscHItMTc2/My-Channels.png" />
 
 Clicking on any of these apps will take the user to the Preview & Publish page for the app, from which they can edit the app metadata. Refer to [App publishing](doc:channel-publishing-guide) for information on managing app settings.
 
@@ -26,7 +26,7 @@ The **Scheduled releases** section of the main panel lists app releases, product
 
 <Image alt="roku815px - Scheduled releases screen shot" border={false} src="https://image.roku.com/ZHZscHItMTc2/Scheduled-Releases.png" />
 
-For an overview on in-app products, promotions, and product groups, see [Adding in-channel products](doc:in-channel-products).
+For an overview on in-app products, promotions, and product groups, see [Adding in-channel products](doc:product-catalog).
 
 ## What's new
 
@@ -42,14 +42,14 @@ In addition to the utilities found on the Developer Dashboard itself, developers
 
 The app section allows developers to manage their apps, Streaming Store listings, and Roku Search feed configurations.
 
-* **My channels –** This is where developers can create new apps or update existing apps. Here, developers can configure an app's settings, Streaming Store metadata listing, or update new application packages. Read the documentation on [App publishing](doc:channel-publishing-guide) for information.
+* **My apps –** This is where developers can create new apps or update existing apps. Here, developers can configure an app's settings, Streaming Store metadata listing, or update new application packages. Read the documentation on [App publishing](doc:channel-publishing-guide) for information.
 * **Search feeds –** The search feed validator allows developers to submit a search feed URL to Roku, in order to begin the process of integrating their apps into Roku Search. Read the documentation on [Implementing Roku Search](doc:implementing-search) for more information.
 
 ### Monetization
 
 The monetization section provides essential tools for Roku Pay, including the ability to configure your Roku Pay products, offers, web services, and test users.
 
-* **Product catalog –** This is the primary page for creating new in-app products for purchases in apps using Roku Pay, as well as their corresponding offers and intro pricing deals. Read the documentation on [Adding in-channel products](doc:in-channel-products) for more information.
+* **Product catalog –** This is the primary page for creating new in-app products for purchases in apps using Roku Pay, as well as their corresponding offers and intro pricing deals. Read the documentation on [Adding in-channel products](doc:product-catalog) for more information.
 
 * **Test users –** Here, developers can manage any Roku accounts that should have "test user" permissions for their apps, meaning these users will not be charged for any products they purchase within the designated app using Roku Pay. A valid payment method is required but purchases will not be charged. Read the documentation on [Creating test users](doc:test-users) for more information.
 
@@ -72,7 +72,7 @@ The financial reports section makes available Roku Pay reports, containing infor
 
 This section provides tools that enable developers to promote their apps to Roku end-users to help grow their audience and drive engagement.
 
-* **Display ads –** Developers can use [Roku's self-serve promotion tool](https://admanager.roku.com/) to programmatically purchase Roku home screen banner ads, Roku screensaver ads, and video ads in order to reach users across the Roku platform. Refer to the [documentation](doc:self-serve-promotions) article for more information.
+* **Display ads –** Developers can use [Roku's self-serve promotion tool](https://ad.roku.com/) to programmatically purchase Roku home screen banner ads, Roku screensaver ads, and video ads in order to reach users across the Roku platform. Refer to the [documentation](doc:self-serve-promotions) article for more information.
 
 ### Account
 

@@ -2,7 +2,7 @@
 title: roScreen
 excerpt: ''
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''
@@ -67,7 +67,7 @@ If four parameters are passed, the last two specify the screen's resolution. The
 
 **Example: Display an image**
 
-```
+```brightscript
 Screen=CreateObject("roScreen")
 dfDrawImage(screen, "myphoto.jpg",0,0)
 Screen.Finish()
@@ -75,7 +75,7 @@ Screen.Finish()
 
 **Example: Alpha blending**
 
-```
+```brightscript
 white=&hFFFFFFFF
 screen0=CreateObject("roScreen")
 screen0.SetAlphaEnable(true)

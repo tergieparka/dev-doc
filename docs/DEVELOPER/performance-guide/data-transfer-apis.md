@@ -2,7 +2,7 @@
 title: Optimized data transfer and reference handling
 excerpt: ''
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''
@@ -10,9 +10,9 @@ metadata:
 next:
   description: ''
 ---
-Roku OS 15.0 includes new APIs for populating node fields by _moving_ rather than _copying_ associative arrays. These new APIs overcome the traditional performance issues posed by setting or getting the large associative array fields of nodes. On the render thread, data can now be efficiently accessed by _reference_ rather than copying. In addition, rendezvous blocking in task node threads can now be avoided by passing messages asynchronously to the queue of the render thread.
+[Roku OS 15.0](doc:release-notes#roku-os-150) includes new APIs for populating node fields by _moving_ rather than _copying_ associative arrays. These new APIs overcome the traditional performance issues posed by setting or getting the large associative array fields of nodes. On the render thread, data can now be efficiently accessed by _reference_ rather than copying. In addition, rendezvous blocking in task node threads can now be avoided by passing messages asynchronously to the queue of the render thread.
 
-The following list breaks down these new data transfer and reference handling APIs introduced in Roku OS 15.0:
+The following list breaks down these new data transfer and reference handling APIs introduced in [Roku OS 15.0](doc:release-notes#roku-os-150):
 
 * **Moving data**
   * roSGNode.MoveIntoField(field_name as String, data as Object) as Integer
@@ -56,19 +56,19 @@ The number of nested objects within an object that were copied, rather than move
 
 #### Example
 
-```
+```brightscript
 ' Can be on Task thread or render thread
   n = CreateObject("roSGNode", "Node")
   n.AddField("aa_field", "assocarray", true)
   my_aa = { key: "value" }
   n.MoveIntoField("aa_field", my_aa)
-  ? n.aa_field
-  ? my_aa
+  print n.aa_field
+  print my_aa
 ```
 
 This code will output the following on the port 8085 console:
 
-```
+```text
 <Component: roAssociativeArray> =
 {
     key: "value"
@@ -100,13 +100,13 @@ The associative array that was moved from the source field.
 
 #### Example
 
-```
+```brightscript
 n = CreateObject("roSGNode", "ContentNode")
 n.AddField("aa_field", "assocarray", true)
 n.aa_field = { key: "value"}' or use moveIntoField()
-my_aa = n.MoveFromField("aa_field") 
-? n.aa_field ' invalid
-? my_aa ' contents of aa_field
+my_aa = n.MoveFromField("aa_field")
+print n.aa_field ' invalid
+print my_aa ' contents of aa_field
 ```
 
 > **Moving data - when it copies instead**
@@ -123,7 +123,7 @@ my_aa = n.MoveFromField("aa_field")
 >
 > The following example is the same as the above, except a nested object contains an external reference. As a result, the nested object is **copied** to the destination rather than being moved.
 >
-> ```
+> ```brightscript
 > sub_array = [1, 2, 3]
 > aa = {foo: "hello", bar: sub_array}
 > ' At this point, there is an external reference into aa
@@ -134,7 +134,7 @@ my_aa = n.MoveFromField("aa_field")
 
 ## Accessing fields by reference
 
-You can access fields by reference instead of copying their values. This is significantly faster than copying; however, you can only do this on the render thread for fields with an associative array type. Access by reference cannot be used when queuing fields, and you must explicity set references before getting them.
+You can access fields by reference instead of copying their values. This is significantly faster than copying; however, you can only do this on the render thread for fields with an associative array type. Access by reference cannot be used when queuing fields, and you must explicitly set references before getting them.
 
 > **Function references**
 >
@@ -167,7 +167,7 @@ This function returns true if successful; otherwise it return false, indicating 
 
 #### Description
 
-Indicates whether the **GetRef()** function will succeed in the current context. The **GetRef()** call will only succeed if is called on the render thread and the **SetRef()** function had previoulsy been called on the **field_name**.
+Indicates whether the **GetRef()** function will succeed in the current context. The **GetRef()** call will only succeed if is called on the render thread and the **SetRef()** function had previously been called on the **field_name**.
 
 The specified **field_name** must be an associative array, and it must have previously been given a value via **SetRef()**.
 
@@ -197,21 +197,21 @@ This function returns a reference to the field’s value. This function returns 
 
 #### Example
 
-```
+```brightscript
 ' on render thread:
     n = CreateObject("roSGNode", "Node")
     n.AddField("aa_field", "assocarray", true)
     my_aa = { key: "value" }
     n.setRef("aa_field", my_aa)
-    ? n.aa_field
-    ? my_aa
-    ? n.GetRef("aa_field")
+    print n.aa_field
+    print my_aa
+    print n.GetRef("aa_field")
 
 ```
 
 This code will output the following on the port 8085 console:
 
-```
+```text
 <Component: roAssociativeArray> =
 {
     key: "value"
@@ -235,7 +235,7 @@ The **roUtils** component provides a unique namespace for a library of global fu
 
 #### Description
 
-Performs a deep copy of the source node object (it copies the obejct and all of its nested objects). If the source object contains items that are not copyable, they are skipped.
+Performs a deep copy of the source node object (it copies the object and all of its nested objects). If the source object contains items that are not copyable, they are skipped.
 
 #### Parameters
 
@@ -249,20 +249,20 @@ This function returns a copy of the specified object.
 
 #### Example
 
-```
+```brightscript
 utils = CreateObject("roUtils")
     di = CreateObject("roDeviceInfo")
     aa = { a: 1, b: { b1: 42 }, c: di }
     new_aa = utils.DeepCopy(aa)
-    ? "IsSameObject", utils.IsSameObject(aa, new_aa)
-    ? "new_aa.a", new_aa.a
-    ? "new_aa.b", new_aa.b
-    ? "new_aa.c", new_aa.c ' invalid, roDeviceInfo is not copyable
+    print "IsSameObject", utils.IsSameObject(aa, new_aa)
+    print "new_aa.a", new_aa.a
+    print "new_aa.b", new_aa.b
+    print "new_aa.c", new_aa.c ' invalid, roDeviceInfo is not copyable
 ```
 
 This code will output the following on the port 8085 console:
 
-```
+```brightscript
 IsSameObject    false
 new_aa.a         1
 new_aa.b        <Component: roAssociativeArray> =
@@ -291,7 +291,7 @@ Returns true if **data1** and **data2** reference the same object; otherwise, th
 
 #### Example
 
-```
+```brightscript
 shared = {}
     aa = {"a": shared, "b": shared}
     utils = CreateObject("roUtils")
@@ -302,13 +302,13 @@ shared = {}
 
 ## Queueing messages
 
-Roku OS 15.0 provides a new **roRenderThreadQueue** node for queuing messages to be consumed by handlers on the render thread. This enables asynchronous communication between Task nodes and the render thread. Messages passed using this mechanism will not block the render thread like a rendezvous.
+[Roku OS 15.0](doc:release-notes#roku-os-150) provides a new **roRenderThreadQueue** node for queuing messages to be consumed by handlers on the render thread. This enables asynchronous communication between Task nodes and the render thread. Messages passed using this mechanism will not block the render thread like a rendezvous.
 
 ### Message Handlers
 
 Use the following syntax to define message handlers:
 
-```
+```brightscript
 sub MyMessagehandler(data, msgInfo)
 ```
 
@@ -356,14 +356,12 @@ This function may be called from any thread.
       <th><strong>Description</strong></th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>message\_id</td>
       <td>String</td>
       <td>The ID of the channel to which this message should be posted.</td>
     </tr>
-
     <tr>
       <td>data</td>
       <td>Object</td>

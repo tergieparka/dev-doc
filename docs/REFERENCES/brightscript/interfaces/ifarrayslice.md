@@ -1,11 +1,11 @@
 ---
 title: "ifArraySlice"
-excerpt: ''
+excerpt: 'Interface providing the Slice method for extracting portions of an array'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'ifArraySlice'
+  description: 'Documents the ifArraySlice interface, which provides the Slice method for copying a specified portion of an array into a new array object using 0-based indices.'
   robots: index
 next:
   description: ''
@@ -38,28 +38,28 @@ The **start_pos** and **end_pos** fields specify the 0-based indices of items in
 
 #### Examples
 
-```
+```brightscript
 '      0       1     2      3      4      5
 arr = ["ape", "bat", "cow", "dog", "elk"]
 
 ' get the 3rd (index 2) and subsequent elements
 arr2 = arr.Slice(2)
-? FormatJSON(arr2)
+print FormatJSON(arr2)
 ' => ["cow","dog","elk"]
 
 ' get the 2nd (index 1) through 3rd (index 2) elements
 arr2 = arr.Slice(1, 3)
-? FormatJSON(arr2)
+print FormatJSON(arr2)
 ' => ["bat","cow"]
 
 ' get the last 2 elements
 arr2 = arr.Slice(-2)
-? FormatJSON(arr2)
+print FormatJSON(arr2)
 ' => ["dog","elk"]
 
 ' empty range
 arr2 = arr.Slice(1, 1)
-? FormatJSON(arr2)
+print FormatJSON(arr2)
 ' => []
 ```
 

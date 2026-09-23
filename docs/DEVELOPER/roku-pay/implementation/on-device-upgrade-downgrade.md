@@ -1,18 +1,18 @@
 ---
 title: On-device upgrade and downgrade
-excerpt: ''
+excerpt: 'Switch subscription plans on-device using Roku Pay upgrade and downgrade actions'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'On-device upgrade and downgrade | Roku Developer Docs'
+  description: 'Implement on-device subscription upgrades and downgrades in apps with Roku Pay using the doOrder command and validate transaction API responses.'
   robots: index
 next:
   description: ''
 ---
 Apps with Roku Pay integrations can implement on-device subscription upgrades and downgrades. By doing so, customers can seamlessly switch plans directly from their devices, and apps can ensure that they are billed properly. This enables apps to target different audiences with the best plan in order to maximize content monetization.
 
-> Authenticated transactional apps (SVOD, TVOD, and other subscription services) must complete upgrades and downgrades on the device using Roku Pay, without visiting an external webpage, to pass [certification](doc:certification).
+> Authenticated transactional apps (SVOD, TVOD, and other subscription services) must complete upgrades and downgrades on the device using Roku Pay, without visiting an external webpage, to pass [certification](doc:certification#2-purchases).
 
 ## Overview
 
@@ -20,11 +20,11 @@ To understand how Roku's on-device upgrades and downgrades work, consider a cust
 
 <img src="https://image.roku.com/ZHZscHItMTc2/upgrade-annual-subscription.jpg" />
 
-To upgrade a plan, apps cancel the previous _base plan_ and completes the purchase of the _upgraded plan_ (causing a prorated service credit for the remaining balance on the base plan to be applied to the purchase of the upgraded plan).
+To upgrade a plan, apps cancel the previous _base plan_ and complete the purchase of the _upgraded plan_ (causing a prorated service credit for the remaining balance on the base plan to be applied to the purchase of the upgraded plan).
 
 To downgrade a plan, apps similarly check the expiration date of the _current plan_ being and then mark it for cancellation. A new transaction ID for the _downgraded plan_, which has a $0 price and the same expiration date as the current plan, is returned. On the expiration date, the downgrade is completed and a new transaction ID is created with the purchase price of the downgraded plan.
 
-Apps must add a [product group](doc:in-channel-products) in the Developer Dashboard to enable and facilitate upgrades and downgrades. A product group contains a set of two or more _mutually exclusive_ products, to which customers can upgrade or downgrade. For example, a product group may contain two products for a subscription service with different billing cycles (one that is billed monthly and another annually) or different ad support (one that is ad-based and another that is ad-free). Because they are defined as being mutually-exclusive by their membership in the same product group, Roku can automatically help ensure that the customer is only ever subscribed to one at a time.
+Apps must add a [product group](doc:product-catalog#creating-product-exclusivity-groups) in the Developer Dashboard to enable and facilitate upgrades and downgrades. A product group contains a set of two or more _mutually exclusive_ products, to which customers can upgrade or downgrade. For example, a product group may contain two products for a subscription service with different billing cycles (one that is billed monthly and another annually) or different ad support (one that is ad-based and another that is ad-free). Because they are defined as being mutually-exclusive by their membership in the same product group, Roku can automatically help ensure that the customer is only ever subscribed to one at a time.
 
 > Subscription adjustments, such as upgrade and downgrade as described here, are only made available by the Roku system, to users whose subscriptions are _established and maintained_ via Roku Pay.
 >
@@ -34,13 +34,13 @@ Apps must add a [product group](doc:in-channel-products) in the Developer Dashbo
 
 Apps must complete the following steps to handle on-device upgrades and downgrades via Roku Pay:
 
-1. [Create a product group in the Developer Dashboard](doc:in-channel-products) for the products customers can upgrade or downgrade.
+1. [Create a product group in the Developer Dashboard](doc:product-catalog#creating-product-exclusivity-groups) for the products customers can upgrade or downgrade.
 
-2. Apps using the [SceneGraph ChannelStore node (SDK 2)](doc:channelstore): Set the `order.action` field to `Upgrade` or `Downgrade`, and then send a [**doOrder command**](doc:channelstore) to complete the upgrade/downgrade.
+2. Apps using the [SceneGraph ChannelStore node (SDK 2)](doc:channelstore): Set the `order.action` field to `Upgrade` or `Downgrade`, and then send a [**doOrder command**](doc:channelstore#doorder) to complete the upgrade/downgrade.
 
-   Apps using the [BrightScript roChannelStore node (SDK 1)](doc:ifchannelstore): Call the [**SetOrder()** function](doc:ifchannelstore) with the **action** field of the **orderInfo** parameter set to `Upgrade` or `Downgrade`.
+   Apps using the [BrightScript roChannelStore node (SDK 1)](doc:ifchannelstore): Call the [**SetOrder()** function](doc:ifchannelstore##setorderorder-as-object-orderinfo-as-object-as-void) with the **action** field of the **orderInfo** parameter set to `Upgrade` or `Downgrade`.
 
-3. Call the [Roku Pay **validate transaction** API](doc:roku-web-service) with the transaction ID from the `purchaseid` field of the [**doOrder command**](doc:channelstore). Use the data returned by the API to update the backend system with the entitlements and expiration dates of the original and upgraded/downgraded plans. Apps subscribing to [push notifications](doc:push-notifications) will receive both [cancel](doc:push-notifications) and [sale](doc:push-notifications) notifications for upgrades and downgrades.
+3. Call the [Roku Pay **validate transaction** API](doc:roku-web-service#validate-transaction) with the transaction ID from the `purchaseid` field of the [**doOrder command**](doc:channelstore#doorder). Use the data returned by the API to update the backend system with the entitlements and expiration dates of the original and upgraded/downgraded plans. Apps subscribing to [push notifications](doc:push-notifications) will receive both [cancel](doc:push-notifications#cancel) and [sale](doc:push-notifications#sale) notifications for upgrades and downgrades.
 
 ## Handling upgrade/downgrade transactions
 
@@ -48,20 +48,20 @@ Apps must complete the following steps to handle on-device upgrades and downgrad
 
 #### SceneGraph ChannelStore node (SDK 2)
 
-To send a [**doOrder command**](doc:channelstore) to upgrade or downgrade a plan with the SceneGraph ChannelStore node, follow these steps:
+To send a [**doOrder command**](doc:channelstore#doorder) to upgrade or downgrade a plan with the SceneGraph ChannelStore node, follow these steps:
 
 1. Set the `order.action` field to `Upgrade` or `Downgrade` (the required values are case-sensitive; do not pass "upgrade" or "downgrade" in the `action` field).
 
-   ```
+   ```brightscript
    m.channelStore = CreateObject("roSGNode","ChannelStore")
    myOrder = CreateObject("roSGNode", "ContentNode")
    myItem = myOrder.createChild("ContentNode")
-   myItem.addFields(\{ "code": "UPC2397", "qty": 1})
+   myItem.addFields({ "code": "UPC2397", "qty": 1})
    m.channelStore.order = myOrder
    myOrder.action = "Upgrade"
    ```
 
-2. Send a [**doOrder** command](doc:channelstore) to have the customer confirm the upgrade/downgrade.
+2. Send a [**doOrder** command](doc:channelstore#doorder) to have the customer confirm the upgrade/downgrade.
 
    m.channelStore.command = "doOrder"
 
@@ -73,19 +73,21 @@ To send a [**doOrder command**](doc:channelstore) to upgrade or downgrade a plan
 
 #### BrightScript roChannelStore node (SDK 1)
 
-To call the [**SetOrder()** function](doc:ifchannelstore) to upgrade or downgrade a plan with the BrightScript roChannelStore node, follow these steps:
+To call the [**SetOrder()** function](doc:ifchannelstore#setorderorder-as-object-orderinfo-as-object-as-void) to upgrade or downgrade a plan with the BrightScript roChannelStore node, follow these steps:
 
 1. Set the `orderInfo.action` field to `Upgrade` or `Downgrade` (the required values are case-sensitive; do not pass "upgrade" or "downgrade" in the `action` field).
 
-   ```
-   m.store = CreateObject("roChannelStore")​
+   ```brightscript
+   m.store = CreateObject("roChannelStore")
    ' Populate myOrderItems
    myOrderInfo.action = "Upgrade"
    ```
 
-2. Call the [**SetOrder()** function](doc:ifchannelstore) to have the customer confirm the upgrade/downgrade. The **myOrderItems** parameter specifies the in-channel product to which the customer is upgrading/downgrading; the **myOrderInfo** parameter whether the transaction is an upgrade or downgrade.
+2. Call the [**SetOrder()** function](doc:ifchannelstore#setorderorder-as-object-orderinfo-as-object-as-void) to have the customer confirm the upgrade/downgrade. The **myOrderItems** parameter specifies the in-channel product to which the customer is upgrading/downgrading; the **myOrderInfo** parameter whether the transaction is an upgrade or downgrade.
 
+   ```brightscript
    m.store.setOrder(myOrderItems, myOrderInfo)
+   ```
 
 3. The following occurs to the original base plan and the upgraded/downgraded plan based on the specified action.
 
@@ -95,7 +97,7 @@ To call the [**SetOrder()** function](doc:ifchannelstore) to upgrade or downgrad
 
 ### Calling the Roku Pay validate transaction API
 
-In order to support upgrade and downgrade transactions, the [**validate transaction** API](doc:roku-web-service) includes the following fields in the response:
+In order to support upgrade and downgrade transactions, the [**validate transaction** API](doc:roku-web-service#validate-transaction) includes the following fields in the response:
 
 * **purchaseType**: The `purchaseType` indicates whether the transaction was an `UPGRADE` or `DOWNGRADE`.
 
@@ -112,52 +114,52 @@ In order to support upgrade and downgrade transactions, the [**validate transact
 | Pending_Active   | true       | false     |
 | Pending_Inactive | true       | true      |
 
-Once an upgrade or downgrade has been completed on-device, apps should call the [**validate transaction** API](doc:roku-web-service) with the transaction ID from the `purchaseid` field of the `doOrder` command to update their system.
+Once an upgrade or downgrade has been completed on-device, apps should call the [**validate transaction** API](doc:roku-web-service#validate-transaction) with the transaction ID from the `purchaseid` field of the `doOrder` command to update their system.
 
 The API responses for the original purchase and upgrades/downgrades are as follows:
 
 #### Upgrades
 
-After an upgrade has been completed on-device, responses to [**validate transaction** API](doc:roku-web-service) calls made with the transaction IDs of the original base plan and the upgrade will result in the following:
+After an upgrade has been completed on-device, responses to [**validate transaction** API](doc:roku-web-service#validate-transaction) calls made with the transaction IDs of the original base plan and the upgrade will result in the following:
 
 **Original base plan purchase**. The `cancelled` field is set to true (no renewal will therefore happen); the `expirationDate` field remains unchanged.
 
 #### JSON
 
-```
+```json
 {
-   "errorCode":null,
-   "errorDetails":null,
-   "errorMessage":"",
-   "status":0,
-   "OriginalTransactionId":"b0f7e477e89e48d0aa13abad017d4ee9",
-   "amount":2.99,
-   "cancelled":true,
-   "cancelledTransactionIds":null,
-   "channelId":000000,
-   "channelName":"ESPRIMU",
-   "couponCode":null,
-   "currency":"usd",
-   "expirationDate":"\/Date(1588892898000+0000)\/",
-   "isEntitled":true,
-   "originalPurchaseDate":"\/Date(1588288095000+0000)\/",
-   "partnerReferenceId":"1969",
-   "productId":"KFevcXDIo96kmmsy9wh7_MonthlySubFreeTrial",
-   "productName":"KFevcXDIo96kmmsy9wh7_MonthlySubFreeTrial",
-   "purchaseDate":"\/Date(1588288095000+0000)\/",
-   "purchaseStatus":"PendingInactive",
-   "purchaseType":null,
-   "quantity":1,
-   "rokuCustomerId":"99999999999999999999999999999999",
-   "tax":0.0000,
-   "total":0.0000,
-   "transactionId":"b0f7e477e89e48d0aa13abad017d4ee9"
+   "errorCode": null,
+   "errorDetails": null,
+   "errorMessage": "",
+   "status": 0,
+   "OriginalTransactionId": "b0f7e477e89e48d0aa13abad017d4ee9",
+   "amount": 2.99,
+   "cancelled": true,
+   "cancelledTransactionIds": null,
+   "channelId": "000000",
+   "channelName": "ESPRIMU",
+   "couponCode": null,
+   "currency": "usd",
+   "expirationDate": "\/Date(1588892898000+0000)\/",
+   "isEntitled": true,
+   "originalPurchaseDate": "\/Date(1588288095000+0000)\/",
+   "partnerReferenceId": "1969",
+   "productId": "KFevcXDIo96kmmsy9wh7_MonthlySubFreeTrial",
+   "productName": "KFevcXDIo96kmmsy9wh7_MonthlySubFreeTrial",
+   "purchaseDate": "\/Date(1588288095000+0000)\/",
+   "purchaseStatus": "PendingInactive",
+   "purchaseType": null,
+   "quantity": 1,
+   "rokuCustomerId": "99999999999999999999999999999999",
+   "tax": 0.0000,
+   "total": 0.0000,
+   "transactionId": "b0f7e477e89e48d0aa13abad017d4ee9"
 }
 ```
 
 #### XML
 
-```
+```xml
 <result xmlns="http://api.roku.com/transaction" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
   <errorCode/>
   <errorDetails/>
@@ -196,42 +198,42 @@ When a free trial _is_ offered with the upgrade subscription, the `purchase_stat
 
 #### JSON
 
-```
+```json
 {
-   "errorCode":null,
-   "errorDetails":null,
-   "errorMessage":"",
-   "status":0,
-   "OriginalTransactionId":"a800b90755be491d821aabad017d6674",
-   "amount":4.99,
-   "cancelled":false,
-   "cancelledTransactionIds":[
+   "errorCode": null,
+   "errorDetails": null,
+   "errorMessage": "",
+   "status": 0,
+   "OriginalTransactionId": "a800b90755be491d821aabad017d6674",
+   "amount": 4.99,
+   "cancelled": false,
+   "cancelledTransactionIds": [
       "b0f7e477e89e48d0aa13abad017d4ee9"
    ],
-   "channelId":000000,
-   "channelName":"ESPRIMU",
-   "couponCode":null,
-   "currency":"usd",
-   "expirationDate":"\/Date(1588892919000+0000)\/",
-   "isEntitled":true,
-   "originalPurchaseDate":"\/Date(1588288117000+0000)\/",
-   "partnerReferenceId":"1969",
-   "productId":"Y6ZFym7Xl2agLakTcxMB_MonthlySubFreeTrial",
-   "productName":"Y6ZFym7Xl2agLakTcxMB_MonthlySubFreeTrial",
-   "purchaseDate":"\/Date(1588288117000+0000)\/",
-   "purchaseStatus":"Active",
-   "purchaseType":"UPGRADE",
-   "quantity":1,
-   "rokuCustomerId":"99999999999999999999999999999999",
-   "tax":0.0000,
-   "total":0.0000,
-   "transactionId":"a800b90755be491d821aabad017d6674"
+   "channelId": "000000",
+   "channelName": "ESPRIMU",
+   "couponCode": null,
+   "currency": "usd",
+   "expirationDate": "\/Date(1588892919000+0000)\/",
+   "isEntitled": true,
+   "originalPurchaseDate": "\/Date(1588288117000+0000)\/",
+   "partnerReferenceId": "1969",
+   "productId": "Y6ZFym7Xl2agLakTcxMB_MonthlySubFreeTrial",
+   "productName": "Y6ZFym7Xl2agLakTcxMB_MonthlySubFreeTrial",
+   "purchaseDate": "\/Date(1588288117000+0000)\/",
+   "purchaseStatus": "Active",
+   "purchaseType": "UPGRADE",
+   "quantity": 1,
+   "rokuCustomerId": "99999999999999999999999999999999",
+   "tax": 0.0000,
+   "total": 0.0000,
+   "transactionId": "a800b90755be491d821aabad017d6674"
 }
 ```
 
 #### XML
 
-```
+```xml
 <result xmlns="http://api.roku.com/transaction" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
   <errorCode/>
   <errorDetails/>
@@ -264,46 +266,46 @@ When a free trial _is_ offered with the upgrade subscription, the `purchase_stat
 
 #### Downgrades
 
-After a downgrade has been completed on-device, responses to [**validate transaction** API](doc:roku-web-service) calls made with the transaction IDs of the original plan and the downgrade will result in the following:
+After a downgrade has been completed on-device, responses to [**validate transaction** API](doc:roku-web-service#validate-transaction) calls made with the transaction IDs of the original plan and the downgrade will result in the following:
 
 **Original plan purchase**. The `cancelled` field is set to true (no renewal will therefore happen); the `expirationDate` field remains unchanged.
 
 #### JSON
 
-```
+```json
 {
-   "errorCode":null,
-   "errorDetails":null,
-   "errorMessage":"",
-   "status":0,
-   "OriginalTransactionId":"03c3ac6f50864601b87aabac0165abed",
-   "amount":4.99,
-   "cancelled":true,
-   "cancelledTransactionIds":null,
-   "channelId":000000,
-   "channelName":"ESPRIMU",
-   "couponCode":null,
-   "currency":"usd",
-   "expirationDate":"\/Date(1588801334000+0000)\/",
-   "isEntitled":true,
-   "originalPurchaseDate":"\/Date(1588196534000+0000)\/",
-   "partnerReferenceId":"1969",
-   "productId":"QynVhYtdThAg7wcfTkgi_MonthlySubFreeTrial",
-   "productName":"QynVhYtdThAg7wcfTkgi_MonthlySubFreeTrial",
-   "purchaseDate":"\/Date(1588196534000+0000)\/",
-   "purchaseStatus":"Active",
-   "purchaseType":null,
-   "quantity":1,
-   "rokuCustomerId":"99999999999999999999999999999999",
-   "tax":0.0000,
-   "total":0.0000,
-   "transactionId":"03c3ac6f50864601b87aabac0165abed"
+   "errorCode": null,
+   "errorDetails": null,
+   "errorMessage": "",
+   "status": 0,
+   "OriginalTransactionId": "03c3ac6f50864601b87aabac0165abed",
+   "amount": 4.99,
+   "cancelled": true,
+   "cancelledTransactionIds": null,
+   "channelId": "000000",
+   "channelName": "ESPRIMU",
+   "couponCode": null,
+   "currency": "usd",
+   "expirationDate": "\/Date(1588801334000+0000)\/",
+   "isEntitled": true,
+   "originalPurchaseDate": "\/Date(1588196534000+0000)\/",
+   "partnerReferenceId": "1969",
+   "productId": "QynVhYtdThAg7wcfTkgi_MonthlySubFreeTrial",
+   "productName": "QynVhYtdThAg7wcfTkgi_MonthlySubFreeTrial",
+   "purchaseDate": "\/Date(1588196534000+0000)\/",
+   "purchaseStatus": "Active",
+   "purchaseType": null,
+   "quantity": 1,
+   "rokuCustomerId": "99999999999999999999999999999999",
+   "tax": 0.0000,
+   "total": 0.0000,
+   "transactionId": "03c3ac6f50864601b87aabac0165abed"
 }
 ```
 
 #### XML
 
-```
+```xml
 <result xmlns="http://api.roku.com/transaction" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
   <errorCode/>
   <errorDetails/>
@@ -338,36 +340,36 @@ After a downgrade has been completed on-device, responses to [**validate transac
 
 #### JSON
 
-```
+```json
 {
-   "errorCode":null,
-   "errorDetails":null,
-   "errorMessage":"",
-   "status":0,
-   "OriginalTransactionId":"e8515e538c2b4e9e9039abac0165b4e1",
-   "amount":2.99,
-   "cancelled":false,
-   "cancelledTransactionIds":[
+   "errorCode": null,
+   "errorDetails": null,
+   "errorMessage": "",
+   "status": 0,
+   "OriginalTransactionId": "e8515e538c2b4e9e9039abac0165b4e1",
+   "amount": 2.99,
+   "cancelled": false,
+   "cancelledTransactionIds": [
       "03c3ac6f50864601b87aabac0165abed"
    ],
-   "channelId":000000,
-   "channelName":"ESPRIMU",
-   "couponCode":null,
-   "currency":"usd",
-   "expirationDate":"\/Date(1588801334000+0000)\/",
-   "isEntitled":true,
-   "originalPurchaseDate":"\/Date(1588196542000+0000)\/",
-   "partnerReferenceId":"1969",
-   "productId":"ZTtL0DvuGNX1sO4tJGNp_MonthlySubFreeTrial",
-   "productName":"ZTtL0DvuGNX1sO4tJGNp_MonthlySubFreeTrial",
-   "purchaseDate":"\/Date(1588196542000+0000)\/",
-   "purchaseStatus":"PendingActive",
-   "purchaseType":"DOWNGRADE",
-   "quantity":1,
-   "rokuCustomerId":"99999999999999999999999999999999",
-   "tax":0.0000,
-   "total":0.0000,
-   "transactionId":"e8515e538c2b4e9e9039abac0165b4e1"
+   "channelId": "000000",
+   "channelName": "ESPRIMU",
+   "couponCode": null,
+   "currency": "usd",
+   "expirationDate": "\/Date(1588801334000+0000)\/",
+   "isEntitled": true,
+   "originalPurchaseDate": "\/Date(1588196542000+0000)\/",
+   "partnerReferenceId": "1969",
+   "productId": "ZTtL0DvuGNX1sO4tJGNp_MonthlySubFreeTrial",
+   "productName": "ZTtL0DvuGNX1sO4tJGNp_MonthlySubFreeTrial",
+   "purchaseDate": "\/Date(1588196542000+0000)\/",
+   "purchaseStatus": "PendingActive",
+   "purchaseType": "DOWNGRADE",
+   "quantity": 1,
+   "rokuCustomerId": "99999999999999999999999999999999",
+   "tax": 0.0000,
+   "total": 0.0000,
+   "transactionId": "e8515e538c2b4e9e9039abac0165b4e1"
 }
 ```
 
@@ -375,7 +377,7 @@ Since the "downgrade" subscription will be activated sometime in the future (i.e
 
 #### XML
 
-```
+```xml
 <result xmlns="http://api.roku.com/transaction" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
   <errorCode/>
   <errorDetails/>
@@ -424,33 +426,33 @@ The following sample demonstrates an **UpgradeSale** notification:
 
 #### JSON
 
-```
+```json
 {
-   "customerId":"ab080b5f1c5650d9ae0d7f595d0be886",
-   "transactionType":"UpgradeSale",
-   "transactionId":"187fb8f7b3a24883a245ab5d0171fadd",
-   "channelId":"713788",
-   "channelName":"Roku Channel",
-   "productCode":"5tahs9bYB9jM5FJtz3DW_YearlySub",
-   "productName":"5tahs9bYB9jM5FJtz3DW_YearlySub",
-   "price":13.99,
-   "tax":0.0,
-   "total":13.99,
-   "currency":"usd",
-   "isFreeTrial":false,
-   "expirationDate":"2021-02-10T22:27:03.7657086Z",
-   "originalTransactionId":"187fb8f7b3a24883a245ab5d0171fadd",
-   "comments":"New order processed.",
-   "eventDate":"2020-02-10T22:27:03.8597086Z",
-   "responseKey":"ce5e3c2ae1c242c2bfd136ac36580112"
+   "customerId": "ab080b5f1c5650d9ae0d7f595d0be886",
+   "transactionType": "UpgradeSale",
+   "transactionId": "187fb8f7b3a24883a245ab5d0171fadd",
+   "channelId": "713788",
+   "channelName": "Roku Channel",
+   "productCode": "5tahs9bYB9jM5FJtz3DW_YearlySub",
+   "productName": "5tahs9bYB9jM5FJtz3DW_YearlySub",
+   "price": 13.99,
+   "tax": 0.0,
+   "total": 13.99,
+   "currency": "usd",
+   "isFreeTrial": false,
+   "expirationDate": "2021-02-10T22:27:03.7657086Z",
+   "originalTransactionId": "187fb8f7b3a24883a245ab5d0171fadd",
+   "comments": "New order processed.",
+   "eventDate": "2020-02-10T22:27:03.8597086Z",
+   "responseKey": "ce5e3c2ae1c242c2bfd136ac36580112"
 }
 ```
 
 #### XML
 
-```
+```xml
 <result xmlns="http://api.roku.com/transaction" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
-	<customerId>ab080b5f1c5650d9ae0d7f595d0be886</customerId>
+  <customerId>ab080b5f1c5650d9ae0d7f595d0be886</customerId>
   <transactionType>UpgradeSale</transactionType>
   <transactionId>187fb8f7b3a24883a245ab5d0171fadd</transactionId>
   <channelId>713788</channelId>

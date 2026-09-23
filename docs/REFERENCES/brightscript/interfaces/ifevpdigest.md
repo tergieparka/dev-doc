@@ -2,7 +2,7 @@
 title: "ifEVPDigest"
 excerpt: ''
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''
@@ -65,17 +65,17 @@ A Hex string (Digested array data).
 
 #### Example
 
-~~~
+```brightscript
   x = evp.Process(bytes)
-~~~
+```
 
 is equivalent to
 
-~~~
+```brightscript
   evp.Reinit()
   evp.Update(bytes)
   x = evp.Final()
-~~~
+```
 
 ### Update(bytes as Object) as Void
 

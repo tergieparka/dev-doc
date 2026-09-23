@@ -1,11 +1,11 @@
 ---
 title: "roRegistrySection"
-excerpt: ''
+excerpt: 'Organizes registry keys into named, case-sensitive sections for scoped storage'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'roRegistrySection'
+  description: 'roRegistrySection organizes registry settings into named sections, where key names are scoped to their section and section names are case sensitive.'
   robots: index
 next:
   description: ''
@@ -22,21 +22,21 @@ This object must be supplied with a "section" name on creation. If no such secti
 
 **Example: Get and set some user authentication in the registry**
 
-~~~
-Function GetAuthData() As Dynamic
+```brightscript
+function GetAuthData() as Dynamic
      sec = CreateObject("roRegistrySection", "Authentication")
      if sec.Exists("UserRegistrationToken")
          return sec.Read("UserRegistrationToken")
-     endif
+     end if
      return invalid
-End Function
-  
-Function SetAuthData(userToken As String) As Void
+end function
+
+function SetAuthData(userToken as String) as Void
     sec = CreateObject("roRegistrySection", "Authentication")
     sec.Write("UserRegistrationToken", userToken)
     sec.Flush()
-End Function
-~~~
+end function
+```
 
 
 ## Supported interfaces

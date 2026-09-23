@@ -1,11 +1,11 @@
 ---
 title: Integrating the Roku Advertising Framework
-excerpt: ''
+excerpt: 'Integrate the RAF library to render preroll, midroll, and postroll ads'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Integrating the Roku Advertising Framework | Roku Developer Docs'
+  description: 'Integrate the RAF library into your app using the manifest entry, getAds() to fetch ad pods, and showAds() to render preroll, midroll, and postroll ads.'
   robots: index
 next:
   description: ''
@@ -35,7 +35,7 @@ any applications using the Roku Advertising Framework library:
 
 **Manifest entry**
 
-```
+```text
 bs_libs_required=roku_ads_lib
 ```
 
@@ -44,19 +44,19 @@ as part of their own package file. Instead, the “Library” keyword is
 used. The following line should be the first entry in
 your `main.brs` file:
 
-```
+```brightscript
 Library "Roku_Ads.brs"
 ```
 
 The library interface is obtained by calling the constructor with no arguments:
 
-```
+```brightscript
 adIface = Roku_Ads()
 ```
 
 Configure the ad URL before making the ad request call:
 
-```
+```brightscript
 adIface.setAdUrl(myAdUrl)
 ```
 
@@ -71,14 +71,14 @@ makes the initial request to the ad server, parses the server response,
 and returns the structure of ads to be rendered prior to, or during
 playback, of the selected content:
 
-```
+```brightscript
 adPods = adIface.getAds()
 ```
 
 Any preroll ads present in the returned set of ad pods can be
 immediately rendered by calling:
 
-```
+```brightscript
 shouldPlayContent = adIface.showAds(adPods, invalid, adHolder)
 ```
 
@@ -96,7 +96,7 @@ ads:
 
 **Calling getAds() in a while loop**
 
-```
+```brightscript
 while shouldPlayContent
   videoMsg = wait(0, contentVideoScreen.GetMessagePort())
   adPods = adIface.getAds(videoMsg)
@@ -104,10 +104,10 @@ while shouldPlayContent
     contentVideoScreen.Close() ' stop playback of content
     shouldPlayContent = adIface.showAds(adPods) ' render current ad pod
     if shouldPlayContent
-      ' *** Insert client app’s resume-playback code here
+      ' *** Insert client app's resume-playback code here
     end if
   end if
-  ' *** Insert client app’s video event handler code here
+  ' *** Insert client app's video event handler code here
 end while
 ```
 
@@ -119,11 +119,11 @@ retains control over the * button and will need to handle button
 presses on their own. To set the Video node in focus again, use the
 following code snippet:
 
-```
+```brightscript
 sub init()
-m.top.setFocus(true)
-setVideo()
-sub
+  m.top.setFocus(true)
+  setVideo()
+end sub
 ```
 
 ## Use cases
@@ -142,7 +142,7 @@ URL (which currently provides only a single ad), the ad URL must be
 configured before requesting an
 ad pod:
 
-```
+```brightscript
 Library "Roku_Ads.brs"
 
 adIface = Roku_Ads()
@@ -177,7 +177,7 @@ its `renderSequence` attribute.
 Just call [showAds()](doc:raf-api) with
 the adPods value that the application obtained above:
 
-```
+```brightscript
 shouldPlayContent = adIface.showAds(adPods)
 ```
 
@@ -199,7 +199,7 @@ occur:
 
 **Sequential ad pod rendering example**
 
-```
+```brightscript
 shouldPlayContent = adIface.showAds(adPods)
 while shouldPlayContent
   videoMsg = wait(0, contentVideoScreen.GetMessagePort())
@@ -208,10 +208,10 @@ while shouldPlayContent
     contentVideoScreen.Close() ' stop playback of content
     shouldPlayContent = adIface.showAds(adPods) ' render current ad pod
     if shouldPlayContent
-      ' *** Insert client app’s resume-playback code here
+      ' *** Insert client app's resume-playback code here
     end if
   end if
-  ' *** Insert client app’s video event handler code here
+  ' *** Insert client app's video event handler code here
 end while
 ```
 
@@ -232,18 +232,19 @@ necessary:
 
 **Custom ad scheduling example**
 
-```
+```brightscript
 adBreakSchedule = [adBreakTime1, adBreakTime2, adBreakTime3]
 scheduledPods = []
 adBreakIndex = 0
 for each ad in adPods[0].ad
   ' schedule one ad per ad break
-  scheduledPods.Push([{viewed : false,
-                      renderSequence : "midroll",
-                      duration : ad.duration,
-                      renderTime : adBreakSchedule[adBreakIndex],
-                      ads : [ad]
-                      })
+  scheduledPods.Push([{
+    viewed : false,
+    renderSequence : "midroll",
+    duration : ad.duration,
+    renderTime : adBreakSchedule[adBreakIndex],
+    ads : [ad]
+  }])
   adBreakIndex = adBreakIndex + 1
 end for
 ```
@@ -259,7 +260,7 @@ rendering:
 
 **Complete ad rendering control example**
 
-```
+```brightscript
 shouldPlayContent = true
 adBreakIndex = 0
 while shouldPlayContent
@@ -272,11 +273,11 @@ while shouldPlayContent
       shouldPlayContent = adIface.showAds(nextPod) ' render next ad pod
       adBreakIndex = adBreakIndex + 1
       if shouldPlayContent
-        ' *** Insert client app’s resume-playback code here
+        ' *** Insert client app's resume-playback code here
       end if
     end if
   end if
-  ' *** Insert client app’s video event handler code here
+  ' *** Insert client app's video event handler code here
 end while
 ```
 
@@ -311,7 +312,7 @@ The impression tags fired when video ads are displayed on your app must include 
 
 To enable ad measurement, call the [enableAdMeasurements()](doc:raf-api) method, and pass the required content metadata within the [setContentGenre()](doc:raf-api), [setContentId()](doc:raf-api), and [setContentLength()](doc:raf-api) methods.
 
-```
+```brightscript
 adIface.enableAdMeasurements(true)
 adIface.setContentGenre(content.categories)
 adIface.setContentId(content.stream.contentid)
@@ -334,15 +335,15 @@ Apps can use the [GetRIDA()](doc:ifdeviceinfo) API to get the RIDA of a device a
 
 **Retrieving RIDA example**
 
-```
-Function getAdID() as String
+```brightscript
+function getAdID() as String
     adId = ""
     dev_info = createObject("roDeviceInfo")
     if dev_info <> invalid then
       adId = dev_info.GetRIDA()
     end if
     return adId
-End Function
+end function
 ```
 
 #### RIDA specific parameters
@@ -407,7 +408,7 @@ The supported content meta-data attributes are:
 | Title                | Center-aligned relative to and displayed below PosterUrl | "Title for custom buffering screen"                                                                                                                                                                                                       |
 | Description          | Left-aligned relative to PosterUrl                       | "Description for custom buffering screen"                                                                                                                                                                                                 |
 
-```
+```brightscript
 bufferScreenContent = {}
 bufferScreenContent.HDBackgroundImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Aspect-ratio-16x9.svg/1280px-Aspect-ratio-16x9.svg.png"
 bufferScreenContent.HDPosterUrl = "http://static.commentcamarche.net/ccm.net/faq/images/0-BX4VeV6H-resolution-comparison-s-.png"
@@ -430,7 +431,7 @@ other roImageCanvas attributes.
 
 **Custom buffering screen using layers**
 
-```
+```brightscript
 layers = [
     {Url: BackgroundImageUrl}
     {Url: PosterUrl, TargetRect : {x : 405, y : 370, w : 467, h : 262}}
@@ -467,7 +468,7 @@ first calling
 the [importAds()](doc:raf-api) method
 with the ad structure constructed externally by the client:
 
-```
+```brightscript
 adIface.importAds(myAdPodArray)
 ```
 
@@ -520,7 +521,7 @@ As an example, if `ad` contains the [Ad structure](doc:integrating-roku-advertis
 video ad that the client application has just begun rendering,
 the `Impression` beacons for that ad could be fired with a single call:
 
-```
+```brightscript
 adIface.fireTrackingEvents(ad, {type: "Impression"})
 ```
 
@@ -529,14 +530,14 @@ variable `adProgressTime` holds a value representing the number of
 seconds since the ad began rendering, the quartile beacons can be sent
 via:
 
-```
+```brightscript
 adIface.fireTrackingEvents(ad, {time: adProgressTime})
 ```
 
 If the ad were paused by the user, then the client app would fire
 the `Pause` beacons:
 
-```
+```brightscript
 adIface.fireTrackingEvents(ad, {type: "Pause"})
 ```
 
@@ -621,7 +622,7 @@ Scheduling and rendering is then initialized by first calling
 the [`stitchedAdsInit()`](doc:raf-api) method with the ad structure constructed by the
 client:
 
-```
+```brightscript
 adIface.stitchedAdsInit(myAdPodArray)
 ```
 
@@ -636,13 +637,13 @@ logic:
 
 **Server side ad insertion example**
 
-```
+```brightscript
 playContent = true
 while playContent
   msg = Wait(0, videoPlayer.GetMessagePort())
   currentAd = adIface.stitchedAdHandledEvent(msg, videoPlayer)
 
-  if currentAd <> Invalid and currentAd.evtHandled
+  if currentAd <> invalid and currentAd.evtHandled
     ' ad handled event, take no further action
     if currentAd.adExited
       ' user exited, return to content selection
@@ -706,7 +707,7 @@ device.
 | ROKU_ADS_DISPLAY_HEIGHT | Height of device display                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | ROKU_ADS_TIMESTAMP      | Current timestamp value (number of milliseconds elapsed since 00:00:00 1/1/1970 GMT)                                                                                                                                                                                                                                                                                                                                                                                              |
 | ROKU_ADS_CACHE_BUSTER   | Makes the URL unique to avoid retrieving cached ad server responses, or to ensure proper counting of unique event tracking beacons                                                                                                                                                                                                                                                                                                                                                |
-| ROKU_ADS_KIDS_CONTENT   | Mark ad requests as appearing in a content title, channel, or area of a channel that is made for kids, or where you have actual knowledge that the end user is a child. This macro is designed to help flag ad requests that may be subject to child privacy and child protection laws such as the Children's Online Privacy Protection Act (COPPA). For more information about these laws, see [Channels or Content Made for Kids](https://docs.roku.com/published/madeforkids). |
+| ROKU_ADS_KIDS_CONTENT   | Mark ad requests as appearing in a content title, app, or area of an app that is made for kids, or where you have actual knowledge that the end user is a child. This macro is designed to help flag ad requests that may be subject to child privacy and child protection laws such as the Children's Online Privacy Protection Act (COPPA). For more information about these laws, see [Channels or Content Made for Kids](https://docs.roku.com/published/madeforkids). |
 | ROKU_ADS_LOCALE         | Returns current locale in the same format as [roDeviceInfo.getCurrentLocale()](doc:ifdeviceinfo) (e.g., "en_US", "es_ES")                                                                                                                                                                                                                                                                                      |
 
 #### Example
@@ -719,7 +720,7 @@ set:
 
 **setAdUrl example**
 
-```
+```brightscript
 rokuAds = Roku_Ads()
 url = "http://my.ad.server.net/?my_first_param=MyFirstValue&my_app_id=ROKU_ADS_APP_ID&my_user_agent=ROKU_ADS_USER_AGENT&my_timestamp=ROKU_ADS_TIMESTAMP&other_param=SomeOtherValue"
 rokuAds.setAdUrl(url)
@@ -896,8 +897,58 @@ of genre tags that can be used to improve ad targeting:
 
 ## Nielsen DAR genre tags
 
-Tagging content by genre
-via [setNielsenGenre()](doc:raf-api) requires
-a single primary genre code for the selected content from the following
-set of values. Publishers should provide the most specific category
-applicable to the content for which ads are to be shown.
+The enableAdMeasurements method deprecates the enableNielsenDAR API; therefore, do not use the enableNielsenDAR API. The [setContentGenre()](doc:raf-api) API translates Roku Genres to Nielsen Genres without additional steps. Optionally, apps may also use the [setNielsenGenre()](doc:raf-api) API to pass specific Nielsen Genre granularity. If using the [setNielsenGenre()](doc:raf-api) API, pass a single primary genre code for the selected content from the following set of values. Publishers should provide the most specific category applicable to the content for which ads are to be shown.
+
+Action:             "GD"
+Adventure:          "A"
+Animated:           "GV"
+Ballet:             "GV"
+Biography:          "DO"
+Children:           "CP"
+Comedy:             "CV"
+"Comedy drama":     "CV"
+"Crime drama":      "GD"
+Cuisine:            "GV"
+"Dark comedy":      "CV"
+Docudrama:          "GD"
+Documentary:        "DO"
+Drama:              "GD"
+Entertainment:      "GV"
+Fantasy:            "GV"
+"Historical drama": "GD"
+Horror:             "SM"
+"Martial arts":     "GV"
+Music:              "GV"
+Musical:            "MD"
+"Musical comedy":   "CV"
+Mystery:            "SM"
+"Performing arts":  "GV"
+Romance:            "GV"
+"Romantic comedy":  "CV"
+"Science fiction":  "SF"
+Special:            "GV"
+Suspense:           "SM"
+Talk:               "GV"
+Theater:            "GV"
+Thriller:           "SM"
+Travel:             "GV"
+War:                "GD"
+Western:            "EW"
+animals:            "GV"
+anime:              "GV"
+crime:              "GD"
+educational:        "IA"
+faith:              "D"
+food:               "GV"
+fashion:            "GV"
+gaming:             "GV"
+health:             "IA"
+history:            "GD"
+miniseries:         "GV"
+nature:             "GV"
+news:               "N"
+reality:            "GV"
+science:            "GV"
+sitcom:             "CS"
+sports:             "SE"
+technology:         "GV"

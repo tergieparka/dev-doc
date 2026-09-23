@@ -1,11 +1,11 @@
 ---
 title: "ScrollableText"
-excerpt: ''
+excerpt: 'Interactive vertically scrolling text node with scrollbar and alignment controls'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'ScrollableText'
+  description: 'Documents the ScrollableText node, which provides an interactive, vertically scrolling pane of text for displaying long content such as a license agreement.'
   robots: index
 next:
   description: ''
@@ -66,7 +66,7 @@ In most cases, the vertAlign field should remain set to top.
 | lineSpacing | float | 8 | READ_WRITE | If the text is displayed on more than one line, specifies the amount of additional space added between lines |
 | horizAlign              | string            | left                                      | READ_WRITE        | See [Horizontal Alignment](doc:scrollinglabel) |
 | vertAlign               | string | top            | READ_WRITE        | See [Vertical Alignment](doc:scrollinglabel) |
-| scrollbarTrackBitmapUri | string            | ""                                        | READ_WRITE        | Specifies the URI of an image file to be loaded to replace the default scrollbar track. This should be a 9-patch image so that it can be stretched to the appropriate height specifed by the height field |
+| scrollbarTrackBitmapUri | string            | ""                                        | READ_WRITE        | Specifies the URI of an image file to be loaded to replace the default scrollbar track. This should be a 9-patch image so that it can be stretched to the appropriate height specified by the height field |
 | scrollbarThumbBitmapUri | string | ""             | READ_WRITE        | Specifies the URI of an image file to be loaded to replace the default scrollbar thumb. This should be a 9-patch image so that it can be stretched to the appropriate size |
 
 ## Sample app

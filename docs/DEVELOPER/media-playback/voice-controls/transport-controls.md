@@ -1,11 +1,11 @@
 ---
 title: Implementing voice controls
-excerpt: ''
+excerpt: 'Handle voice commands from the Roku voice remote using roInput transport events'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Implementing voice controls | Roku Developer Docs'
+  description: 'Implement voice controls in your app using roInput to handle transport commands such as play, pause, seek, skip, and next from the Roku voice remote.'
   robots: index
 next:
   description: ''
@@ -46,16 +46,16 @@ these steps:
 
 1. Create an **roInput** object, and set the [**roMessagePort**](doc:romessageport) for receiving events.
 
-   ```
+   ```brightscript
    input = CreateObject("roInput")
    port = CreateObject("roMessagePort")
    input.SetMessagePort(port)
    ```
 
 2. Register the **roInput** component for voice commands by calling
-   its  [**EnableTransportEvents()**](https://roku-ent.readme.io/dev/docs/ifinput#enabletransportevents-as-boolean) function. This tells the Roku OS that your app can handle voice commands sent to the **roInput** object. Once this is set, your app will receive **roInput** events for every voice command on this **roInput** object.
+   its  [**EnableTransportEvents()**](/dev/docs/ifinput#enabletransportevents-as-boolean) function. This tells the Roku OS that your app can handle voice commands sent to the **roInput** object. Once this is set, your app will receive **roInput** events for every voice command on this **roInput** object.
 
-   ```
+   ```brightscript
    input.enableTransportEvents()
    ```
 
@@ -68,7 +68,7 @@ these steps:
    3. This method takes an AssociativeArray with two fields: **id** and **status**. The **id** field specifies the transport ID event; the **status** specifies whether the event was handled, handled with an error, or unhandled.
    4. This method should be called immediately after a voice command is received. If your application does not handle a transport event (or the command is unknown or not implemented in your app), mark it as "error.generic" or "unhandled". See [Error handling](#error-handling) for the complete list of error messages to which the **status** field can be set.
       c.  Optionally, for better modularization, you can pass the captured voice command to a function for handing.
-      ```
+      ```brightscript
       while m.isPlaying
             msg = wait(0, port)
             if type(msg) = "roInputEvent" then
@@ -90,7 +90,7 @@ these steps:
 
 4. Add business logic for handling each voice command. In this example, a function is used to receive the voice command and implement the required behavior. As a best practice, set the **ret.status** field to "unhandled" by default, and then update it to "success" if your app handles the command, or "error.generic" if the app cannot fulfill it. Setting the status to "error.generic" displays "That is not available" in the Roku Voice heads-up display. The default "unhandled" status results in the Roku OS executing the default behavior.
 
-   ```
+   ```brightscript
    function handleTransport(evt)
        cmd = evt.command
        ret = {status: "unhandled"}
@@ -121,48 +121,44 @@ these steps:
 
        else if cmd = "seek"
            duration = evt.duration.toInt()
-           if evt.direction = "backward" then
-               duration = -duration
-               seekPosition = m.videoplayer.position + duration
-               if seekPosition > m.videoplayer.duration then
-                   ret.status = "success.seek-end"
-                   seekPosition = m.videoplayer.duration - 30
-               else if seekPosition < 0
-                   then ret.status = "success.seek-start"
-                   seekPosition = 0
-               end if
-           m.seekPosition = seekPosition playVideoFrom()
-           ret.status = "success"
+           if evt.direction = "backward" then duration = -duration
+           seekPosition = m.videoplayer.position + duration
+           if seekPosition > m.videoplayer.duration then
+               ret.status = "success.seek-end"
+               seekPosition = m.videoplayer.duration - 30
+           else if seekPosition < 0 then
+               ret.status = "success.seek-start"
+               seekPosition = 0
+           else
+               ret.status = "success"
+           end if
+           m.seekPosition = seekPosition
+           playVideoFrom()
 
        else if cmd = "next"
-           'skip to next content item in playlist'
+           'skip to next content item in playlist
            ret.status = "success"
-       end if
 
        else if cmd = "nowplaying"
-           'handle nowplaying command
+           'handle "nowplaying" command
            appmgr = CreateObject("roAppManager")
            appmgr.SetNowPlayingContentMetaData({
                title: "<title>",
                contentType: "<contentType>"
            })
            ret.status = "success"
-       end if
 
        else if cmd = "loop"
            'handle "loop" command
-            ret.status = "success"
-       end if
+           ret.status = "success"
 
        else if cmd = "shuffle"
            'handle "shuffle" command
            ret.status = "success"
-       end if
 
        else if cmd = "skip"
-           'handle "skip intro" command OR handle same as "next" if channel have no into/recap to skip
+           'handle "skip intro"/"skip recap" command, or fall through to "next" behavior if there is nothing to skip
            ret.status = "success"
-       end if
 
        else if cmd = "like"
            'handle "like" command
@@ -181,7 +177,7 @@ As described in [Handling voice commands](#handling-voice-commands), apps must i
 
 For convenience, the list of possible values for the **status** field of the associative array taken by the [**roInput.EventResponse()**](doc:ifinput) method is as follows:
 
-* "error.generic" (_Available since Roku OS 10.0_). No active media is available to fulfill the voice command. Passing this status displays "That is not available" in the Roku Voice heads-up display. This can be used in cases, for example, when an app receives a "forward" or "next" command, but there is no content to fast forward or play next, respectively.
+* "error.generic" (_Available since [Roku OS 10.0](doc:release-notes#roku-os-100)_). No active media is available to fulfill the voice command. Passing this status displays "That is not available" in the Roku Voice heads-up display. This can be used in cases, for example, when an app receives a "forward" or "next" command, but there is no content to fast forward or play next, respectively.
 
 * "unhandled". The app is not handling the event. The default behavior is executed by the Roku OS, if defined.
 
@@ -226,17 +222,17 @@ The following table summarizes which apps need to implement handling for enhance
 
 You can test voice controls in an app by sending [External Control Protocol (ECP)](doc:external-control-api) commands via cURL to your Roku device. Specifically, send an HTTP POST request to port 8060 on your Roku device using the following syntax:
 
-```
+```bash
 curl -d '' 'http://<roku-device-ip-address>:8060/input/<channelId>?id=<longInteger>&type=transport&command=<commandValue>
 ```
 
 The following examples show how to send ECP commands via cURL HTTP POST requests. The examples are based on a sideloaded app handling forward and seek commands.
 
-```
+```bash
 curl -d '' ' http://192.168.1.114:8060/input/dev?id=5&type=transport&command=forward
 ```
 
-```
+```bash
 curl -d '' 'http://192.168.1.114:8060/input/dev?id=8&type=transport&command=seek&direction=backward&duration=10
 ```
 
@@ -244,7 +240,7 @@ curl -d '' 'http://192.168.1.114:8060/input/dev?id=8&type=transport&command=seek
 
 You can download and install a [sample app](https://github.com/rokudev/transport-control) that demonstrates how to implement voice controls. It demonstrates how to handle voice commands in your app, and it shows you how to use the [**roInputEvent**](doc:roinputevent) to listen for transport events and then process them. This sample includes standard and custom video player apps, a live app, and an app implementing server-side ad insertion [SSAI](doc:ssai-adapters) via the [Roku Advertising Framework (RAF)](doc:advertising):
 
-* The standard UI app shows how the native Roku Media Player handles voice controls. You can run this app and use the [debug console](doc:debugging-channels) to view output related to transport events.
+* The standard UI app shows how the native Roku Media Player handles voice controls. You can run this app and use the [debug console](doc:debugging) to view output related to transport events.
 * The custom UI, live, and SSAI apps shows how your application can receive and process voice controls. This is especially important if your app uses custom [trick mode](doc:trick-mode) or it is using a RAF SSAI implementation because your app must explicitly handle "seek" and "start over" transport commands in these cases.
 
 ## Video demo
@@ -255,7 +251,7 @@ For a video demonstration of voice controls, see the [Voice overview guide](doc:
 
 The following table summarizes the different voice controls, how they may be invoked, and their required behavior:
 
-> If your app does not handle one of the listed voice controls (or it is unknown or not implemented in your app), [mark it as "error.generic" or "unhandled"](#errror-handling).
+> If your app does not handle one of the listed voice controls (or it is unknown or not implemented in your app), [mark it as "error.generic" or "unhandled"](#error-handling).
 
 ### Basic voice controls
 
@@ -378,7 +374,7 @@ The following table summarizes the different voice controls, how they may be inv
 <td>nowplaying</td>
 <td>"what's playing?"<br />"what am I watching?"</td>
 <td>Acknowledge command as success; the Roku OS will display app name as playing.</td>
-<td><ul><li>Content playing is known to the app: Create an <a href="https://roku-ent.readme.io/dev/docs/roappmanager"><strong>roAppManager</strong></a> node, and then pass the item's title and contentType into a call to the <a href="https://roku-ent.readme.io/dev/docs/ifappmanager#setnowplayingcontentmetadatacontentmetadata-as-object-as-void"><strong>roAppManager.SetNowPlayingContentMetaData()</strong></a> method. Mark the event as successfully handled.</li><li>No content playing or content playing is unknown to the app: Pass <code>invalid</code> into a call to the <a href="https://roku-ent.readme.io/dev/docs/ifappmanager#setnowplayingcontentmetadatacontentmetadata-as-object-as-void"><strong>roAppManager.SetNowPlayingContentMetaData()</strong></a> method, and mark the event as "error.generic" or "unhandled".</li></ul></td>
+<td><ul><li>Content playing is known to the app: Create an <a href="/dev/docs/roappmanager"><strong>roAppManager</strong></a> node, and then pass the item's title and contentType into a call to the <a href="/dev/docs/ifappmanager#setnowplayingcontentmetadatacontentmetadata-as-object-as-void"><strong>roAppManager.SetNowPlayingContentMetaData()</strong></a> method. Mark the event as successfully handled.</li><li>No content playing or content playing is unknown to the app: Pass <code>invalid</code> into a call to the <a href="/dev/docs/ifappmanager#setnowplayingcontentmetadatacontentmetadata-as-object-as-void"><strong>roAppManager.SetNowPlayingContentMetaData()</strong></a> method, and mark the event as "error.generic" or "unhandled".</li></ul></td>
 <td>Use content metadata to display title of content.</td>
 </tr>
 <tr>

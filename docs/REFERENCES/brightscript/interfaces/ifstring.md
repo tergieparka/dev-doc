@@ -1,11 +1,11 @@
 ---
 title: "ifString"
-excerpt: ''
+excerpt: 'Interface equivalent for the intrinsic String type'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'ifString'
+  description: 'The ifString interface is the interface equivalent for the intrinsic String type, providing GetString, SetString, and IsEmpty methods on String objects.'
   robots: index
 next:
   description: ''
@@ -61,7 +61,7 @@ A flag indicating whether the string is empty (true), or contains characters (fa
 
 #### Example
 
-```
+```brightscript
 a = "myString"
 b = ""
 

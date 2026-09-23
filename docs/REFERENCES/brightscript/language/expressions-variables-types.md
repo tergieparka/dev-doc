@@ -1,11 +1,11 @@
 ---
 title: Expressions, variables, and types
-excerpt: ''
+excerpt: 'Covers identifiers, types, literals, operators, and type conversion rules'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Expressions, variables, and types | Roku Developer Docs'
+  description: 'Documents identifiers, dynamic typing, type declaration characters, literals, operators, and type conversion rules used in expressions and variables.'
   robots: index
 next:
   description: ''
@@ -35,9 +35,9 @@ functions or interfaces (appear after a ".")) have the following rules.
 
 For example:
 
-```
-a  
-boy5  
+```brightscript
+a
+boy5
 super_man$
 ```
 
@@ -56,7 +56,7 @@ The following types are supported in BrightScript:
 * **Boolean** – Either true or false.
 * **Integer** – A 32-bit signed integer number.
 * **LongInteger** – A 64-bit signed integer number. **This is
-  available in Roku OS 7.0 or above.**
+  available in [Roku OS 7.0](doc:release-notes#roku-os-70) or above.**
 * **Float** – A 32-bit IEEE floating point number.
 * **Double** – A 64-bit IEEE floating point number. (Although Double
   is an intrinsically understood type, it is implemented internally
@@ -187,37 +187,31 @@ literals (constants), or expressions.
 
 **Example**
 
-```
+```brightscript
 myarray = [] ' empty array
 
 myarray = [ 1, 2, 3 ] ' array of three members
 
-myarray = [ x+5, true, 1\<\>2, ["a","b"] ] ' array of four members
+myarray = [ x+5, true, 1<>2, ["a","b"] ] ' array of four members
 ```
 
 Arrays can be specified in multi-line form:
 
 **Example**
 
-```
+```brightscript
 a = [
-
-"able"
-
-"baker"
-
+    "able"
+    "baker"
 ]
 ```
 
 **OR**
 
-```
+```brightscript
 a = [
-
-3.1415,
-
-2.71828
-
+    3.1415,
+    2.71828
 ]
 ```
 
@@ -227,9 +221,8 @@ The { } operator can be used to define an Associative Array. It can contain lite
 
 **Example**
 
-```
+```brightscript
 aa = { }
-
 aa = { key1: "value", key2: 55, key3: 5+3 }
 ```
 
@@ -239,7 +232,7 @@ Key names can be specified as string literals.
 
 **Example**
 
-```
+```brightscript
 aa = { "Jane Doe": 1001, "John Doe": 1002 }
 ```
 
@@ -247,25 +240,19 @@ Associative Arrays can be specified in multi-line form:
 
 **Example**
 
-```
+```brightscript
 aa = {
-
-Myfunc1: aFunction
-
-Myval1: "the value"
-
+    Myfunc1: aFunction
+    Myval1: "the value"
 }
 ```
 
 **OR**
 
-```
+```brightscript
 aa = {
-
-alpha: 1,
-
-zulu: 26
-
+    alpha: 1,
+    zulu: 26
 }
 ```
 
@@ -276,8 +263,8 @@ example, in the case when there is no object to return). In which case,
 the variable accepting the result must be dynamic, since it may get
 "invalid" or it may get an "object".
 
-```
-l=[]  
+```brightscript
+l=[]
 a$=l.pop()
 ```
 
@@ -298,7 +285,7 @@ all different variables.
 | %         | Integer     | A%, SUM%, 125%      |                                              |
 | !         | Float       | A!, value!, 125!    | Single-precision                             |
 | #         | Double      | A#, distance#, 125# | Double-precision                             |
-| &         | LongInteger | A&, ID&             | _This is available in Roku OS 7.0 or later._ |
+| &         | LongInteger | A&, ID&             | _This is available in [Roku OS 7.0](doc:release-notes#roku-os-70) or later._ |
 
 ## Type conversion (promotion)
 
@@ -345,129 +332,104 @@ except for exponentiation, which is right associative.
       <th>
         ()
       </th>
-
       <th>
         Function call, or parentheses
       </th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>
         .
       </td>
-
       <td>
         Dot operator
       </td>
     </tr>
-
     <tr>
       <td>
         [ ]
       </td>
-
       <td>
         Array operator
       </td>
     </tr>
-
     <tr>
       <td>
         "?.", "?@", "?[", "?("
       </td>
-
       <td>
         Optional chaining operators
       </td>
     </tr>
-
     <tr>
       <td>
         ^
       </td>
-
       <td>
         Exponentiation
       </td>
     </tr>
-
     <tr>
       <td>
         – , +
       </td>
-
       <td>
         Negation (unary)
       </td>
     </tr>
-
     <tr>
       <td>
         * ,  / , MOD, \
       </td>
-
       <td>
         Multiplicative operators
       </td>
     </tr>
-
     <tr>
       <td>
         – , +
       </td>
-
       <td>
         Additive operators
       </td>
     </tr>
-
     <tr>
       <td>
         \<\<, >>
       </td>
-
       <td>
         Integer bitshift operators
       </td>
     </tr>
-
     <tr>
       <td>
         \<, >, = , \<\>, \<=, >=
       </td>
-
       <td>
         Comparisons
       </td>
     </tr>
-
     <tr>
       <td>
         NOT
       </td>
-
       <td>
         Unary logical NOT or bitwise
       </td>
     </tr>
-
     <tr>
       <td>
         AND
       </td>
-
       <td>
         Logical or bitwise
       </td>
     </tr>
-
     <tr>
       <td>
         OR
       </td>
-
       <td>
         Logical or bitwise
       </td>
@@ -481,21 +443,17 @@ The function call operator "( )" can be used to call a function. When
 used on a function name, function literal, or variable containing a
 function reference, it calls the function.
 
-```
+```brightscript
 function five() as Integer
-
-return 5
-
+    return 5
 end function
 
 print five()
 
 fivevar = five
-
 print fivevar()
 
 array[1] = fivevar
-
 print array[1]()
 ```
 
@@ -508,7 +466,7 @@ interface or a member function.
 
 **Example**
 
-```
+```brightscript
 i = CreateObject("roInt")
 
 i.ifInt.SetInt(5)
@@ -531,7 +489,7 @@ they are not dynamic (unlike the Lookup() or AddReplace() functions).
 
 **Example**
 
-```
+```brightscript
 aa = CreateObject("roAssociativeArray")
 
 aa.newkey = "the value" ' same as: aa.AddReplace("newkey", "the value")
@@ -543,7 +501,7 @@ When used for lookups, the dot operator is always case insensitive, even
 if ifAssociativeArray.SetModeCaseSensitive() has been called. By
 convention, a statement like:
 
-```
+```brightscript
 aa.NewKey = 55
 ```
 
@@ -551,13 +509,13 @@ will actually create the Associative Array entry in all lower case
 ("newkey"). Similarly, an AssociativeArray literal like this will also
 create the entry in lower case:
 
-```
+```brightscript
 aa = { NewKey: 55 }
 ```
 
 To create mixed case keys, use the array operator or the ifAssociativeArray.AddReplace method:
 
-```
+```brightscript
 aa["NewKey"] = 55
 
 aa.AddReplace("NewKey", 55)
@@ -573,17 +531,13 @@ It can also be used as a synonym for the dot operator to access an
 AssociativeArray (except that the dot operator is case insensitive as
 described above).
 
-```
+```brightscript
 array = CreateObject("roArray", 10, true)
-
 array[2] = "two"
-
 print array[2]
 
 aa = CreateObject("roAssociativeArray")
-
 aa["newkey"] = "the value"
-
 print aa["newkey"]
 ```
 
@@ -593,13 +547,10 @@ operator can be used in situations where dot cannot, such as when the
 value of the index contains a character which is invalid in a variable
 name.
 
-```
+```brightscript
 aa = {}
-
 aa.name = 1
-
 aa["name"] = 1 ' same as previous line
-
 aa["name with spaces"] = 2 ' cannot do this with dot operator
 ```
 
@@ -611,7 +562,7 @@ the same:
 
 **Example**
 
-```
+```brightscript
 dim array[5,5,5]
 
 item = array[1][2][3]
@@ -626,7 +577,7 @@ are not automatically set to roArray.
 
 Developers can use optional chaining operators, "?.", "?@", "?[", and "?(", in their BrightScript code to access possibly invalid values. This enables developers to execute more concise, higher-performing code. The optional chaining operators are used to read the value of a property nested within a chain of connected objects without having to first check whether each reference in the chain does not return the BrightScript value of "invalid". If the expression to the left of the chaining operator is invalid, the operator to the right of the chaining operator is skipped.
 
-> The optional chaining operators feature is not supported on devices running firmware earlier than Roku OS 11.0 (doing so generates syntax errors). If the app does use the optional chaining operators feature, specify Roku OS 11.0 (or later) as the minimum version when [uploading your package file](doc:channel-publishing-guide) in order to publish to the Streaming Store.
+> The optional chaining operators feature is not supported on devices running firmware earlier than [Roku OS 11.0](doc:release-notes#roku-os-110) (doing so generates syntax errors). If the app does use the optional chaining operators feature, specify [Roku OS 11.0](doc:release-notes#roku-os-110) (or later) as the minimum version when [uploading your package file](doc:channel-publishing-guide) in order to publish to the Streaming Store.
 
 #### Example
 
@@ -634,7 +585,7 @@ The following example demonstrates how the BrightScript optional chaining operat
 
 ##### With optional chaining operators
 
-```
+```brightscript
 x = array?[3]?.foo?.bar?()
 ```
 
@@ -642,26 +593,26 @@ In this example, the `?` variant checks whether the left-hand side of the expres
 
 ##### No optional chaining operators
 
-```
-IF array <> invalid THEN
+```brightscript
+if array <> invalid then
     el = array[3]
-    IF el <> invalid THEN
+    if el <> invalid then
         foo = el.foo
-        IF foo <> invalid THEN
-            IF foo.bar <> invalid THEN
+        if foo <> invalid then
+            if foo.bar <> invalid then
                 x = foo.bar()
-            ELSE
+            else
                 x = invalid
-            END IF
-        ELSE
+            end if
+        else
             x = invalid
-        END IF
-    ELSE
+        end if
+    else
         x = invalid
-    END IF
-ELSE
+    end if
+else
     x = invalid
-END IF
+end if
 ```
 
 #### Notes
@@ -777,15 +728,15 @@ Increment (++) and decrement (–) operators are available to allow
 integer increment and decrement to have effect on a variable. A few
 examples:
 
-```
-x=1  
-x++  
-' x = 2  
-x--  
+```brightscript
+x=1
+x++
+' x = 2
+x--
 ' x = 1
 ```
 
-**These operators are available in Roku OS 7.1 and above.**
+**These operators are available in [Roku OS 7.1](doc:release-notes#roku-os-71) and above.**
 
 ### Mathematical and bitshift assignment operators
 
@@ -808,33 +759,33 @@ and bitshift operations that take a numeric operand:
 
 A few examples:
 
-```
-x=1  
-x+=1  
-' x = 2  
-x+=2  
-' x = 4  
-x-=1  
-' x = 3  
-x/=2  
+```brightscript
+x=1
+x+=1
+' x = 2
+x+=2
+' x = 4
+x-=1
+' x = 3
+x/=2
 ' x = 1.5
 
-x=9  
-x\=2  
-' x = 4 (integer divide)  
-x*=3  
+x=9
+x\=2
+' x = 4 (integer divide)
+x*=3
 ' x = 12
 
-x=1  
-x<<=8  
-' x = 256  
-x-=1  
-' x = 255  
-x>>=4  
+x=1
+x<<=8
+' x = 256
+x-=1
+' x = 255
+x>>=4
 ' x = 15
 ```
 
-**These operators are available in Roku OS 7.1 and above.**
+**These operators are available in [Roku OS 7.1](doc:release-notes#roku-os-71) and above.**
 
 ### Integer bitshift operators
 
@@ -845,7 +796,7 @@ A runtime error is generated if the shift value is out of range.
 
 Example:
 
-```
+```brightscript
 print 2 << 10 '= 2048
 
 print 7 >> 1 '= 3
@@ -875,7 +826,7 @@ expressions and for bit manipulation. If the arguments to these
 operators are Boolean, then they perform a logical operation. If the
 arguments are numeric, they perform bitwise operations.
 
-```
+```brightscript
 x = 1 and 2 ' x is zero
 
 y = true and false ' y is false
@@ -888,14 +839,14 @@ evaluated from left to right, and only the necessary amount of the
 expression is executed (a feature sometimes called "minimal evaluation"
 or "short-circuit evaluation"). For example:
 
-```
+```brightscript
 if true or func()=0 then print "ok"
 ```
 
 The above statement will print "ok" but will not call func, since the
 expression is true no matter what func returns. On the other hand
 
-```
+```brightscript
 if false or func()=0 then print "ok"
 ```
 
@@ -903,14 +854,14 @@ will call func and print ok only if func returns a value of zero.
 
 This feature can be used to write statements such as
 
-```
+```brightscript
 if count > 0 and (total / count) > 33 then ...
 ```
 
 Because of minimal evaluation, this will work correctly even when count
 is zero, while the following similar expression would not:
 
-```
+```brightscript
 if (total / count) > 33 and count > 0 then ... ' runtime error when count = 0
 ```
 
@@ -918,7 +869,7 @@ if (total / count) > 33 and count > 0 then ... ' runtime error when count = 0
 
 "=" is used for both assignment and comparison.
 
-```
+```brightscript
 a=5
 
 if a=5 then print "a is 5"

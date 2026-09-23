@@ -2,7 +2,7 @@
 title: roXMLElement
 excerpt: ''
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''
@@ -15,13 +15,13 @@ roXMLElement is used to contain an XML tree.
 
 For instance,
 
-```
+```xml
 <tag1>this is some text</tag1>
 ```
 
 Would parse such that:
 
-```
+```brightscript
 Name = "tag1"
 Attributes = invalid
 Body = roString with "this is some text"
@@ -29,13 +29,13 @@ Body = roString with "this is some text"
 
 **Example**
 
-```
+```xml
 <emptytag caveman="barney" />
 ```
 
 Would parse such that:
 
-```
+```brightscript
 Name = "emptytag"
 Attributes = roAssociativeArray, with one entry { caveman: "barney" }
 Body = invalid
@@ -51,10 +51,10 @@ GenXML() takes one parameter (boolean) that indicates whether the generated `<xm
 
 **Example: Subroutine to print out the contents of an roXMLElement tree**
 
-```
+```brightscript
 PrintXML(root, 0)
 
-Sub PrintXML(element As Object, depth As Integer)
+sub PrintXML(element as Object, depth as Integer)
     print tab(depth*3);"Name: ";element.GetName()
     if not element.GetAttributes().IsEmpty() then
         print tab(depth*3);"Attributes: ";
@@ -79,7 +79,7 @@ end sub
 
 **Example: Generating XML**
 
-```
+```brightscript
 root.SetName("myroot")
 root.AddAttribute("key1", "value1")
 root.AddAttribute("key2", "value2")

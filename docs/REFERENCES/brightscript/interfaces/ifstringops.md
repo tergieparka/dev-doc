@@ -2,7 +2,7 @@
 title: ifStringOps
 excerpt: ''
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''
@@ -45,7 +45,7 @@ Appends the specified first set of characters of the provided string to the end 
 
 The AppendString() function modifies the object on which it is called, which can result in unexpected results if called on a literal string constant rather than a string object. Consider the following example:
 
-```
+```brightscript
 x = "one"
 print type(x) ' prints "String"
 x.AppendString("two", 3)
@@ -174,7 +174,7 @@ A copy of the string with all the instances
 
 #### Example
 
-```
+```brightscript
 print "a-b-c".Replace("-", "/")
 
 ' result is "a/b/c"
@@ -261,35 +261,35 @@ An array of the split token strings (not including the delimiter).
 
 #### Examples
 
-```
+```brightscript
 a = "".Split("")
 
 'creates the array equivalent to
 a = []
 ```
 
-```
+```brightscript
 a = "123".Split("")
 
 'creates the array equivalent to
 a = ["1", "2", "3"]
 ```
 
-```
+```brightscript
 a = "123".Split("/")
 
 'creates the array equivalent to
 a = ["123"]
 ```
 
-```
+```brightscript
 a = "/123/".Split("/")
 
 'creates the array equivalent to
 a = ["", "123", ""]
 ```
 
-```
+```brightscript
 a = "one, two, three".Split(", ")
 
 'creates the array equivalent to
@@ -309,28 +309,23 @@ Returns the string with the following characters replaced with their correspondi
       <th>Replaced with</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>" (double quote)</td>
       <td>\&quot;</td>
     </tr>
-
     <tr>
       <td>' (single quote)</td>
       <td>\&apos;</td>
     </tr>
-
     <tr>
       <td>\<</td>
       <td>\&lt;</td>
     </tr>
-
     <tr>
       <td>></td>
       <td>\&gt;</td>
     </tr>
-
     <tr>
       <td>&</td>
       <td>\&amp;</td>
@@ -366,17 +361,17 @@ The URL-encoded version of the specified string.
 
 #### Example
 
-```
+```brightscript
 s = "@&=+/#!*"
 t = s.Escape()
 print """" + t + """"
-REM "%40%26%3D%2B%2F%23%21%2A"
+' "%40%26%3D%2B%2F%23%21%2A"
 
 ' escaped characters are encoded as UTF-8 sequences
 s = Chr(&h2022)
 t = s.Escape()
 print """" + t + """"
-REM "%E2%80%A2"
+' "%E2%80%A2"
 ```
 
 ### Unescape() as String
@@ -397,11 +392,11 @@ The URL-decoded string.
 
 #### Example
 
-```
+```brightscript
 t = "%3B%3F%3A%24%2C%28%29"
 s = t.Unescape()
 print """" + s + """"
-REM ";?:$,()"
+' ";?:$,()"
 ```
 
 ### EncodeUri() as String
@@ -416,11 +411,11 @@ The provided string encoded as a Uniform Resource Identifier (URI).
 
 #### Example
 
-```
+```brightscript
 s = "http://roku.com/my test.asp?first=jane&last=doe"
 t = s.EncodeUri()
 print """" + t + """"
-REM "http://roku.com/my%20test.asp?first=jane&last=doe"
+' "http://roku.com/my%20test.asp?first=jane&last=doe"
 ```
 
 ### DecodeUri() as String
@@ -435,11 +430,11 @@ An unencoded version of the provided encoded Uniform Resource Identifier (URI).
 
 #### Example
 
-```
+```brightscript
 t = "http://roku.com/my%20test.asp?first=jane&last=doe"
 s = t.DecodeUri()
 print """" + s + """"
-REM "http://roku.com/my test.asp?first=jane&last=doe"
+' "http://roku.com/my test.asp?first=jane&last=doe"
 ```
 
 ### EncodeUriComponent() as String
@@ -454,11 +449,11 @@ The provided string encoded as a Uniform Resource Identifier (URI).
 
 #### Example
 
-```
+```brightscript
 s = "http://roku.com/my test.asp?first=jane&last=doe"
 t = s.EncodeUriComponent()
 print """" + t + """"
-REM "http%3A%2F%2Froku.com%2Fmy%20test.asp%3Ffirst%3Djane%26last%3Ddoe"
+' "http%3A%2F%2Froku.com%2Fmy%20test.asp%3Ffirst%3Djane%26last%3Ddoe"
 ```
 
 ### DecodeUriComponent() as String
@@ -473,11 +468,11 @@ An unencoded version of the provided encoded Uniform Resource Identifier (URI).
 
 #### Example
 
-```
+```brightscript
 t = "http%3A%2F%2Froku.com%2Fmy%20test.asp%3Ffirst%3Djane%26last%3Ddoe"
 s = t.DecodeUriComponent()
 print """" + s + """"
-REM "http://roku.com/my test.asp?first=jane&last=doe"
+' "http://roku.com/my test.asp?first=jane&last=doe"
 ```
 
 ### StartsWith(matchString as String) As Boolean
@@ -490,10 +485,10 @@ A flag indicating whether a matching substring was found.
 
 #### Example
 
-```
+```brightscript
 s = "Roku Rocks"
-? s.StartsWith("Roku") ' => true
-? s.StartsWith("roku") ' => false
+print s.StartsWith("Roku") ' => true
+print s.StartsWith("roku") ' => false
 ```
 
 ### StartsWith(matchString as String, matchPos as Integer) As Boolean
@@ -506,10 +501,10 @@ A flag indicating whether a matching substring was found.
 
 #### Example
 
-```
+```brightscript
 s = "Roku Rocks"
-? s.StartsWith("Rocks", 5) ' => true
-? s.StartsWith("Roku", 5)  ' => false
+print s.StartsWith("Rocks", 5) ' => true
+print s.StartsWith("Roku", 5)  ' => false
 ```
 
 ### EndsWith(matchString as String) As Boolean
@@ -522,10 +517,10 @@ A flag indicating whether a matching substring was found.
 
 #### Example
 
-```
+```brightscript
 s = "Roku Rocks"
-? s.EndsWith("Rocks") ' => true
-? s.EndsWith("roku") ' => false
+print s.EndsWith("Rocks") ' => true
+print s.EndsWith("roku") ' => false
 ```
 
 ### EndsWith(matchString as String, length as Integer) As Boolean
@@ -538,9 +533,9 @@ A flag indicating whether a matching substring was found.
 
 #### Example
 
-```
+```brightscript
 s = "Roku Rocks"
-? s.EndsWith("Roku", 4) ' => true
+print s.EndsWith("Roku", 4) ' => true
 ```
 
 ### Format(...) As String
@@ -565,7 +560,7 @@ Format support (the `ifStringOps` interface) is implemented by the following typ
 
 ##### Mixed
 
-```
+```brightscript
 '* example of mixed parameters
 s = "Roku" + " " + "rocks!"
 print "The length of '%s' is %d.".Format(s, s.Len())
@@ -574,7 +569,7 @@ print "The length of '%s' is %d.".Format(s, s.Len())
 
 ##### Integer (Decimal)
 
-```
+```brightscript
 '* example of decimal integers
 print "%d * %d = %d".Format(-13, 21, -13 * 21)
 '=> "-13 * 21 = -273"
@@ -586,7 +581,7 @@ print "%04d-%02d-%02d".Format(17, 3, 99)
 
 ##### Integer (Hexadecimal)
 
-```
+```brightscript
 '* example of hexadecimal integer with left-side 0-padding
 print "%07x".Format(&hFACE1)
 '=> "00face1"
@@ -609,7 +604,7 @@ print "%0*x".Format(8, &hFACE1)
 
 ##### Floating Point
 
-```
+```brightscript
 '* example of floating point formatting
 pi = 3.1415 : r = 2.5
 print "r=%4.2f => c=%4.2f".Format(r, 2 * pi * r)
@@ -618,7 +613,7 @@ print "r=%4.2f => c=%4.2f".Format(r, 2 * pi * r)
 
 ##### String
 
-```
+```brightscript
 '* example plain string formatting
 print "%s, %s".Format("Fields", "Sally")
 '=> "Fields, Sally"
@@ -631,7 +626,7 @@ print "[%-3s:%3s]".Format("A", "B")
 
 ##### Character
 
-```
+```brightscript
 '* example of character formatting
 print "(%c%c%c)".Format(&h7B, 64, &h7D)
 '=> "({@})"
@@ -657,7 +652,7 @@ The resulting string after all eligible placeholder replacements have been made.
 
 ### Examples
 
-```
+```brightscript
 title = "Princess"
 name = "Leia"
 salutation = "Hello %1 %2!".Arg(title, name)
@@ -666,14 +661,14 @@ print salutation
 ' Hello Princess Leia!
 ```
 
-```
+```brightscript
 s = "%2 and %4 (or %4 and %2)".Arg("first", "second")
 print s
 ' =>
 ' first and second (or second and first)
 ```
 
-```
+```brightscript
 first_name = "Jack"
 last_name = "Reacher"
 listing = "%2, %1".Arg(first_name, last_name)
@@ -682,7 +677,7 @@ print listing
 ' Reacher, Jack
 ```
 
-```
+```brightscript
 text = "a=%3 b=%1 c=%2"
 text = text.Arg("banana")
 print text

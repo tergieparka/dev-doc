@@ -1,11 +1,11 @@
 ---
 title: "Rectangle"
-excerpt: ''
+excerpt: 'Draws a solid color rectangle that supports child nodes and rotation'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Rectangle'
+  description: 'The Rectangle node draws a solid color rectangle at the origin of the node local coordinate system, and can have child nodes such as a Label node.'
   robots: index
 next:
   description: ''
@@ -26,36 +26,27 @@ The following are examples using the Rectangle node.
 
 Rectangle Node Class Example:
 
-~~~
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
+<component name="rectangleexample" extends="Group">
+  <script type="text/brightscript">
+    <![CDATA[
+      sub init()
+        m.top.setFocus(true)
+      end sub
+    ]]>
+  </script>
 
-<!--********** Copyright 2015 Roku Corp.  All Rights Reserved. **********-->
-
-<component name="rectangleexample" extends="Group" >
-
-<script type="text/brightscript" >
-<![CDATA[
-
-sub init()
-  m.top.setFocus(true)
-end sub
-
-]]>
-</script>
-
-<children>
-
-<Rectangle
-  id="testRectangle"
-  color="0x880088FF"
-  width="1280"
-  height="60"
-  translation="[0,0]" />
-
-</children>
-
+  <children>
+    <Rectangle
+      id="testRectangle"
+      color="0x880088FF"
+      width="1280"
+      height="60"
+      translation="[0,0]" />
+  </children>
 </component>
-~~~
+```
 
 ### Rotation
 

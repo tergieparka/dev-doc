@@ -1,11 +1,11 @@
 ---
 title: DRM & content protection
-excerpt: ''
+excerpt: 'Supported DRM schemes and HDCP copy protection details for Roku devices'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'DRM & content protection | Roku Developer Docs'
+  description: 'Lists supported DRM schemes including PlayReady, Widevine, and AES-128 across HLS, DASH, and Smooth, plus HDCP copy protection details for Roku devices.'
   robots: index
 next:
   description: ''
@@ -18,7 +18,7 @@ next:
 | Smooth | Y         |         |          |
 | DASH   | Y         |         | Y        |
 
-> Supported DRM info can be queried using [ifDeviceInfo.getDRMInfo()](doc:ifdeviceinfo).
+> Supported DRM info can be queried using [ifDeviceInfo.getDRMInfo()](doc:ifdeviceinfo#getdrminfoex-as-object).
 >
 > If you receive a `BS lib provider not found: <DRM>` error when running a sideloaded app, you can install a production app that uses that DRM to load the missing library. For example, you can install YouTube to load Widevine, and you can install Netflix to load PlayReady.
 
@@ -28,7 +28,7 @@ next:
 
 **Setup ContentNode and set to Video node:**
 
-```
+```brightscript
 contentNode = createObject("roSGNode", "contentNode")
 contentNode.streamFormat = "smooth"
 contentNode.url = "wwww.myvideo.com/content.ism"
@@ -42,7 +42,7 @@ If your PlayReady implementation requires custom request
 data, `encodingType` and `encodingKey` should be formatted like the
 following:
 
-```
+```brightscript
 contentNode = createObject("roSGNode", "contentNode")
 contentNode.streamFormat = "ism"
 contentNode.url = "wwww.myvideo.com/content.ism"
@@ -54,7 +54,7 @@ m.video.content = contentNode
 
 #### PlayReady 3
 
-Starting from Roku OS version 8.1, all Roku devices with MStar chips are updating to the PlayReady 3 library. Prior to this update, all platforms were using PlayReady 2.5.
+Starting from [Roku OS version 8.1](doc:release-notes#roku-os-81), all Roku devices with MStar chips are updating to the PlayReady 3 library. Prior to this update, all platforms were using PlayReady 2.5.
 
 While PlayReady 3 is expected to be backward compatible with PlayReady 2.5, we encourage all developers using PlayReady to test their streams on a range of MStar and non-MStar devices.
 
@@ -77,27 +77,27 @@ The following devices contain MStar chips:
 
 ### Verimatrix
 
-As of Roku OS 9.3, support for Verimatrix DRM has been removed from the firmware. Make sure that content in your app is protected using a Roku-supported DRM such as Widevine or PlayReady.
+As of [Roku OS 9.3](doc:release-notes#roku-os-93), support for Verimatrix DRM has been removed from the firmware. Make sure that content in your app is protected using a Roku-supported DRM such as Widevine or PlayReady.
 
 **Required Roku manifest entries:**
 
-```
+```text
 requires_verimatrix_drm=1
 requires_verimatrix_version=1.0
 ```
 
 **Configure DRM parameters in an roAssociativeArray:**
 
-```
+```brightscript
 drmParams = createObject("roAssociativeArray")
 drmParams.name = "Verimatrix"
 drmParams.authDomain = "auth-value-from-streaming-provider"
-drmParams.serializationUrl = "hostname-url-from-streaming-provider"`
+drmParams.serializationUrl = "hostname-url-from-streaming-provider"
 ```
 
 **Setup ContentNode and set to Video node:**
 
-```
+```brightscript
 contentNode = createObject("roSGNode", "contentNode")
 contentNode.streamFormat = "hls"
 contentNode.url = "wwww.myvideo.com/content.m3u8"
@@ -110,7 +110,7 @@ m.video.content = contentNode
 
 The Roku OS supports Widevine DRM for all Roku apps.
 
-> Since Roku OS 9.4, Widevine version 16 is supported on devices that do not have "secure processors".
+> Since [Roku OS 9.4](doc:release-notes#roku-os-94), Widevine version 16 is supported on devices that do not have "secure processors".
 
 The Widevine support security levels for the different Roku devices is as follows:
 
@@ -122,7 +122,6 @@ The Widevine support security levels for the different Roku devices is as follow
       <th>L2 Players</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td><ul><li>FtWorth</li><li>Longview</li><li>Reno/Bandera</li><li>Liberty</li><li>Midland/El Paso</li><li>Malone/Camden</li><li>Roma</li><li>Athens</li><li>Miami</li><li>Trinidad</li><li>Roxton</li><li>Sandia</li><li>Damon</li><li>Shiner</li></ul></td>
@@ -148,4 +147,4 @@ currently set to.
 > smaller than 4K will default to HDCP 1.4.
 >
 > HDCP versioning can be queried
-> using [ifHdmiStatus.getHDCPVersion()](doc:ifhdmistatus).
+> using [ifHdmiStatus.getHDCPVersion()](doc:ifhdmistatus##gethdcpversion-as-string).

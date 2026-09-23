@@ -1,6 +1,6 @@
 ---
 title: ifAppManager
-hidden: true
+hidden: false
 ---
 ## Implemented by
 
@@ -14,7 +14,7 @@ hidden: true
 
 #### Description
 
-Returns an [roTimespan](doc:rotimespan) object, which is "marked" when the user clicked on the application button on the home screen.<br /><br />Calling the TotalMilliseconds() method on the returned roTimespan object returns the total number of milliseconds since the application started.
+Returns an [roTimespan](doc:rotimespan) object, which is "marked" when the user clicked on the application button on the home screen.<br /><br />Calling the TotalMilliseconds() method on the returned roTimespan object returns the total number of milliseconds since the application started. ddd
 
 #### Return Value
 
@@ -85,7 +85,7 @@ Updates video or audio [content metadata](doc:content-metadata) during playback.
 
 #### Example
 
-```
+```brightscript
 appmgr = CreateObject("roAppManager")
 appmgr.SetNowPlayingContentMetaData({
  title: "The Gambler",
@@ -95,7 +95,7 @@ appmgr.SetNowPlayingContentMetaData({
 
 To revert an update, pass `invalid` in this method:
 
-```
+```brightscript
 appmgr.SetNowPlayingContentMetaData(invalid)
 ```
 
@@ -127,7 +127,6 @@ When there is a match (the name uttered by the user matches the registered text 
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>actions</td>
@@ -139,21 +138,20 @@ When there is a match (the name uttered by the user matches the registered text 
 
 #### Example
 
-```
+```brightscript
 appMgr = CreateObject("roAppManager")
 
-profile1 = { text: "kids", link: "d46ge-i8Y5-192"}
-profile2 = { text: "Jane", link: "2a2Nu-u1D4-555"}
-profile3 = { text: "John", link: "6Nu70-N37x-901"}
+profile1 = { text: "kids", link: "d46ge-i8Y5-192" }
+profile2 = { text: "Jane", link: "2a2Nu-u1D4-555" }
+profile3 = { text: "John", link: "6Nu70-N37x-901" }
 
 actions = [profile1, profile2, profile3]
-
 appMgr.SetVoiceActionStrings(actions)
 ```
 
 ### GetLastExitInfo() as Object
 
-_Available since Roku OS 13.0_
+_Available since [Roku OS 13.0](doc:release-notes#roku-os-130)_
 
 **Description**
 
@@ -171,38 +169,32 @@ An roAssociativeArray the following information about the most recent app exits.
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>timestamp</td>
       <td>String</td>
       <td>An ISO 8601 date string that specifies the time of the app exit.</td>
     </tr>
-
     <tr>
       <td>exit\_code</td>
       <td>String</td>
-      <td>The exit code, which denotes the cause of the app termination. See <a href="https://roku-ent.readme.io/dev/docs/dev-environment#lastexitorterminationreason-parameter">lastExitOrTerminationReason</a> for the list of possible exit codes. For memory-related app exits, this value will be one of the following: <ul><li><strong>EXIT\_CHANNEL\_MEM\_LIMIT\_FG</strong>: The app exceeded the per-app memory limit while running in the foreground.</li><li><strong>EXIT\_CHANNEL\_MEM\_LIMIT\_BG</strong>: The app exceeded the per-app memory limit while running in the background.</li><li><strong>EXIT\_OUT\_OF\_MEMORY</strong>: The device was running under low-memory conditions.</li><li><strong>EXIT\_AM\_LOWRESOURCE</strong>: System resources were low.</li><li><strong>EXIT\_SYSTEM\_KILL</strong>: The app was preemptively closed by the Roku OS.</li><li><strong>EXIT\_UNKNOWN:</strong> The device was rebooted because of low memory, or 10 or more apps had run before the launch of your app.</li></ul></td>
+      <td>The exit code, which denotes the cause of the app termination. See <a href="/dev/docs/dev-environment#lastexitorterminationreason-parameter">lastExitOrTerminationReason</a> for the list of possible exit codes. For memory-related app exits, this value will be one of the following: <ul><li><strong>EXIT\_CHANNEL\_MEM\_LIMIT\_FG</strong>: The app exceeded the per-app memory limit while running in the foreground.</li><li><strong>EXIT\_CHANNEL\_MEM\_LIMIT\_BG</strong>: The app exceeded the per-app memory limit while running in the background.</li><li><strong>EXIT\_OUT\_OF\_MEMORY</strong>: The device was running under low-memory conditions.</li><li><strong>EXIT\_AM\_LOWRESOURCE</strong>: System resources were low.</li><li><strong>EXIT\_SYSTEM\_KILL</strong>: The app was preemptively closed by the Roku OS.</li><li><strong>EXIT\_UNKNOWN:</strong> This is the default exit code if there was no prior exit (for example, the inital app launch after system boot) or no unusual exit reason noted (for example, a scenario other than a BrightScript crash or system resources issue).</li></ul></td>
     </tr>
-
     <tr>
       <td>mem\_limit</td>
       <td>Integer</td>
       <td>The applicable per-app memory limit that was exceeded (in Mb). This attribute is only included If the <strong>exitCode</strong> is EXIT\_CHANNEL\_MEM\_LIMIT\_FG or EXIT\_CHANNEL\_MEM\_LIMIT\_BG.</td>
     </tr>
-
     <tr>
       <td>app\_state</td>
       <td>String</td>
       <td>The state of the app when it was terminated: <ul><li><strong>foreground</strong>: The application was running in the foreground.</li><li><strong>background</strong>: The application was running in the background.</li></ul></td>
     </tr>
-
     <tr>
       <td>console\_log</td>
       <td>String</td>
       <td>The last 20 lines of text written to the BrightScript console before termination. The console output includes BrightScript print statements, BrightScript errors and warnings, and any system messages. The availability of this attribute depends on the platform and app configuration.</td>
     </tr>
-
     <tr>
       <td>media\_player\_state</td>
       <td>String</td>
@@ -215,7 +207,7 @@ An roAssociativeArray the following information about the most recent app exits.
 
 The following sample demonstrates how to use the **GetLastExitInfo()** function.
 
-```
+```brightscript
 appManager = CreateObject("roAppManager")
 closureDump = appManager.GetLastExitInfo()
 

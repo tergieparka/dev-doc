@@ -2,7 +2,7 @@
 title: IfUtils
 excerpt: ''
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''
@@ -10,7 +10,7 @@ metadata:
 next:
   description: ''
 ---
-_Available since Roku OS 15.0_
+_Available since [Roku OS 15.0](doc:release-notes#roku-os-150)_
 
 ## Implemented by
 
@@ -24,7 +24,7 @@ _Available since Roku OS 15.0_
 
 #### Description
 
-Performs a deep copy of a node object (it copies the obejct and all of its nested objects). If the object contains items that are not copyable, they are skipped.
+Performs a deep copy of a node object (it copies the object and all of its nested objects). If the object contains items that are not copyable, they are skipped.
 
 #### Parameters
 
@@ -38,20 +38,20 @@ This function returns a copy of the specified object.
 
 #### Example
 
-```
+```brightscript
 utils = CreateObject("roUtils")
     di = CreateObject("roDeviceInfo")
     aa = { a: 1, b: { b1: 42 }, c: di }
     new_aa = utils.DeepCopy(aa)
-    ? "IsSameObject", utils.IsSameObject(aa, new_aa)
-    ? "new_aa.a", new_aa.a
-    ? "new_aa.b", new_aa.b
-    ? "new_aa.c", new_aa.c ' invalid, roDeviceInfo is not copyable
+    print "IsSameObject", utils.IsSameObject(aa, new_aa)
+    print "new_aa.a", new_aa.a
+    print "new_aa.b", new_aa.b
+    print "new_aa.c", new_aa.c ' invalid, roDeviceInfo is not copyable
 ```
 
 This code will output the following on the port 8085 console:
 
-```
+```brightscript
 IsSameObject    false
 new_aa.a         1
 new_aa.b        <Component: roAssociativeArray> =
@@ -80,11 +80,135 @@ Returns true if **data1** and **data2** reference the same object; otherwise, th
 
 #### Example
 
-```
+```brightscript
 shared = {}
     aa = {"a": shared, "b": shared}
     utils = CreateObject("roUtils")
     utils.isSameObject(aa, aa)   ' returns true
     utils.isSameObject(aa, {})   ' returns false
     utils.isSameObject(aa.a, aa.b)  ' returns true
+```
+
+### HasComponent(componentName as String) as Boolean
+
+_Available since [Roku OS 15.2](doc:release-notes#roku-os-152)_
+
+#### Description
+
+Verifies whether a component name is already registered. Developers can call this method before trying to create an instance.
+
+#### Parameters
+
+| **Name**      | **Type** | **Description**                                           |
+| :------------ | :------- | :-------------------------------------------------------- |
+| componentName | String   | The component name to check for an existing registration. |
+
+#### Return Value
+
+A flag indicating whether the specified component name has already been registered.
+
+### isNumber(val as Number) as Boolean
+
+_Available since Roku OS 15.3_
+
+#### Description
+
+Verifies whether the provided value is any numeric type (int, float, double, long integer; boxed or unboxed).&#x20;
+
+#### Parameters
+
+| **Name** | **Type** | **Description**            |
+| :------- | :------- | :------------------------- |
+| val      | Number   | The value to be evlauated. |
+
+#### Return Value
+
+A flag indicating whether the specified value is an Integer, LongInteger, Float, or Double.
+
+#### Example
+
+```text
+utils = CreateObject("roUtils")
+? utils.IsNumber(invalid)              ' false
+? utils.IsNumber(42)                   ' true
+? utils.IsNumber(box(42))              ' true
+? utils.IsNumber("42")                 ' false
+```
+
+### isInteger(val as Integer) as Boolean
+
+_Available since Roku OS 15.3_
+
+#### Description
+
+Verifies whether the provided value is an Integer or LongInteger (boxed or unboxed).&#x20;
+
+#### Parameters
+
+| **Name** | **Type** | **Description**            |
+| :------- | :------- | :------------------------- |
+| val      | Integer  | The value to be evlauated. |
+
+#### Return Value
+
+A flag indicating whether the specified value is an Integer or LongInteger.
+
+#### Example
+
+```text
+utils = CreateObject("roUtils")
+? utils.isInteger(42)               ' true
+? utils.isInteger(box(42))         ' true
+? utils.isInteger(invalid)          ' false
+```
+
+### isFloatingPoint(val as Float) as Boolean
+
+_Available since Roku OS 15.3_
+
+#### Description
+
+Verifies whether the provided value is a Float or Double (boxed or unboxed).&#x20;
+
+#### Parameters
+
+| **Name** | **Type** | **Description**            |
+| :------- | :------- | :------------------------- |
+| val      | Float    | The value to be evlauated. |
+
+#### Return Value
+
+A flag indicating whether the specified value is a Float or a Double.
+
+#### Example
+
+```text
+utils = CreateObject("roUtils")
+? utils.IsFloatingPoint(box(3.14)) ' true
+```
+
+### isString(val as String) as Boolean
+
+_Available since Roku OS 15.3_
+
+#### Description
+
+Verifies whether the provided argument is a string type (intrinsic or roString, boxed or unboxed).&#x20;
+
+#### Parameters
+
+| **Name** | **Type** | **Description**            |
+| :------- | :------- | :------------------------- |
+| val      | String   | The value to be evlauated. |
+
+#### Return Value
+
+A flag indicating whether the specified value is a string type.
+
+#### Example
+
+```text
+utils = CreateObject("roUtils")
+? utils.isString("foo")            ' true
+? utils.isString(box("foo"))       ' true
 ```

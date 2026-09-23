@@ -1,18 +1,18 @@
 ---
 title: "MonospaceLabel"
-excerpt: ''
+excerpt: 'Node for rendering text with fixed character spacing using proportional fonts'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'MonospaceLabel'
+  description: 'The MonospaceLabel node draws a single line of text with all characters spaced at a fixed distance, transforming proportional fonts into monospaced fonts.'
   robots: index
 next:
   description: ''
 ---
 
 
-*Available since Roku OS 14.0*
+*Available since [Roku OS 14.0](doc:release-notes#roku-os-140)*
 
 The **MonospaceLabel** node is used to draw a single line of text with all characters spaced at a fixed distance from each other. It transforms proportional fonts into monospaced fonts. It is a substitute for using a monospace font with the **Label** node.
 
@@ -23,8 +23,8 @@ The **MonospaceLabel** node is used to draw a single line of text with all chara
 | text                   | string   |                | READ_WRITE            | Specifies the text to be displayed                           |
 | color                  | color    | 0xddddddff     | READ_WRITE            | Specifies the text color                                     |
 | font                   | Font     | system default | READ_WRITE            | Specifies the Font node to be used                           |
-| horizAlign             | string   | left           | READ_WRITE            | See [Horizontal Alignment](doc:scrollinglabel) |
-| vertAlign              | string   | top            | READ_WRITE            | See [Vertical Alignment](doc:label-base) |
+| horizAlign             | string   | left           | READ_WRITE            | See [Horizontal Alignment](doc:label-base#horizontal-alignment) |
+| vertAlign              | string   | top            | READ_WRITE            | See [Vertical Alignment](doc:label-base#vertical-alignment) |
 | width                  | float    | 0              | READ_WRITE            | Specifies the width of the label. If set to zero, the width of the label will be set automatically |
 | height                 | float    | 0              | READ_WRITE            | Specifies the height of the label. If set to zero, the height of the label will be set automatically |
 | characterWidth         | float    | 0              | READ_WRITE            | Specifies the width of the label characters. If set to zero, width of font’s character 'M' will be used |

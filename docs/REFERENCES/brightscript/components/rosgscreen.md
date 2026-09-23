@@ -1,11 +1,11 @@
 ---
 title: "roSGScreen"
-excerpt: ''
+excerpt: 'A canvas object that displays a Scene node instance on screen'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'roSGScreen'
+  description: 'The roSGScreen object is a canvas that displays the contents of a Scene node instance, created via CreateObject("roSGScreen") and used with CreateScene().'
   robots: index
 next:
   description: ''
@@ -25,7 +25,7 @@ to `CreateScene().`
 
 **roSGScreen typical usage example**
 
-```
+```brightscript
 screen = CreateObject("roSGScreen")
 scene  = screen.CreateScene("Scene")
 screen.show()

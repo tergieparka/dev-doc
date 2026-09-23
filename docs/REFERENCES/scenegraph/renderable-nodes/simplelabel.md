@@ -1,11 +1,11 @@
 ---
 title: SimpleLabel
-excerpt: ''
+excerpt: 'Lightweight single-line text node with font and origin control'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'SimpleLabel'
+  description: 'SimpleLabel is a lightweight node for displaying a single line of text, supporting built-in system fonts, TrueType/OpenType font files, and customizable origin.'
   robots: index
 next:
   description: ''
@@ -26,31 +26,24 @@ The following shows a text layout derived from the SimpleLabel node:
 
 With ui_resolutions=hd specified in the manifest, the following displays the text string "Application Development Made Easy!" using the medium bold system font, centered horizontally on display, and with the baseline of the text at the vertical center of the display.
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
+<component name="simpleLabeltest" extends="Group">
+  <script type="text/brightscript">
+    <![CDATA[
+      sub init()
+        m.top.setFocus(true)
+      end sub
+    ]]>
+  </script>
 
-<!--********** Copyright 2018 Roku Corp.  All Rights Reserved. **********-->
-
-<component name="simpleLabeltest" extends="Group" >
-
-<script type="text/brightscript" >
-<![CDATA[
-
-  sub init()
-    m.top.setFocus(true)
-  end sub
-
-]]>
-</script>
-
-<SimpleLabel
-  id="testLabel"
-  font="fontUri:MediumBoldSystemFont"
-  text = "Application Development Made Easy!"
-  horizOrigin = "left"
-  vertOrigin = "baseline"
-  translation="[640,360]" />
-
+  <SimpleLabel
+    id="testLabel"
+    font="fontUri:MediumBoldSystemFont"
+    text="Application Development Made Easy!"
+    horizOrigin="left"
+    vertOrigin="baseline"
+    translation="[640,360]" />
 </component>
 ```
 

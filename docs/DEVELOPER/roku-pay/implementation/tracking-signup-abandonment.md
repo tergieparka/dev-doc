@@ -1,11 +1,11 @@
 ---
 title: Tracking signup abandonment
-excerpt: ''
+excerpt: 'Fire signup events on each page to identify where users abandon your app''s signup flow'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Tracking signup abandonment | Roku Developer Docs'
+  description: 'Track customers'' progress through your app''s signup workflow by firing events on each page to identify where users are abandoning the sign-up process.'
   robots: index
 next:
   description: ''
@@ -90,7 +90,7 @@ To use the Roku Event Dispatcher in your app's signup workflow to send events, f
 
 1. Enable the RED library in your app by adding the following line to the [manifest](doc:channel-manifest) file:
 
-   sg_component_libs_required=roku_analytics
+   `sg_component_libs_required=roku_analytics`
 
 2. Use the [Roku Analytics Component](doc:libraries) to send signup events from your app following these steps:
 
@@ -102,26 +102,26 @@ To use the Roku Event Dispatcher in your app's signup workflow to send events, f
 
    The following example demonstrates how to send signup events:
 
-   ```
+   ```brightscript
    sub Notify_Roku_UserIsLoggedIn(rsgScreen = invalid as Object)
-      ' get the global node
-      if type(m.top) = "roSGNode"  ' was called from a component script
-      		globalNode = m.global
-      else ' must pass roSGScreen when calling from main() thread
-     		 globalNode = rsgScreen.getGlobalNode()
-      end if
+       ' get the global node
+       if type(m.top) = "roSGNode"  ' was called from a component script
+           globalNode = m.global
+       else ' must pass roSGScreen when calling from main() thread
+           globalNode = rsgScreen.getGlobalNode()
+       end if
 
-      ' get the Roku Analytics Component Library used for RED
-      RAC = globalNode.roku_event_dispatcher
-      if RAC = invalid then
-      		RAC = createObject("roSGNode", "Roku_Analytics:AnalyticsNode")
-      		RAC.debug = true ' for verbose output to BrightScript console, optional
-      		RAC.init = \{RED: \{}} ' activate RED as a provider
-      		globalNode.addFields(\{roku_event_dispatcher: RAC})
-      end if
+       ' get the Roku Analytics Component Library used for RED
+       RAC = globalNode.roku_event_dispatcher
+       if RAC = invalid then
+           RAC = createObject("roSGNode", "Roku_Analytics:AnalyticsNode")
+           RAC.debug = true ' for verbose output to BrightScript console, optional
+           RAC.init = {RED: {}} ' activate RED as a provider
+           globalNode.addFields({roku_event_dispatcher: RAC})
+       end if
 
-      ' dispatch an event to Roku
-      RAC.trackEvent = \{RED: \{eventName: "Sign_Up|pageNumber=1|pageType=landing"}}
+       ' dispatch an event to Roku
+       RAC.trackEvent = {RED: {eventName: "Sign_Up|pageNumber=1|pageType=landing"}}
    end sub
    ```
 

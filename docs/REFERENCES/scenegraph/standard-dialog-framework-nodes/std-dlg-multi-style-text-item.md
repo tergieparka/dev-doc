@@ -1,11 +1,11 @@
 ---
 title: StdDlgMultiStyleTextItem
-excerpt: ''
+excerpt: 'Text item node supporting multiple font styles in a custom dialog'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'StdDlgMultiStyleTextItem'
+  description: 'The StdDlgMultiStyleTextItem node adds a line of text with multiple styles to the content area of a custom dialog, supporting fonts, colors, and emojis.'
   robots: index
 next:
   description: ''
@@ -24,7 +24,7 @@ The **StdDlgMultiStyleTextItem** node enables developers to add a line of text w
 
 - The **text** field uses a simple markup style. Markup tags with the names of the styles defined in the **drawingStyles** field are used to delineate the boundaries of the label text to be rendered in that specific style.
 
-```
+```brightscript
 msTextItem.drawingStyles = {
       "default": {
         "fontSize": {fhd:33,hd:22}
@@ -85,53 +85,45 @@ In this example, two drawing styles named "default" and "url" have been defined 
 
 ![roku815px - StdDlgMultiStyleTextItemFHD](https://image.roku.com/ZHZscHItMTc2/StdDlgMultiStyleTextItemFHD.jpg)
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
- 
-<component name="MultiStyleTextItemDialog" extends="StandardDialog" initialFocus="buttonArea" >
- 
-<script type="text/brightscript" >
-<![CDATA[
-function init()
-    m.top.width = {fhd:1380,hd:920}
- 
-    msTextItem = m.top.findNode("msTextItem")
- 
-    msTextItem.drawingStyles = {
-      "default": {
-        "fontSize": {fhd:33,hd:22}
-        "fontUri": "font:SystemFontFile"
-        "color": "#EFEFEFFF"
-      }
-      "url": {
-        "fontSize": {fhd:33,hd:22}
-        "fontUri": "font:SystemFontFile"
-        "color": "#00FF00FF"
-      }
-    }
- 
-    msTextItem.text="This StdDlgMultiStyleTextItem renders the URL <url>http://www.roku.com</url> in bright green."
- 
-end function
- 
-sub printSelectedButtonAndClose()
-    print "m.buttonArea button ";m.buttonArea.getChild(m.top.buttonSelected).text;" selected"
-    m.top.close = true
-end sub
- 
-]]>
-</script>
- 
-<children>
+<component name="MultiStyleTextItemDialog" extends="StandardDialog" initialFocus="buttonArea">
+  <script type="text/brightscript">
+    <![CDATA[
+      function init()
+        m.top.width = { fhd: 1380, hd: 920 }
+        msTextItem = m.top.findNode("msTextItem")
+        msTextItem.drawingStyles = {
+          "default": {
+            "fontSize": { fhd: 33, hd: 22 }
+            "fontUri": "font:SystemFontFile"
+            "color": "#EFEFEFFF"
+          }
+          "url": {
+            "fontSize": { fhd: 33, hd: 22 }
+            "fontUri": "font:SystemFontFile"
+            "color": "#00FF00FF"
+          }
+        }
+        msTextItem.text = "This StdDlgMultiStyleTextItem renders the URL <url>http://www.roku.com</url> in bright green."
+      end function
+
+      sub printSelectedButtonAndClose()
+        print "m.buttonArea button "; m.buttonArea.getChild(m.top.buttonSelected).text; " selected"
+        m.top.close = true
+      end sub
+    ]]>
+  </script>
+
+  <children>
     <StdDlgTitleArea primaryTitle="StdDlgMultiStyleTextItem Example" />
     <StdDlgContentArea>
-        <StdDlgMultiStyleTextItem id="msTextItem" />
+      <StdDlgMultiStyleTextItem id="msTextItem" />
     </StdDlgContentArea>
     <StdDlgButtonArea id="buttonArea">
-        <StdDlgButton text="OK" />
+      <StdDlgButton text="OK" />
     </StdDlgButtonArea>
-</children>
- 
+  </children>
 </component>
 ```
 

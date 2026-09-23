@@ -1,11 +1,11 @@
 ---
 title: TargetList
-excerpt: ''
+excerpt: 'TargetGroup extension with focus transitions and key handling'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'TargetList'
+  description: 'Extends the TargetGroup node with built-in focused and unfocused transitions, focus management policies, and default key handling for lists and rows.'
   robots: index
 next:
   description: ''
@@ -20,7 +20,7 @@ To set up a fixed focus list or grid, set the focusedTargetSet field to a Target
 
 **focusedTargetSet1**
 
-```
+```brightscript
 focusedTargetSet1 = createObject("roSGNode", "TargetSet")
 m.tList1.focusedTargetSet = [ focusedTargetSet1 ]
 
@@ -38,7 +38,7 @@ focusedTargetSet1.focusIndex = 1
 
 **unfocusedTargetSet**
 
-```
+```brightscript
 unfocusedTargetSet.targetRects = [
     { x:-100, y:-64, height:134, width:240 },
     { x:150, y:-64, height:134, width:240 },
@@ -61,7 +61,7 @@ When the focus moves to Item 2, the layout of the first row is defined by anothe
 
 **focusedTargetSet array**
 
-```
+```brightscript
 focusedTargetSet1 = createObject("roSGNode", "TargetSet")
 focusedTargetSet2 = createObject("roSGNode", "TargetSet")
 focusedTargetSet3 = createObject("roSGNode", "TargetSet")
@@ -71,7 +71,7 @@ m.tList1.focusedTargetSet = [ focusedTargetSet1, focusedTargetSet2, focusedTarge
 
 **Additional TargetSets for floating focus**
 
-```
+```brightscript
 focusedTargetSet2.targetRects = [
     { x:-178, y:-64, height:134, width:240 },
     { x:72, y:-64, height:134, width:240 },
@@ -127,7 +127,6 @@ focusedTargetSet4.focusIndex = 4
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>focusedTargetSet</td>
@@ -136,7 +135,6 @@ focusedTargetSet4.focusIndex = 4
       <td>READ\_WRITE</td>
       <td>Specifies one or more TargetSet's to be used when the TargetList has the focus. If a single TargetSet is specified, focus will stay fixed on the targetRect of that TargetSet that corresponds to the TargetGroup's focus index. The focus index will come from the TargetSet if explicitly specified or from the TargetGroup's defaultTargetSetFocusIndex field if not.<br /><br />If focusedTargetSet includes more than one TargetSet node, that defines a sequence of TargetSet's that will be advanced through as the user presses the advance or reverse key. When advancing, the focus floats from one TargetSet's to the next TargetSet in the array until the last element of the focusedTargetSet is reached, at which point the focus is fixed to the last element and the items begin to scroll.<br /><br />When reversing, the focus floats from one TargetSet to the previous TargetSet in the array until the first element of the focusedTargetSet is reached, at which point the focus is fixed to the first element and the items begin to scroll.<br /><br />See above for more discussion of setting up fixed and floating focus use cases.</td>
     </tr>
-
     <tr>
       <td>unfocusedTargetSet</td>
       <td>TargetSet</td>
@@ -144,7 +142,6 @@ focusedTargetSet4.focusIndex = 4
       <td>READ\_WRITE</td>
       <td>Specifies the TargetSet to be used when the TargetList does not have the focus.</td>
     </tr>
-
     <tr>
       <td>advanceKey</td>
       <td>string</td>
@@ -152,7 +149,6 @@ focusedTargetSet4.focusIndex = 4
       <td>READ\_WRITE</td>
       <td>Specifies which remote button will move the focus forward. For vertical lists, this will typically be set to "down". For horizontal rows, this will typically be set to "right".</td>
     </tr>
-
     <tr>
       <td>reverseKey</td>
       <td>string</td>

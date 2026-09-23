@@ -1,6 +1,11 @@
 ---
 title: On-Device Authentication
-hidden: true
+excerpt: 'Sign customers up and in on the device using ChannelStore and access tokens'
+hidden: false
+metadata:
+  title: 'On-Device Authentication | Roku Developer Docs'
+  description: 'Implement on-device authentication so customers can sign up and sign in on their Roku devices using the ChannelStore node, access tokens, and Roku Pay.'
+  robots: index
 ---
 Apps implement on-device authentications so that customers can complete sign-ups and sign-ins entirely on their Roku devices—without having to visit an external webpage. Additionally, once a customer authenticates on one device, they can automatically be signed in when they activate additional Roku devices linked to their same Roku account.
 
@@ -21,7 +26,6 @@ To implement on-device authentication, you first verify whether a customer shoul
       <th>Next Steps</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>YES</td>
@@ -29,35 +33,30 @@ To implement on-device authentication, you first verify whether a customer shoul
       <td>—</td>
       <td>Get a refresh token from your entitlement server and store it in the device registry and Roku cloud. Grant access to content.</td>
     </tr>
-
     <tr>
       <td>YES</td>
       <td>NO</td>
       <td>YES</td>
       <td>Store an access token in the device registry. Grant access to content.</td>
     </tr>
-
     <tr>
       <td>YES</td>
       <td>NO</td>
       <td>NO</td>
-      <td>The next steps depend on whether the customer originally created their account through Roku Pay or your own service ("publisher service)":<br /> <ul><li><strong>Created through Roku Pay</strong>: Validate the previous transaction. Get a new access token from your entitlement server and store in device registry and Roku cloud. Grant access to content.<br /><br /></li><li><strong>Created through publisher service</strong>: Check whether the Roku cloud has an access token. If it does and the customer is signed in, store the access token in the device registry, and then grant access to content.</li></ul><p>If the customer is not signed up or is signed out, display your app UI, get the customer's email address, and have them sign up or sign back in. Once the customer has successfully authenticated, generate a new access token from your entitlement server and store it in the device registry and Roku cloud. Grant access to content.</p><p>If the Roku cloud does not have an access token, display your app UI and then get the customer's email address. Use the email address to check whether the customer is linked to an active subscription in your system. If there is already an active subscription, generate a new access token from your entitlement server and store it in the device registry and Roku cloud. Grant access to content.</p><blockquote><p>For SVOD and TVOD apps (and other subscription services), on-device authentication deprecates the <a href="https://roku-ent.readme.io/dev/docs/authentication-and-linking">"rendezvous" registration method</a>. With this method, a customer was shown a registration code on their device and had to enter it on an external website. An authentication service then linked the customer's device to their account via an access token that was downloaded and stored on the device.</p><p>Authentication via a third-party oAuth provider such as Google or Facebook is not supported.</p></blockquote></td>
+      <td>The next steps depend on whether the customer originally created their account through Roku Pay or your own service ("publisher service)":<br /> <ul><li><strong>Created through Roku Pay</strong>: Validate the previous transaction. Get a new access token from your entitlement server and store in device registry and Roku cloud. Grant access to content.<br /><br /></li><li><strong>Created through publisher service</strong>: Check whether the Roku cloud has an access token. If it does and the customer is signed in, store the access token in the device registry, and then grant access to content.</li></ul><p>If the customer is not signed up or is signed out, display your app UI, get the customer's email address, and have them sign up or sign back in. Once the customer has successfully authenticated, generate a new access token from your entitlement server and store it in the device registry and Roku cloud. Grant access to content.</p><p>If the Roku cloud does not have an access token, display your app UI and then get the customer's email address. Use the email address to check whether the customer is linked to an active subscription in your system. If there is already an active subscription, generate a new access token from your entitlement server and store it in the device registry and Roku cloud. Grant access to content.</p><blockquote><p>For SVOD and TVOD apps (and other subscription services), on-device authentication deprecates the <a href="/dev/docs/authentication-and-linking">"rendezvous" registration method</a>. With this method, a customer was shown a registration code on their device and had to enter it on an external website. An authentication service then linked the customer's device to their account via an access token that was downloaded and stored on the device.</p><p>Authentication via a third-party oAuth provider such as Google or Facebook is not supported.</p></blockquote></td>
     </tr>
-
     <tr>
       <td>NO</td>
       <td>YES</td>
       <td>—</td>
       <td>Grant access to content.</td>
     </tr>
-
     <tr>
       <td>NO</td>
       <td>NO</td>
       <td>YES</td>
       <td>If the customer is signed in, store the access token in the device registry, and grant access to content. If the customer is signing up (or has signed out), have them re-authenticate.</td>
     </tr>
-
     <tr>
       <td>NO</td>
       <td>NO</td>
@@ -85,7 +84,7 @@ To check for an active Roku subscription with the **ChannelStore API**, follow t
 
    `myChannelStore.command = "getAllPurchases"`
 2. Get the transaction ID from the **purchaseId** field of the child content node. Find the subscription to be validated using the **code** or **productType** fields of the child content node.
-   ```
+   ```brightscript
    if (myChannelStore.purchases <> invalid)
        count = myChannelStore.purchases.GetChildCount()
        for x = 0 to count - 1
@@ -93,7 +92,7 @@ To check for an active Roku subscription with the **ChannelStore API**, follow t
               transactionId = myChannelStore.purchases.getChild(x).purchaseId
            end if
        end for
-   endif
+   end if
    ```
 3. Pass the transaction ID into a [**validate-transaction**](doc:roku-web-service#validate-transaction) Roku Pay web service GET API call
    ```
@@ -101,7 +100,7 @@ To check for an active Roku subscription with the **ChannelStore API**, follow t
    ```
 4. Check the **isEntitled** field in the response to verify that the user is entitled to the content.
 
-   ```
+   ```xml
    <result>
        <transactionId>{transactionId}</transactionId>
        ...
@@ -140,7 +139,7 @@ To check for a valid access token in the device registry, follow these steps:
 
    * Call the [**ChannelStore.storeChannelCredData **](doc:channelstore#storechannelcreddata) command to store an access token in the Roku cloud. You can use the **status** and **response** fields of the **storeChannelCredDataStatus** content node to verify that the command was successful and that the access token stored in the Roku cloud has the specified value.
 
-     ```
+     ```brightscript
      myChannelStore.channelCredData = "your access token"
      myChannelStore.command = "storeChannelCredData "
 
@@ -150,7 +149,7 @@ To check for a valid access token in the device registry, follow these steps:
        ...
      end if
 
-     'check if access token stored in Roku cloud has specifed value
+     'check if access token stored in Roku cloud has specified value
      response = myChannelStore.storeChannelCredDataStatus.response
      if response.json.channel_data = myChannelStore.channelCredData
         ...
@@ -206,7 +205,7 @@ To obtain and validate the customers' account credentials, follow these steps:
    myChannelStore.command = "getUserData"
    ```
 
-2. When you call the the **ChannelStore.getUserData** command, a "Request for information" (RFI) screen is displayed automatically. It guides the customer to create an account in your system using their Roku account information.
+2. When you call the **ChannelStore.getUserData** command, a "Request for information" (RFI) screen is displayed automatically. It guides the customer to create an account in your system using their Roku account information.
 
    <Image alt="roku815px - signup-2-rfi" border={false} src="https://image.roku.com/ZHZscHItMTc2/signup-rfi-getuserdata-v2.jpg" />
 
@@ -238,10 +237,10 @@ To complete and validate the new subscription, follow these steps:
 
 2. Once the customer selects a product, [create an order](doc:channelstore) that contains the product the customer is purchasing. To do this, you set the [**ChannelStore.order**](doc:channelstore#order) field to a **ContentNode** that has one child **ContentNode** for the item the customer is purchasing
 
-   ```
+   ```brightscript
    myOrder = CreateObject("roSGNode", "ContentNode")
    itemPurchased = myOrder.createChild("ContentNode")
-   itemPurchased.addFields(\{ "code": "UPC3L5A", "qty": 1})
+   itemPurchased.addFields({ "code": "UPC3L5A", "qty": 1})
    myChannelStore.order = myOrder
    ```
 
@@ -274,10 +273,10 @@ If a customer is signing in, have them authenticate themselves in your app UI fo
 
 1. After the user enters the sign-in flow, set the [**ChannelStore.requestedUserData**](doc:channelstore) field to "email" to ask the customer to share their email address, and set the [**ChannelStore.requestedUserDataInfo**](doc:channelstore) field to a ContentNode that has a **context** field set to "signin".
 
-   ```
+   ```brightscript
    myChannelStore.requestedUserData("email")
-   info = CreateObject(“roSGNode”, “ContentNode”)
-   info.addFields(\{context: “signin”})
+   info = CreateObject("roSGNode", "ContentNode")
+   info.addFields({context: "signin"})
    myChannelStore.requestedUserDataInfo = info
    ```
 
@@ -285,7 +284,7 @@ If a customer is signing in, have them authenticate themselves in your app UI fo
 
    `myChannelStore.command = "getUserData"`
 
-3. When you call the the **ChannelStore.getUserData** command, a "Request for information" (RFI) screen is displayed automatically. It guides the customer to share the email address and/or phone number in their Roku customer account with the app in order to sign in.
+3. When you call the **ChannelStore.getUserData** command, a "Request for information" (RFI) screen is displayed automatically. It guides the customer to share the email address and/or phone number in their Roku customer account with the app in order to sign in.
 
    <Image alt="roku815px - signin-2-rfi-splash" border={false} src="https://image.roku.com/ZHZscHItMTc2/signin-2-rfi-splash-v2.jpg" />
 

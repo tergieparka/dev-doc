@@ -1,11 +1,11 @@
 ---
 title: "roTextureManager"
-excerpt: ''
+excerpt: 'API for managing an roBitmap cache with request-based texture loading'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'roTextureManager'
+  description: 'Reference page for roTextureManager. roTextureManager manages an roBitmap cache via request-based texture loading.'
   robots: index
 next:
   description: ''
@@ -18,15 +18,15 @@ The Texture Manager provides a set of API's for managing an roBitmap cache.
 
 **Example: Requesting an roBitmap from the roTextureManager**
 
-~~~
-Sub Main()
+```brightscript
+sub Main()
     mgr = CreateObject("roTextureManager")
     msgport = CreateObject("roMessagePort")
     mgr.SetMessagePort(msgport)
- 
+
     request = CreateObject("roTextureRequest","pkg:/assets/comet.jpg")
     mgr.RequestTexture(request)
- 
+
     msg=wait(0, msgport)
     if type(msg)="roTextureRequestEvent" then
         print "request id";msg.GetId()
@@ -41,8 +41,8 @@ Sub Main()
             end if
         end if
    end if
-End Sub
-~~~
+end sub
+```
 
 
 ## Supported interfaces

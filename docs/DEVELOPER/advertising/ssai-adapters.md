@@ -2,7 +2,7 @@
 title: Implementing Server-Side Ad Insertion Using Roku Adapters
 excerpt: ''
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''
@@ -61,31 +61,28 @@ The following entry loads the adapter into your task:
 
 > At the beginning of the playback Task, instantiate the adapter with proper parameters and then initialize it. The valid values of the parameter name are uplynk, adobe, onceux, yospace, awsemt, and ggldai.
 
-```
+```brightscript
 adapter = RAFX_SSAI({name:"uplynk"})  ' Supported: uplynk, adobeonceux, yospace, awsemt, ggldai
 adapter.init()
 ```
 
 ### 2. Make an initial request to SSAI manifest server getting Ad metadata: Request Ad Metadata
 
-```
+```brightscript
 request = {
-
     type: adapter.SreamType.VOD  ' Required, VOD or LIVE
-
     url:  "http://admanifest.ssai.com/api?assetid=abcdefg"' Ad metadata URL, provided by SSAI
-
 }
 
 result = adapter.requestStream(request)
-The value of the parameter URL depends on which SSAI manifest servers to integrate and which type of stream it is. (The app may query the initial request to SSAI manifest server by itself rather than using the adapter.requestStream() call). Valid values of the parameter type are VOD or LIVE. VOD is when Ad metadata is fetched before the playback starts, LIVE is when Ad metadata is provided as ping/poll/in-stream (such as X-MARKER) content playback.
+'The value of the parameter URL depends on which SSAI manifest servers to integrate and which type of stream it is. (The app may query the initial request to SSAI manifest server by itself rather than using the adapter.requestStream() call). Valid values of the parameter type are VOD or LIVE. VOD is when Ad metadata is fetched before the playback starts, LIVE is when Ad metadata is provided as ping/poll/in-stream (such as X-MARKER) content playback.
 ```
 
 ### 3. Read stream info
 
 The initial request to SSAI manifest servers returns content URL (like Adobe and Verizon Media Services). The following entry gets the content URL:
 
-```
+```brightscript
 streamInfo = adapter.getStreamInfo()
 url = streamInfo["playURL"]
 ```
@@ -95,7 +92,7 @@ url = streamInfo["playURL"]
 Once the content playback URL is known, the adapter is ready to track Ads. Pass the adapter player object and observe the position event on the video node.
 The value of params.player is given to RAF internally as the second parameter of RAF.stitchedAdHandledEvent(). adapter.enableAds() parses Ad metadata and/or configure additional settings such as observing timedMetadata2 of given video node. It then calls RAF.stitchedAdsInit() when valid Ad metadata was found in the initial response from the SSAI manifest servers.
 
-```
+```brightscript
 port = CreateObject("roMessagePort")
 params = {player: {sgnode:m.top.video, port:port}}
 adapter.enableAds(params)
@@ -116,8 +113,8 @@ By default, params.useStitched is set to true. In this case:
 
 #### **a) Optional: enable ads without stitchedAdHandledEvent**
 
-```
- params = {  
+```brightscript
+ params = {
      player: {sgnode:m.top.video, port:port},
      useStitched: false
  }
@@ -150,35 +147,24 @@ When params.useStitched = false, it is required to set callbacks and the app MUS
 
 **Setting the callback functions to the Adapter:**
 
-```
+```brightscript
 ' Set adapter callback functions
-
 adapter.addEventListener(adapter.AdEvent.POD_START, rafxCallback)
-
 adapter.addEventListener(adapter.AdEvent.POD_END, rafxCallback)
-
 adapter.addEventListener(adapter.AdEvent.IMPRESSION, rafxCallback)
+```
 
-...
-
-...
-
+Example callback function:
+```brightscript
 function rafxCallback(eventInfo as object) as void
-
     if adapter.AdEvent.POD_START = eventInfo.event
-
         m.top.adPlaying = true
-
     else if adapter.AdEvent.POD_COMPLETE = eventInfo.event
-
         m.top.adPlaying = false
-
     end if
 
     print "Callback at : ";eventInfo.position
-
 end function
-
 ```
 
 ### 5) Enable ad measurements
@@ -187,47 +173,32 @@ When you are ready to start playback, you need to configure RAF by enabling ad m
 
 Note: It is recommended to use [enableAdMeasurements](doc:raf-api).
 
-```
-
+```brightscript
 adIface = Roku_Ads()
-
 adIface.enableAdMeasurements(true) ' Required
-
 adIface.setContentGenre(...) ' Set app/content genre info
-
 adIface.setContentLength(...) ' Set app/content length info
-
 adIface.setContentId(...) ' Set app/content specific info
-
-
 ```
 
 ### 6) Playback Loop
 
 The developer can now start the playback and run the message loop:
 
-```
-
+```brightscript
 video.control = "play"  ' start playback
 
 while true
-
    msg = wait(1000, port)
-
    curAd = adapter.onMessage(msg)
 
    if invalid = curAd
-
        video.setFocus(true)  ' recommended
-
    end if
 
    '  exit while loop when condition met
-
    ...
-
 end while
-
 ```
 
 adapter.onMessage() calls RAF.stitchedAdHandledEvent() and returns the object as it is. It is thus recommended to evaluate the returned value and call setFocus() on the video node in case the interactive ad changes focus while playing.
@@ -284,7 +255,6 @@ Before using the adapter samples, the developer must be familiar with the SSAI p
       <th><strong>File</strong></th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>RAFX SSAI Adapter for Verizon Media Services Preplay and Ping mode, showing ad rendering via stitchedAdsInit()/stitchedAdHandledEvent(). <br /><br />The Verizon Media Services Adapter provides the following services: <br /><br /> When Live-Ping <br /> - Request preplay and parse ads object <br /> - Ping and parse JSON, track with timestamps <br /> - Track ID3 tags and match ad objects <br /> - Configure RAF stitchedAdsInit() as ID3 tags <br /> - Track all ad events through stitchedAdHandledEvent() <br /> - Halt or append ads to current adPods as ID3 tags indicate <br /><br /> When VOD-Preplay <br /> - Request preplay and parse ads object <br /> - Configure RAF stitchedAdsInit() <br /> - Track all ad events through stitchedAdHandledEvent()</td>
@@ -302,7 +272,6 @@ Before using the adapter samples, the developer must be familiar with the SSAI p
       <th>File</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>RAFX SSAI Adapter for Adobe Manifest Server simple and x-marker mode, showing ad rendering via stitchedAdsInit()/stitchedAdHandledEvent().  <br /><br /> Adobe Adapter provides the following services:  <br /><br /> When Live-x-markerObserve    <br /> - Observe ID3 tag: #EXT-X-MARKER <br /> - Parse ad metadata and configure RAF stitchedAdsInit() <br /> - Track ad events through stitchedAdHandledEvent() <br /><br />  When VOD-simple <br /> - Request master URL and select stream<br /> - Request ad metadata with pttrackingposition=1, pttrackingmode=simple <br /> - Supported pttrackingversion=vmap and v2 JSON <br /> - Parse ad metadata and configure RAF stitchedAdsInit() <br /> - Track ad events through stitchedAdHandledEvent()</td>
@@ -320,7 +289,6 @@ Before using the adapter samples, the developer must be familiar with the SSAI p
       <th>File</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>- RAFX SSAI Adapter for OTTera AdNet+ x-marker, showing ad rendering via stitchedAdsInit()/stitchedAdHandledEvent().<br /><br />OTTera AdNet+ Adapter provides the following services: <br />-  Observe ID3 tag: #EXT-X-MARKER<br />- Parse ad metadata and configure RAF stitchedAdsInit()<br /> - Track ad events through stitchedAdHandledEvent()</td>
@@ -338,7 +306,6 @@ Before using the adapter samples, the developer must be familiar with the SSAI p
       <th>File</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>RAFX SSAI Adapter for OnceUX VOD mode, showing ad rendering via stitchedAdInit()/stitchedAdHandledEvent().  <br /><br /> OnceUX Adapter provides the following services: <br /><br /> When VOD <br /> - Request ad metadata and parse XML <br /> - Configure RAF stitchedAdsInit() <br /> - Track ad events through RAF stitchedAdHandledEvent() <br /><br />  When reading stream info, "playURL" field is not available because OnceUX provides a pair of video contentURL and metadata URL. <br /><br /> <strong>Read Stream Info:</strong> <br /><br /> <br />\~\~\~\~ <br />...  <br />streamInfo = adapter.getStreamInfo()  <br />'  url = streamInfo\["playURL"]        This field is NOT available when OnceUX adapter. <br />... <br />\~\~\~\~ <br /><br /> However, the returned value of getStreamInfo() includes a field called <strong>tracking</strong>. This returns a list of event info generated from XML element:  \<uo:contentImpressions>\<uo:Impression>. The app is  responsible for sending those pixels when playback starts. <br /><br /> For example: <br /><br />  \<strong>Sending Content Start Beacon:\</strong> <br />\~\~\~\~ <br />... <br />m.top.video.control = "PLAY" ' Start video content <br />... <br />... <br />adIface = Roku\_Ads() <br />for each evt in streamInfo.tracking <br />    if "Impression" = evt.event <br />        adIface.util.getNoResponseFromUrl(evt.url) ' send beacon to OnceUX <br />    end if <br />end for  <br />\~\~\~\~</td>
@@ -356,7 +323,6 @@ Before using the adapter samples, the developer must be familiar with the SSAI p
       <th>File</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>RAFX SSAI Adapter for Yospace server, showing ad rendering via stitchedAdInit()/stitchedAdHandledEvent().  <br /><br /> Yospace Adapter provides the following services:    <br /><br /> - When VOD <br /> - Request masterURL, parse XML(DASH) or manifest(HLS), extract playbackURL and analyticsURL<br /> -Request ad metadata, parse XML and configure RAF stitchedAdsInit() <br /> -Track ad events through RAF stitchedAdHandledEvent() <br /><br />  <br /> - When LIVE <br /> - Request masterURL, parse XML(DASH) or manifest(HLS), extract playbackURL and analyticsURL<br /> - Observe timed metadata <br /> - As playback stream, ping Yospace server and parse XML <br /> - Match timed metadata YMID and ad metadata, configure RAF stitchedAdsInit() and stitchedAdHandledEvent()</td>
@@ -374,7 +340,6 @@ Before using the adapter samples, the developer must be familiar with the SSAI p
       <th>File</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>RAFX SSAI Adapter for AWS Elemental MediaTailor(AWSEMT), showing ad rendering via stitchedAdInit()/stitchedAdHandledEvent() .  <br /><br /> AWSEMT Adapter provides following services:   <br /><br />- Request masterURL, parse JSON, extract hls\_url and tracking\_url. For apps with  known hls\_url, use setStreamInfo() instead of requestStream() and   getStreamInfo()  <br /><br />  <strong>Using setStreamInfo()</strong>  <br /><br />  <br />\~\~\~\~ <br />if makingIntialRequest <br />    result = adapter.requestStream(...) <br />    streamInfo = adapter.getStreamInfo() <br />else <br />    streamInfo = \{ <br />        type: m.top.testConfig.type, 'Required <br />        tracking\_url: m.top.tracking\_url, 'Required. App must provide valid URL <br />        hls\_url: m.top.hls\_url 'Required. App must provide valid URL <br />    } <br />    adapter.setStreamInfo(streamInfo) <br />end if  <br />\~\~\~\~   <br /><br />  <br /> - Poll ad metadata, parse JSON and configure RAF stitchedAdsInit() <br /> - Track ad events through RAF stitchedAdHandledEvent() masterURL may require GET or POST. When POST request is required, fill request.body with \{"adParams":\{}} <br /> - See AEMTTask.brs, function loadStream().</td>

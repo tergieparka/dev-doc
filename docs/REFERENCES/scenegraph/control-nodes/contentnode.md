@@ -1,11 +1,11 @@
 ---
 title: ContentNode
-excerpt: ''
+excerpt: 'Specifies data used to configure a node or component content field'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'ContentNode'
+  description: 'ContentNode specifies the data used to configure a node or component, and is required as the content field for lists, grids, and panels.'
   robots: index
 next:
   description: ''
@@ -26,22 +26,22 @@ To create a ContentNode object and populate it with data, you can define the Con
 
 As an example, to define a ContentNode with one level of children ContentNodes, you should generally:
 
-```
+```xml
 <ContentNode role= or id= >
-  <ContentNode content_meta-data_attribute = "attribute" ... />
+  <ContentNode content_meta-data_attribute="attribute" ... />
   ...
 </ContentNode>
 ```
 
 The parent ContentNode is defined with either an XML role attribute or an id field, depending on how you want to assign or use the content data. For the nodes classes that have a content field that is to be assigned a ContentNode, such as LabelList nodes, the parent ContentNode should be defined as a child node of the node:
 
-```
-<LabelList  id = "labellist" >
-  <ContentNode  role = "content" >
-    <ContentNode title = "Renderable Nodes" description = "Basic Nodes That Show Things" />
-    <ContentNode title = "Z-Order/Parent-Child" description = "SceneGraph Tree Order Matters" />
-    <ContentNode title = "Animations" description = "Moving Stuff Around and Flashing Lights" />
-    <ContentNode title = "Events and Observers" description = "Reacting When Stuff Happens" />
+```xml
+<LabelList id="labellist">
+  <ContentNode role="content">
+    <ContentNode title="Renderable Nodes" description="Basic Nodes That Show Things" />
+    <ContentNode title="Z-Order/Parent-Child" description="SceneGraph Tree Order Matters" />
+    <ContentNode title="Animations" description="Moving Stuff Around and Flashing Lights" />
+    <ContentNode title="Events and Observers" description="Reacting When Stuff Happens" />
   </ContentNode>
 </LabelList>
 ```
@@ -56,7 +56,7 @@ To create a ContentNode in BrightScript, you should generally:
 
 As follows:
 
-```
+```brightscript
 ContentNode_object = createObject("RoSGNode","ContentNode")
 ContentNode_child_object = ContentNode_object.createChild("ContentNode")
 ContentNode_child_object.field_name = data
@@ -67,13 +67,13 @@ ContentNode_child_object.field_name = data
 
 For nodes and components that require a ContentNode as the specification of their content field, you can define it as a child of the node or component in XML markup using the role attribute, or just assign the ContentNode object to the content field as follows:
 
-```
+```brightscript
 NodeComponent.content = ContentNode_object
 ```
 
 For other nodes and components that don't require a ContentNode, you can use getChild() or a similar function to locate the specific child ContentNode object that contains the data you want to assign to a particular node/component field:
 
-```
+```brightscript
 ContentNode_child_object = ContentNode_object.getChild(child_number)
 NodeComponent.field_name = ContentNode_child_object.field_name
 ```
@@ -86,79 +86,66 @@ The following creates a component with a LabelList node populated with some spec
 
 #### ContentNode Class Example
 
-```
-<?xml version = "1.0" encoding = "utf-8" ?>
-
-<!--********** Copyright 2015 Roku Corp.  All Rights Reserved. **********-->
-
-<component name = "NodeSelectionList" extends = "Group" initialFocus = "coreList" >
-
-  <script type="text/brightscript" >
-
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="NodeSelectionList" extends="Group" initialFocus="coreList">
+  <script type="text/brightscript">
     <![CDATA[
+      sub init()
+        m.list = m.top.FindNode("coreList")
+        m.content = createObject("RoSGNode", "ContentNode")
 
-    sub init()
-      m.list = m.top.FindNode("coreList")
+        addSection("Renderable Nodes")
+        addItem("Rectangle")
+        addItem("Rotated Rectangle")
+        addItem("Label")
+        addItem("Poster")
+        addItem("Video")
+        addItem("Video Zoom")
 
-      m.content = createObject("RoSGNode","ContentNode")
+        addSection("Animation Nodes")
+        addItem("Animation Vector 2D Interpolator")
+        addItem("Animation Color Interpolator")
+        addItem("Animation Float Interpolator")
+        addItem("Sequential Animation")
+        addItem("Parallel Animation")
+        addItem("Fade-In Animation")
+        addItem("Fade-Out Animation")
 
-      addSection("Renderable Nodes")
-      addItem("Rectangle")
-      addItem("Rotated Rectangle")
-      addItem("Label")
-      addItem("Poster")
-      addItem("Video")
-      addItem("Video Zoom")
+        addSection("Control Nodes")
+        addItem("Timer")
 
-      addSection("Animation Nodes")
-      addItem("Animation Vector 2D Interpolator")
-      addItem("Animation Color Interpolator")
-      addItem("Animation Float Interpolator")
-      addItem("Sequential Animation")
-      addItem("Parallel Animation")
-      addItem("Fade-In Animation")
-      addItem("Fade-Out Animation")
+        addSection("Lists and Grids")
+        addItem("Poster Grid")
+        addItem("Markup Grid")
 
-      addSection("Control Nodes")
-      addItem("Timer")
+        m.list.content = m.content
+        m.top.setFocus(true)
+      end sub
 
-      addSection("Lists and Grids")
-      addItem("Poster Grid")
-      addItem("Markup Grid")
+      sub addSection(sectiontext as string)
+        m.sectionContent = m.content.createChild("ContentNode")
+        m.sectionContent.CONTENTTYPE = "SECTION"
+        m.sectionContent.TITLE = sectiontext
+      end sub
 
-      m.list.content = m.content
-
-      m.top.setFocus(true)
-    end sub
-
-    sub addSection(sectiontext as string)
-      m.sectionContent = m.content.createChild("ContentNode")
-      m.sectionContent.CONTENTTYPE = "SECTION"
-      m.sectionContent.TITLE = sectiontext
-    end sub
-
-    sub addItem(itemtext as string)
-      item = m.sectionContent.createChild("ContentNode")
-      item.title = itemtext
-    end sub
-
+      sub addItem(itemtext as string)
+        item = m.sectionContent.createChild("ContentNode")
+        item.title = itemtext
+      end sub
     ]]>
-
   </script>
 
   <children>
-
     <LabelList
-      id = "coreList"
-      translation = "[ 160, 92 ]"
-      itemSize = "[ 440, 48 ]"
-      itemSpacing = "[ 0, 0 ]"
-      sectionDividerHeight = "48.0"
-      sectionDividerFont = "font:MediumBoldSystemFont"
-      sectionDividerTextColor = "0x880088FF" />
-
+      id="coreList"
+      translation="[ 160, 92 ]"
+      itemSize="[ 440, 48 ]"
+      itemSpacing="[ 0, 0 ]"
+      sectionDividerHeight="48.0"
+      sectionDividerFont="font:MediumBoldSystemFont"
+      sectionDividerTextColor="0x880088FF" />
   </children>
-
 </component>
 ```
 
@@ -166,25 +153,23 @@ The following creates a component with a LabelList node populated with some spec
 
 All of the attributes listed in [Content Meta-Data](doc:content-metadata) are accessible as fields using dot (.) notation on a ContentNode object. For example, for a ContentNode object iteminfo, the Content Meta-Data Description attribute can be read or written as follows:
 
-```
+```brightscript
 iteminfo.description
 ```
 
 You can also access ContentNode attributes as fields using dot (.) notation if you add the attribute as an [\<interface>](doc:interface) element field to an extended ContentNode component. For example, you could extend a ContentNode as a custom listitemcontent component with a componentname field to include an XML component name in a list item:
 
-```
-<component  name = "listitemcontent" extends = "ContentNode" >
-
-  <interface >
-    <field id = "componentname" type = "string" />
+```xml
+<component name="listitemcontent" extends="ContentNode">
+  <interface>
+    <field id="componentname" type="string" />
   </interface>
-
 </component>
 ```
 
 Then for a listitemcontent ContentNode object iteminfo, you can read or write the componentname field in the same way as if it were a Content Meta-Data attribute:
 
-```
+```brightscript
 iteminfo.componentname
 ```
 
@@ -192,7 +177,7 @@ iteminfo.componentname
 
 ## Content feed video lesson
 
-You can learn how to link the content metadata in your app's feed to a ContentNode by watching the [Creating the content feed](doc:debugging) video lesson in Roku's [SceneGraph: Build a Channel online video course](doc:rsg).
+You can learn how to link the content metadata in your app's feed to a ContentNode by watching the [Creating the content feed](doc:debugging) video lesson in Roku's [SceneGraph: Build an App online video course](doc:rsg).
 
 ## Sample app
 

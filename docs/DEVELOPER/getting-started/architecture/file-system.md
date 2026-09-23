@@ -2,7 +2,7 @@
 title: "File system"
 excerpt: ''
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''
@@ -51,9 +51,9 @@ in [ifFileSystem](doc:iffilesystem) methods,
 as well as in other components which use files. A Pathname is a string
 with the following format:
 
-~~~~
+```brightscript
 device:/dir1/dir2/…/filename
-~~~~
+```
 
 The device field (sometimes called PHY) identifies the location of the
 file and can be one of:
@@ -78,9 +78,9 @@ format above.
 The filename components in a pathname may not contain any of these
 characters:
 
-~~~~
+```brightscript
   <  >  :  "  /  |  ?  *
-~~~~
+```
 
 nor any whitespace or non-printable character.
 
@@ -88,12 +88,9 @@ nor any whitespace or non-printable character.
 
 **Example of path names used from BrightScript**
 
-~~~~
+```brightscript
 theme.OverhangSliceSD = "pkg:/images/Overhang_Slice_SD43.png"
-
 http.Http.GetToFile("tmp:/categorylist")
-
 DeleteFile("tmp:/categorylist")
-
 obj.SetCertificatesFile("common:/certs/ca-bundle.crt")
-~~~~
+```

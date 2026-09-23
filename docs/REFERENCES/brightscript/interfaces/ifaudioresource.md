@@ -1,11 +1,11 @@
 ---
 title: "ifAudioResource"
-excerpt: ''
+excerpt: 'Interface for triggering and controlling audio resource sound playback'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'ifAudioResource'
+  description: 'Documents the ifAudioResource interface, which provides methods to trigger, stop, and monitor playback of cached audio resource sounds at a specified volume.'
   robots: index
 next:
   description: ''
@@ -16,7 +16,7 @@ next:
 
 | Name            | Description                               |
 | --------------- | ----------------------------------------- |
-| [roAudioResource](doc:roaudioresource) | The roAudioResouce allows .wav files to be cached to memory and quickly played at any time |
+| [roAudioResource](doc:roaudioresource) | The roAudioResource allows .wav files to be cached to memory and quickly played at any time |
 
 
 ## Supported methods

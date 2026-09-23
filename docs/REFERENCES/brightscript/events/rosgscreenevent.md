@@ -1,11 +1,11 @@
 ---
 title: "roSGScreenEvent"
-excerpt: ''
+excerpt: 'Events sent to a roSGScreen to signal screen closure and app termination'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'roSGScreenEvent'
+  description: 'roSGScreenEvents are sent to a roSGScreen by the framework, primarily to notify the app''s main thread that the screen is closed and the app should terminate.'
   robots: index
 next:
   description: ''
@@ -24,7 +24,7 @@ Apps respond to this event by exiting the main BrightScript thread to exit the a
 
 #### Example: Handling the isScreenClosed event to terminate an app in source/main.brs
 
-~~~~
+```brightscript
 sub Main()
     showChannelSGScreen()
 end sub
@@ -43,4 +43,4 @@ sub showChannelSGScreen()
         end if
     end while
 end sub
-~~~~
+```

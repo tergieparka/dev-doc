@@ -1,11 +1,11 @@
 ---
 title: roFont
-excerpt: ''
+excerpt: 'Font object with family, pixel size, and boldness created via roFontRegistry'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'roFont'
+  description: 'roFont represents a particular font from a font-family such as Arial, with a particular pixel size and boldness or italicness, created via roFontRegistry.'
   robots: index
 next:
   description: ''
@@ -16,13 +16,13 @@ It is used in conjunction with [roFontRegistry](doc:rofontregistry) to create an
 
 **Example**
 
-```
+```brightscript
 screen = CreateObject("roScreen")
 white = &hFFFFFFFF
 blue = &h0000FFFF
 font_registry = CreateObject("roFontRegistry")
 font = font_registry.GetDefaultFont()
- 
+
 ' Draw white text in a blue rectangle
 text = "Hello world"
 w = font.GetOneLineWidth(text, screen.GetWidth())

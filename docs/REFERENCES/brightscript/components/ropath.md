@@ -1,11 +1,11 @@
 ---
 title: "roPath"
-excerpt: ''
+excerpt: 'Create and validate file system paths with convenience path inspection'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'roPath'
+  description: 'The roPath component provides a way to create and validate file system paths, implementing ifString and additional path inspection via ifPath.'
   robots: index
 next:
   description: ''
@@ -24,12 +24,12 @@ This object is created with a string that represents the initial path:
 
 **Example**
 
-~~~
+```brightscript
 path = CreateObject("roPath", filename)
 parts = path.Split()
 if parts.phy = "tmp:" then print "this is a temp file"
 if parts.extension = ".bmp" then print "this is a bitmap file"
-~~~
+```
 
 
 ## Supported interfaces

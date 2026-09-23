@@ -1,11 +1,11 @@
 ---
 title: Hardware specifications
-excerpt: ''
+excerpt: 'Key specs for Roku streaming players and Roku TVs, grouped by production status'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Hardware specifications | Roku Developer Docs'
+  description: 'Lists CPU, RAM, max UI resolution, max playback resolution, and HDR support for current, updatable, and legacy Roku streaming players and Roku TVs.'
   robots: index
 next:
   description: ''
@@ -29,7 +29,7 @@ The spec then further classifies the hardware products based on their code names
 The following models are currently being manufactured and are supported:
 
 | Device Name               | Code Name | roDeviceInfo.GetModel() | CPU                      | Accelerated Graphics API | RAM    | Max UI Resolution | Max Playback Resolution | HDR Support                                                             | Year Released |
-| :------------------------ | :-------- | :---------------------- | :----------------------- | :----------------------- | :----- | :---------------- | :---------------------- | :---------------------------------------------------------------------- | ------------- |
+| :------------------------ | :-------- | :---------------------- | :----------------------- | :----------------------- | :----- | :---------------- | :---------------------- | :---------------------------------------------------------------------- | :------------ |
 | Roku Streaming Stick      | Lakeport  | 3840X                   | ARM Cortex A55           | OpenGL ES 2.0            | 512 MB | 720p              | 1080p                   | No                                                                      | 2025          |
 | Roku Streaming Stick Plus | Bayside   | 3830X                   | ARM Cortex A55           | OpenGL ES 2.0            | 1 GB   | 1080p/60fps       | 4K60fps, HDR            | HDR10/10+, HLG                                                          | 2025          |
 | Roku Streaming Stick 4K   | Logan     | 3820X2                  | ARM Cortex A55           | OpenGL ES 2.0            | 1 GB   | 1080p             | 4K60fps, HDR            | HDR10/10+, HLG, and DolbyVision                                         | 2022          |
@@ -45,6 +45,7 @@ The following models are currently being manufactured and are supported:
 | 4K Roku TV                | Reno      | A000X                   | ARM quad core 1 GHz      | OpenGL ES 2.0            | 1.5 GB | 1920X1080         | 3840x2160               | HDR10, Dolby Vision, and HLG supported, varies by model                 | 2019          |
 | 4K Roku TV                | Malone    | C000X                   | ARM quad core 1 GHz      | OpenGL ES 2.0            | 1 GB   | 1920X1080         | 3840x2160               | HDR10, Dolby Vision, and HLG supported, varies by model                 | 2019          |
 | 4K Roku TV                | Athens    | G000X                   | ARM quad core 1 GHz      | OpenGL ES 2.0            | 1 GB   | 1920X1080         | 3840x2160               | HDR10, Dolby Vision, and HLG supported, varies by model                 | 2021          |
+| Roku TV                   | Roxton    | K000X                   | ARM Cortex A35           | OpenGL ES 2.0            | 512 MB | 720p              | 1080p/60fps             | No                                                                      | 2024          |
 | 4k Roku TV                | Sandia    | L000X                   | ARM quad core 1 GHz      | OpenGL ES 2.0            | 1 GB   | 1920X1080         | 3,840 x 2,160           | HDR10, HDR10+, Dolby Vision, HLG supported, varies by model             | 2024          |
 | 4k Roku TV                | Shiner    | M000X                   | ARM quad core 1 GHz      | OpenGL ES 2.0            | 2 GB   | 1920X1080         | 3,840 x 2,160           | HDR10, HDR10+ Adaptive, Dolby Vision IQ, HLG supported, varies by model | 2024          |
 | 4k Roku TV                | Damon     | P000X                   | ARM quad core 1 GHz      | OpenGL ES 2.0            | 1 GB   | 1920X1080         | 3840x2160               | HDR10, Dolby Vision, and HLG supported, varies by model                 | 2024          |
@@ -71,8 +72,8 @@ The following models are no longer manufactured, but can run the latest Roku OS:
 | Roku Streaming Stick     | Amarillo 1080    | 3800X                   | ARM Cortex A53                   | OpenGL ES 2.0            | 512 MB | 720p              | 1080p                   | n/a                                                     | 2017          |
 | Roku Streaming Stick+    | Amarillo-2019    | 3810X                   | ARM Cortex A53                   | OpenGL ES 2.0            | 1 GB   | 1080p             | 4K60fps, HDR            | HDR 10                                                  | 2019          |
 | Roku Streaming Stick+    | Amarillo 2019-HP | 3811X                   | ARM Cortex A53                   | OpenGL ES 2.0            | 1 GB   | 1080p             | 4K60fps, HDR            | HDR 10                                                  | 2019          |
-| Roku Streaming Stick 4K  | Madison          | 3820X                   | ARM Cortex A55                   | OpenGL ES 2.0            | 1 GB   | 1080p             | 4K60fps, HDR            | HDR10/10+, HLG                                          | 2021          |
-| Roku Streaming Stick 4K+ | Madison          | 3821X                   | ARM Cortex A55                   | OpenGL ES 2.0            | 1 GB   | 1080p             | 4K60fps, HDR            | HDR10/10+, HLG                                          | 2021          |
+| Roku Streaming Stick 4K  | Madison          | 3820X                   | ARM Cortex A55                   | OpenGL ES 2.0            | 1 GB   | 1080p             | 4K60fps, HDR            | HDR10/10+, Dolby Vision, HLG                            | 2021          |
+| Roku Streaming Stick 4K+ | Madison          | 3821X                   | ARM Cortex A55                   | OpenGL ES 2.0            | 1 GB   | 1080p             | 4K60fps, HDR            | HDR10/10+, Dolby Vision, HLG                            | 2021          |
 | Roku Express             | Gilbert          | 3900X                   | ARM Cortex A53                   | OpenGL ES 2.0            | 512 MB | 720p              | 1080p                   | n/a                                                     | 2019          |
 | Roku Express+            | Gilbert          | 3910X                   | ARM Cortex A53                   | OpenGL ES 2.0            | 512 MB | 720p              | 1080p                   | n/a                                                     | 2019          |
 | Roku Express             | Nemo             | 3930X, 3930EU           | ARM Cortex A53                   | OpenGL ES 2.0            | 512 MB | 720p              | 1080p                   | n/a                                                     | 2019          |
@@ -93,7 +94,6 @@ The following models are no longer manufactured, but can run the latest Roku OS:
 | 4K Roku TV               | Ft. Worth        | 6000X                   | ARM quad core                    | OpenGL ES 2.0            | 1.5 GB | 1920X1080         | 3840X2160               | N/a                                                     | 2016          |
 | 4K Roku TV (EU)          | Camden           | C000GB                  | ARM quad core 1 GHz              | OpenGL ES 2.0            | 1 GB   | 1920X1080         | 3840x2160               | HDR10, Dolby Vision, and HLG supported, varies by model | 2019          |
 | Roku TV                  | Roma             | D000X                   | ARM Cortex A55                   | OpenGL ES 2.0            | 512 MB | 720p              | 1080p                   | No                                                      | 2020          |
-| Roku TV                  | Roxton           | K000X                   | ARM Cortex A35                   | OpenGL ES 2.0            | 512 MB | 720p              | 1080p/60fps             | No                                                      | 2024          |
 
 ** Supports 720@60fps with some frame drops when video is not scaled to 1080. Should set ContentMetaData.maxFrameRate to 60 so that player doesn't scale the video to 1080.
 
@@ -102,3 +102,26 @@ The following models are no longer manufactured, but can run the latest Roku OS:
 ## Legacy models
 
 The following models have been discontinued, cannot run newer Roku OS versions, and cannot be used to run IDK apps. The table lists the latest compatible version in each case:
+
+| Device Name          | Code name | roDeviceInfo.GetModel() | CPU                 | RAM    | Latest Roku OS version |
+| :------------------- | :-------- | :---------------------- | :------------------ | :----- | :--------------------- |
+| Roku DVP             | Griffin   | N1000                   | MIPS 400 MHz        | 256 MB | 3.1                    |
+| Roku SD              | Redwood   | N1050                   | MIPS 400 MHz        | 256 MB | 3.1                    |
+| Roku HD              | Redwood   | N1100                   | MIPS 400 MHz        | 256 MB | 3.1                    |
+| Roku HD-XR           | Redwood   | N1101                   | MIPS 400 MHz        | 256 MB | 3.1                    |
+| Roku HD              | Pico      | 2000C                   | MIPS 400 MHz        | 256 MB | 3.1                    |
+| Roku XD              | Pico      | 2050X, 2050N            | MIPS 400 MHz        | 256 MB | 3.1                    |
+| Roku XD              | Pico      | 2100X, 2100N            | MIPS 400 MHz        | 256 MB | 3.1                    |
+| Roku LT              | Giga      | 2400X                   | ARM11 600 MHz       | 256 MB | 9.1                    |
+| Roku 2 HD            | Giga      | 3000X                   | ARM11 600 MHz       | 256 MB | 9.1                    |
+| Roku 2 XD            | Giga      | 3050X                   | ARM11 600 MHz       | 256 MB | 9.1                    |
+| Roku 2 XS            | Giga      | 3100X                   | ARM11 600 MHz       | 256 MB | 9.1                    |
+| Roku LT              | Paolo     | 2450X                   | MIPS 400 MHz        | 256 MB | 9.1                    |
+| Roku HD              | Paolo     | 2500X                   | MIPS 400 MHz        | 256 MB | 9.1                    |
+| Roku Streaming Stick | Jackson   | 3400X, 3420X            | ARM11 600 MHz       | 256 MB | 9.1                    |
+| Roku LT              | Tyler     | 2700X                   | MIPS 600 MHz        | 512 MB | 11                     |
+| Roku 1, Roku SE      | Tyler     | 2710X                   | MIPS 600 MHz        | 512 MB | 11                     |
+| Roku 2               | Tyler     | 2720X                   | MIPS 600 MHz        | 512 MB | 11                     |
+| Roku Streaming Stick | Sugarland | 3500X                   | ARM11 600 MHz       | 512 MB | 11                     |
+| Roku 4               | Dallas    | 4400X                   | ARM quad core       | 1.5 GB | 11.5                   |
+| 8K Roku TV           | Bandera   | E000X                   | ARM quad core 1 GHz | 1.5 GB | 13.1                   |

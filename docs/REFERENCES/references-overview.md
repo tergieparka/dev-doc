@@ -1,11 +1,11 @@
 ---
 title: "Reference overview"
-excerpt: ''
+excerpt: 'Detailed syntactic and semantic reference for nodes, components, interfaces, and events'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Reference overview | Roku Developer Docs'
+  description: 'Overview of the reference section covering detailed syntactic and semantic information about nodes, components, interfaces, events, and methods.'
   robots: index
 next:
   description: ''
@@ -65,4 +65,4 @@ or object/component z vary significantly with system version?
 
 Aspects of the last question are specially covered in the separate [Deprecated APIs](doc:deprecated-apis) document,
 which developers should revisit periodically, or whenever notified by Roku,
-in order to keep their channels current for certification purposes.
+in order to keep their apps current for certification purposes.

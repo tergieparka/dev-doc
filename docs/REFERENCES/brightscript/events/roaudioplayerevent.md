@@ -1,11 +1,11 @@
 ---
 title: roAudioPlayerEvent
-excerpt: ''
+excerpt: 'Event type sent by roAudioPlayer to report audio playback state changes'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'roAudioPlayerEvent'
+  description: 'Documents roAudioPlayerEvent, sent by roAudioPlayer to report playback state changes including paused, resumed, failed, and segment download events.'
   robots: index
 next:
   description: ''
@@ -73,7 +73,7 @@ Specific information about the event can be obtained by calling the GetMessages(
 
 #### GetMessage() as String
 
-Returns a description of the message (for exampe, "Format Detected").
+Returns a description of the message (for example, "Format Detected").
 
 #### GetInfo() as Object
 
@@ -128,69 +128,60 @@ Returns an associative array with the following information about the stream seg
       <th>
         Key
       </th>
-
       <th>
         Value
       </th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>
         StreamBandwidth
       </td>
-
       <td>
         Bandwidth of the stream being played in kbps
       </td>
     </tr>
-
     <tr>
       <td>
         SegStartTime
       </td>
-
       <td>
         Segment start time (offset from start of stream) in milliseconds
       </td>
     </tr>
-
     <tr>
       <td>
         Sequence
       </td>
-
       <td>
         Stream segment sequence number
       </td>
     </tr>
-
     <tr>
       <td>
         SegUrl
       </td>
-
       <td>
         Stream segment URL (i.e., .ts file for HLS, stream fragment URL for smooth)
       </td>
     </tr>
-
     <tr>
       <td>
         HdrMode
       </td>
-
       <td>
-        Indicates the HDR format of the content, which may be one of the following values:  
-
-        * 0: UNKNOWN
-        * 1: NONE (SDR)
-        * 2: HDR10
-        * 3: DOLBY_VISION
-        * 4: HLG10
-        * 5: HDR10_PLUS
-        * 6: SL_HDR2
+        Indicates the HDR format of the content, which may be one of the following values:
+        <br /><br />
+        <ul>
+          <li>0: UNKNOWN</li>
+          <li>1: NONE (SDR)</li>
+          <li>2: HDR10</li>
+          <li>3: DOLBY_VISION</li>
+          <li>4: HLG10</li>
+          <li>5: HDR10_PLUS</li>
+          <li>6: SL_HDR2</li>
+        </ul>
       </td>
     </tr>
   </tbody>

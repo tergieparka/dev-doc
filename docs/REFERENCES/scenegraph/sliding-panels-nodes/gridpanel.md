@@ -1,11 +1,11 @@
 ---
 title: "GridPanel"
-excerpt: ''
+excerpt: 'GridPanel node for panels containing a PosterGrid or MarkupGrid with focus handling'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'GridPanel'
+  description: 'Documents the GridPanel node, which creates a Panel containing a PosterGrid or MarkupGrid with automatic focus handling and next-panel creation support.'
   robots: index
 next:
   description: ''
@@ -89,7 +89,7 @@ For efficiency, sometimes the control logic for the GridPanel may create and hol
 <td>Node</td>
 <td>false</td>
 <td>WRITE_ONLY</td>
-<td>When the createNextPanelOnItemFocus field is true, the nextPanel field should be set to a Panel node to the next panel to add to the PanelSet in response to the createNextPanelIndex field being set. It must be set immediately in repsonse to the createNextPanelIndex field being set.</td>
+<td>When the createNextPanelOnItemFocus field is true, the nextPanel field should be set to a Panel node to the next panel to add to the PanelSet in response to the createNextPanelIndex field being set. It must be set immediately in response to the createNextPanelIndex field being set.</td>
 </tr>
 <tr>
 <td>createNextPanelOnItemFocus</td>
@@ -104,10 +104,10 @@ For efficiency, sometimes the control logic for the GridPanel may create and hol
 
 >  If you are creating the grid field (either a PosterGrid or MarkupGrid) associated with a GridPanel in script of a component that extends GridPanel, you also need to add the grid as a child of the GridPanel. For example, in a component that extends GridPanel, where m.top is that component, you would associate the grid field with a PosterGrid as follows:
 
-~~~~
+```brightscript
 grid = m.top.createChild("PosterGrid")
 m.top.grid = grid
-~~~~
+```
 
 ## Data bindings
 

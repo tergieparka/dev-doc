@@ -1,11 +1,11 @@
 ---
 title: ifSocket
-excerpt: ''
+excerpt: 'Core socket interface for send, receive, and address operations'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'ifSocket'
+  description: 'ifSocket defines the binding, sending, and receiving methods shared by roStreamSocket and roDataGramSocket for TCP and UDP socket communication.'
   robots: index
 next:
   description: ''
@@ -111,12 +111,10 @@ Sets the address using a BSD bind() call
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>SetAddress</td>
       <td>Boolean</td>
-
       <td>
         <table>
           <tr>
@@ -124,7 +122,6 @@ Sets the address using a BSD bind() call
             <td>Type</td>
             <td>Description</td>
           </tr>
-
           <tr>
             <td>sockAddr</td>
             <td>Object</td>

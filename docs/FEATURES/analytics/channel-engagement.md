@@ -1,18 +1,18 @@
 ---
-title: "Channel Engagement Report"
-excerpt: ''
+title: "App Engagement Report"
+excerpt: 'Analyze streaming activity, installs, and viewer engagement data for your app'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'App Engagement Report | Roku Developer Docs'
+  description: 'The App Engagement Report helps you grow your audience by analyzing streaming activity, install base size, bounce rate, and minutes streamed over time.'
   robots: index
 next:
   description: ''
 ---
 
 
-You can use the Channel Engagement Report to grow your audience by analyzing data about streaming activity and the size of your install base.
+You can use the App Engagement Report to grow your audience by analyzing data about streaming activity and the size of your install base.
 
 ![roku815px - analytics-report-tabs](https://image.roku.com/ZHZscHItMTc2/channel-engagement-report.png "analytics-report-tabs")
 

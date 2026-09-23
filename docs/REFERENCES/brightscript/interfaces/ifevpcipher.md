@@ -1,11 +1,11 @@
 ---
-title: "ifEVPCipher"
-excerpt: ''
+title: ifEVPCipher
+excerpt: 'Interface for symmetric cipher operations via the OpenSSL EVP library'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'ifEVPCipher'
+  description: 'Documents the ifEVPCipher interface, which provides methods to configure, initialize, and process symmetric cipher operations using the OpenSSL EVP library.'
   robots: index
 next:
   description: ''
@@ -70,17 +70,17 @@ An [roByteArray](doc:robytearray) containing the result.
 
 #### Example
 
-~~~
+```brightscript
   x = evp.Process(bytes)
-~~~
+```
 
 is equivalent to
 
-~~~
+```brightscript
   evp.Reinit()
   x = evp.Update(bytes)
   x = x + evp.Final()
-~~~
+```
 
 ### Update(bytes as Object) as Object
 

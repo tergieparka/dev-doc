@@ -2,7 +2,7 @@
 title: "ifByteArray"
 excerpt: ''
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''
@@ -106,28 +106,28 @@ The **start_pos** and **end_pos** fields specify the 0-based indices of items in
 
 #### Example
 
-```
+```brightscript
 '          0   1   2   3   4   5
 byteArr = [99, 26, 26, 36, 42]
 
 ' get the 3rd (index 2) and subsequent elements
 byteArr2 = byteArr.Slice(2)
-? FormatJSON(byteArr2)
+print FormatJSON(byteArr2)
 ' => [26,36,42]
 
 ' get the 2nd (index 1) through 3rd (index 2) elements
 byteArr2 = byteArr.Slice(1, 3)
-? FormatJSON(byteArr2)
+print FormatJSON(byteArr2)
 ' => [26,26]
 
 ' get the last 2 elements
 byteArr2 = byteArr.Slice(-2)
-? FormatJSON(byteArr2)
+print FormatJSON(byteArr2)
 ' => [36,42]
 
 ' empty range
 byteArr2 = byteArr.Slice(1, 1)
-? FormatJSON(byteArr2)
+print FormatJSON(byteArr2)
 ' => []
 ```
 
@@ -291,13 +291,13 @@ The calculated CRC-32 checksum.
 
 #### Example
 
-~~~
-    ba = CreateObject("roByteArray") 
+```brightscript
+    ba = CreateObject("roByteArray")
     ba.FromAsciiString("Hello world!")
     n = ba.GetCrc32()
     print n, "0x" ; StrI(n, 16)
-    REM 461707669 0x1b851995
-~~~
+    ' 461707669 0x1b851995
+```
 
 ### GetCRC32(start as Integer, length as Integer) As Integer
 

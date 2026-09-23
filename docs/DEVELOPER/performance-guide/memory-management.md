@@ -1,11 +1,11 @@
 ---
 title: "Memory management"
-excerpt: ''
+excerpt: 'Diagnose and resolve texture memory and DRAM issues on Roku devices'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Memory management | Roku Developer Docs'
+  description: 'Learn how texture memory and DRAM affect app performance on Roku devices, and use r2d2_bitmaps or loaded_textures commands to diagnose and fix memory issues.'
   robots: index
 next:
   description: ''
@@ -118,5 +118,5 @@ You can view system memory usage multiple ways:
 
 - Use the [Roku Resource Monitor](https://devtools.web.roku.com/roku-resource-monitor)
 
-- Ttelnet to `port 8080`and run `sgnodes all`
+- Telnet to `port 8080` and run `sgnodes all`
 - Telnet to port 8085, press **^C** to break into the debugger, and run `bcs` or `bscs`.

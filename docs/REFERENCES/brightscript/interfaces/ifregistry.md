@@ -1,11 +1,11 @@
 ---
 title: "ifRegistry"
-excerpt: ''
+excerpt: 'Interface for querying, managing, and flushing the device registry'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'ifRegistry'
+  description: 'Documents the ifRegistry interface, which provides methods to query available storage space, list sections, delete a registry section, and flush to storage.'
   robots: index
 next:
   description: ''
@@ -28,7 +28,7 @@ next:
 
 Returns the number of bytes available in the app's device registry (32K). This function can be used, for example, to check the remaining space and remove older entries before writing newer ones. The following code demonstrates how to do this:
 
-``` 
+```brightscript
 registry = CreateObject("roRegistry")
 buffer = 512 ' arbitrary limit based on the app
 if (registry.GetSpaceAvailable() < buffer)
@@ -38,7 +38,7 @@ end if
 
 #### Return Value
 
-An integer representing the the number of bytes available in the device registry.
+An integer representing the number of bytes available in the device registry.
 
 ### GetSectionList() as Object
 

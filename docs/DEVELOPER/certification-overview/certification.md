@@ -1,11 +1,11 @@
 ---
 title: Certification criteria
-excerpt: ''
+excerpt: 'Design, performance, and compliance requirements for publishing apps'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Certification criteria | Roku Developer Docs'
+  description: 'Review the certification criteria for submitting apps to the Roku Streaming Store, including performance, advertising, deep linking, and UI requirements.'
   robots: index
 next:
   description: ''
@@ -28,11 +28,11 @@ Using deprecated APIs may cause your app to fail certification testing. See the 
 
 #### Test apps before submission
 
-Use the certification criteria and the [list of pre-certification tests](doc:certification-testing) as tools to guide certification-compliance testing. Roku also provides a suite of tools to help developers verify that their apps comply with Roku's certification criteria before being submitting them for certification:
+Use the certification criteria and the [list of pre-certification tests](doc:cert-tests) as tools to guide certification-compliance testing. Roku also provides a suite of tools to help developers verify that their apps comply with Roku's certification criteria before being submitting them for certification:
 
 * [Static Analysis tool](doc:static-analysis-tool): Checks the app's code for certification-related errors.
 
-* [Channel Behavior Analysis tool](doc:channel-publishing-guide): For SVOD, AVOD, and free apps, verifies whether app performance and deep linking meet applicable certification requirements.
+* [App Behavior Analysis tool](doc:channel-publishing-guide): For SVOD, AVOD, and free apps, verifies whether app performance and deep linking meet applicable certification requirements.
 
 * [Test automation software](doc:automated-channel-testing): Enables developers to write and execute automated test cases, including app purchasing, performance, deep linking, and other certification criteria.
 
@@ -66,9 +66,9 @@ As part of the app publishing flow, you must provide the following resources to 
 
 #### Run certification tests
 
-Once you’ve finished QA testing your app and have packaged it, you can begin the certification process by running [Static Analysis](doc:static-analysis-tool) and [Channel Behavior Analysis Testing](doc:channel-publishing-guide) on your app in the Developer Dashboard. The Static Analysis tool checks the structure and syntax of your app's code for common problems related to certification requirements. This tool lists any errors requiring resolution before the app can be scheduled for publishing. The Channel Behavior Analysis tool, which is only available to free, ad-supported, and subscription apps, launches the app and checks for state-driven results to verify compliance with Roku's certification criteria. TVE, TVOD, PVOD, and vMVPD apps must include login credentials with their app certification submission.
+Once you’ve finished QA testing your app and have packaged it, you can begin the certification process by running [Static Analysis](doc:static-analysis-tool) and [App Behavior Analysis Testing](doc:channel-publishing-guide) on your app in the Developer Dashboard. The Static Analysis tool checks the structure and syntax of your app's code for common problems related to certification requirements. This tool lists any errors requiring resolution before the app can be scheduled for publishing. The App Behavior Analysis tool, which is only available to free, ad-supported, and subscription apps, launches the app and checks for state-driven results to verify compliance with Roku's certification criteria. TVE, TVOD, PVOD, and vMVPD apps must include login credentials with their app certification submission.
 
-For self-published apps, once your app has passed Static Analysis and Channel Behavior Analysis Testing, you can schedule the publishing process start date.
+For self-published apps, once your app has passed Static Analysis and App Behavior Analysis Testing, you can schedule the publishing process start date.
 
 Once your app is scheduled for publishing, it is submitted to Roku for final review. If Roku does not find any issues with your app, it will be published on the date and time you have scheduled. If issues are found, an email that lists them is forwarded to the developer account associated with the app.
 
@@ -128,7 +128,7 @@ Certification criteria may be applicable to one or more app model types supporte
 
 ## Certification criteria
 
-**Last updated**: October, 2025
+**Last updated**: April, 2026
 
 Certification criteria are listed by functionality. <br />
 
@@ -136,11 +136,11 @@ Certification criteria are listed by functionality. <br />
 
 1.1 Apps that include video advertising must comply with all the integration requirements listed in the [Roku advertising requirements document](doc:ad-requirements).
 
-### 2. Purchases
+### 2. Accounts and purchases
 
-**2.1** Apps offering transactional content or services must integrate and enable Roku Pay services including, but not limited to, signup/sign-in, payment, and entitlements/transactions within their app. Apps must comply with all requirements listed in the [Roku Pay integration requirements document](doc:roku-pay-requirements). Apps must disclose integration/use of all non-Roku SDKs and libraries, and app features that enable, facilitate, or link to monetary transactions or external webpages related to such transactions. Roku has the right to approve or deny such non-Roku SDKs, libraries, and app features. Apps may not facilitate or direct customers to use any method of payment and/or method of payment interface in connection with their app other than Roku Pay.
+**2.1** Apps offering transactional content or services must integrate and enable Roku Pay services including, but not limited to, signup/sign-in, payment, and entitlements/transactions within their app. Apps must comply with all requirements listed in the [Roku Pay integration requirements document](doc:roku-pay-requirements).
 
-**2.2** Apps that include authentication must complete account sign-ups and sign-ins on the device using [On-device authentication](doc:on-device-authentication). Sign-up and sign-in workflows are prohibited from including external webpages, links to off-device promotional or marketing materials, or utilizing off-device sign-up or sign-in mechanisms.
+**2.2** Apps must integrate [On-device authentication](doc:on-device-authentication). Sign-up/sign-in workflows are prohibited from using external webpages, links to off-device promotional or marketing materials, or any other 1st or 3rd-party off-device sign-up/sign-in/authentication/activation mechanism.
 
 Apps must complete upgrades and downgrades on the device using [On-device upgrade and downgrade](doc:on-device-upgrade-downgrade). The upgrade/downgrade workflows are prohibited from including external webpages.
 
@@ -150,9 +150,9 @@ Apps' ISU integration must include offers for lapsed and canceled subscribers. T
 
 Apps must return a product offer to Roku for all current non-subscribers. This ensures that all non-subscribed customers receive a product offer on all touchpoints. This helps drive subscription sign-ups, particularly for lapsed and cancelled customers.
 
-<br />
-
 **2.4** Apps are prohibited from including nested content or applications, additional content via browsers or embedded screens, deep links to other applications, or any cross-app functionality.
+
+**2.5** Apps must disclose integration/use of all non-Roku SDKs, libraries, and/or app features that enable, facilitate, or link to monetary transactions or external webpages related to such transactions. Roku has the right to approve or deny such non-Roku SDKs, libraries, and/or app features. Apps may not facilitate or direct customers to use any method of payment and/or method of payment interface in connection with their app other than Roku Pay.
 
 ### 3. Performance
 
@@ -160,7 +160,7 @@ Apps must return a product offer to Roku for all current non-subscribers. This e
 
 Apps must meet requirements 3.2–3.6 when measured specifically on the Roku Streaming Stick+ (Amarillo-2019 3810X) or the Roku Premiere+ (Gilbert 4K 3921X). If the performance requirement is not met on these specified devices, Roku reserves the right to block launch on all other Roku device types.
 
-**3.2** Apps must launch to a **fully rendered** home screen within 15 seconds. A signal beacon must be added to the app to measure launch times. The debug console can then be used to verify that the app's launch time is meeting this requirement. See [Measuring channel performance](doc:measuring-channel-performance) on how to measure app launch times.
+**3.2** Apps must launch to a **fully rendered** home screen within 15 seconds. A signal beacon must be added to the app to measure launch times. The debug console can then be used to verify that the app's launch time is meeting this requirement. See [Measuring app performance](doc:measuring-channel-performance) on how to measure app launch times.
 
 **3.3** Apps must have screen-to-screen (scene-to-scene) transitions that are within 3 seconds.
 
@@ -178,7 +178,7 @@ Roku's [Fast Video Start](doc:fast-video-start) is available to pre-buffer conte
 
 **3.7** The app's file size must be 4 MB or less.
 
-### 4. Channel operation
+### 4. App operation
 
 **4.1** App updates are prohibited from requiring reactivation/re-linking/re-login, and must persist saved data.
 
@@ -206,11 +206,13 @@ Apps must adhere to [Roku’s autoplay policy](doc:autoplay).
 
 **4.12** Apps must use [Roku voice keyboards](doc:dynamic-keyboard-base) for [email](doc:dynamic-keyboard), [PIN](doc:dynamic-pinpad), and [password](doc:dynamic-keyboard) entry.
 
-**4.13** Apps in the U.S. Roku Streaming Store that have streamed more than an average of 5 million hours per month over the last three months must implement Roku’s [Continue Watching](doc:continue-watching) feature. This requirement is also applicable to new apps projected to reach the specified streaming hours threshold shortly after launch. TVOD, live linear, and made-for-kids apps are excluded from this requirement.
+**4.13** Apps in the U.S. Roku Streaming Store that have streamed more than an average of 5 million hours per month over the last three months and apps outside the U.S. Streaming Store that have streamed more than an average of 1million hours per month over the last three months (effective October 1, 2026) must implement Roku’s [Continue Watching](doc:continue-watching) feature. This requirement is also applicable to new apps projected to reach the specified streaming hours threshold shortly after launch. TVOD, live linear, and made-for-kids apps are excluded from this requirement.
+
+**4.14** Apps in the U.S. Roku Streaming Store that have streamed more than an average of 5 million hours per month over the last three months must implement Roku’s [Instant Resume feature](doc:instant-resume) (effective October 1, 2026).
 
 ### 5. Deep linking
 
-**5.1** Apps must support deep linking for all media types, per Roku's [deep linking policy](doc:implementing-deep-linking). Live streams (and replays of live broadcast streams) may be exempt from this requirement.
+**5.1** Apps must support deep linking for all media types, per Roku's [deep linking policy](doc:implementing-deep-linking).
 
 **5.2**  Apps must implement [Direct to Play](doc:direct-to-play) to support direct voice playback commands for launching and playing content.
 

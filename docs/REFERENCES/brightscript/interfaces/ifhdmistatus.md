@@ -1,11 +1,11 @@
 ---
 title: "ifHdmiStatus"
-excerpt: ''
+excerpt: 'Interface for HDMI connection state and HDCP link version on Roku players'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'ifHdmiStatus'
+  description: 'Documents the ifHdmiStatus interface, which checks HDMI or MHL output connection and returns the HDCP link version on Roku streaming players.'
   robots: index
 next:
   description: ''
@@ -42,7 +42,7 @@ The version number of the HDCP link: 1.4 or 2.2.
 
 If an empty string is returned, HDCP is disabled. In this case, videos that require HDCP encryption cannot be played. Videos not requiring encryption should still be playable.
 
-> For code demonstrating how to check whether a Roku device (STB or TV) can play 4K content, see the [streaming specification](doc:streaming-specifications).
+> For code demonstrating how to check whether a Roku device (STB or TV) can play 4K content, see the [streaming specification](doc:media#detecting-4k-uhd-compatibility).
 
 ### IsHdcpActive(version as String) as Boolean
 

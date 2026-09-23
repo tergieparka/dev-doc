@@ -1,11 +1,11 @@
 ---
 title: Debugging
-excerpt: ''
+excerpt: 'Access debug console commands, telnet ports, and troubleshooting tools for Roku apps'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Debugging | Roku Developer Docs'
+  description: 'Use the debug console, telnet ports, and interactive debugger to view crash logs, stack traces, and app performance metrics while developing your Roku app.'
   robots: index
 next:
   description: ''
@@ -21,7 +21,7 @@ The debug console can be accessed using telnet through a shell
 application such as [PuTTY](http://www.putty.org/) for Windows or
 _terminal_ on Mac and Linux:
 
-```
+```bash
 telnet roku-ip-address 8085
 ```
 
@@ -84,17 +84,17 @@ publication.
 
 ### Cross-component backtrace
 
-As of Roku OS 14.6, you can use the `backtrace`, `up`, `down`, `over`, and `out` commands in the debug console on stack frames entered via `callFunc` or an observer callback, in addition to a normal BrightScript function call.
+As of [Roku OS 14.6](doc:release-notes#roku-os-146), you can use the `backtrace`, `up`, `down`, `over`, and `out` commands in the debug console on stack frames entered via `callFunc` or an observer callback, in addition to a normal BrightScript function call.
 
 For example, if roSgNode A calls into roSgNode B on the same thread (for example, via [CallFunc](doc:handling-application-events)) and then B breaks into the call, you can now view the calls belonging to both A and B in the backtrace of the thread.
 
 ### Type mismatch reporting
 
-As of Roku OS 10.5, the BrightScript debug console provides more specific reporting of "type mismatch" errors to help developers identify and resolve these types of bugs in their code. For example, attempting to evaluate whether an integer value equals a string in an expression (for example, if 12 = "number") results in the following error message: `Type mismatch. Operator "=" cannot be applied to "Integer" and "String"`.
+As of [Roku OS 10.5](doc:release-notes#roku-os-105), the BrightScript debug console provides more specific reporting of "type mismatch" errors to help developers identify and resolve these types of bugs in their code. For example, attempting to evaluate whether an integer value equals a string in an expression (for example, if 12 = "number") results in the following error message: `Type mismatch. Operator "=" cannot be applied to "Integer" and "String"`.
 
 ## SceneGraph applications
 
-Beginning with **Roku OS 7.5** and above, the main BrightScript
+Beginning with **[Roku OS 7.5](doc:release-notes#roku-os-75)** and above, the main BrightScript
 console (port 8085) provides context for all threads. This
 eliminates the need to have multiple telnet sessions open for each
 running thread and **ports 8089 - 8093** will no longer be used.
@@ -108,7 +108,7 @@ threads. All threads will be listed with the following information:
 
 The current selected thread will be marked with an `*`.
 
-```
+```brightscript
 BrightScript Micro Debugger.
 Enter any BrightScript statement, debug commands, or HELP.
 Suspending threads...
@@ -116,11 +116,11 @@ Thread selected:  0*   pkg:/source/Main.brs(19)                msg = wait(0, m.p
 Current Function:
 011:      m.port = CreateObject("roMessagePort")
 012:      screen.setMessagePort(m.port)
-013:  
+013:
 014:      'Create a scene and load /components/helloworld.xml'
 015:      scene = screen.CreateScene("HelloWorld")
 016:      screen.show()
-017:  
+017:
 018:      while(true)
 019:*         msg = wait(0, m.port)
 020:          msgType = type(msg)
@@ -159,68 +159,55 @@ ID    Location                                Source Code
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>brightscript\_warnings \[<em>num-warnings</em>]</td>
       <td>Sets the maximum number of BrightScript warnings displayed in the debug console. Warnings may indicate possible bugs in the code and therefore should be addressed.</td>
     </tr>
-
     <tr>
       <td>chanperf \[-r <em>seconds</em>]</td>
       <td>Prints the current memory and CPU utilization of an app (RAM usage is reported in KibiBytes \[KiB]).<br /><br /><strong>chanperf</strong><br />Sending this command with no arguments generates the following output on port 8080 for example:<br /><code>channel: mem=15156KiB\{anon=2720,file=12392,shared=44},%cpu=7\{user=1,sys=6}</code><br /><br /><strong>chanperf -r <em>seconds</em></strong><br />Executes and repeats the <strong>chanperf</strong> command the specified number of seconds and outputs the results to port 8085. To cancel a repeating command, use the chanperf command with no arguments or with the -r parameter set to 0 ("chanperf" or "chanperf -r 0"). Calling this command with the seconds parameter set to 10 generates the following output on port 8085 for example:<br /><code>channel: mem=27124KiB\{anon=9684,file=17372,shared=68},%cpu=43\{user=30,sys=13} repeat 10s (on dev console), chanperf -r 0 to stop</code><blockquote><p>The output for the chanperf -r <em>seconds</em> command is sent to port 8085. It is not displayed on port 8080</p></blockquote><strong>Error message</strong><br />If the app is not running, or if undefined attribute is missing from the manifest, the following output is generated:<br />undefined<blockquote><p>You can download a <a href="https://github.com/rokudev/sgnodes-all-demo">sample app</a> that demonstrates how to use the <strong>chanperf</strong> command.</p></blockquote></td>
     </tr>
-
     <tr>
       <td>logrendezvous \[on | off]</td>
       <td>Enable console logging of thread rendezvous. Set to off to disable.</td>
     </tr>
-
     <tr>
       <td>loaded\_textures</td>
       <td>Displays the current set of images loaded into texture memory.</td>
     </tr>
-
     <tr>
       <td>r2d2\_bitmaps</td>
-      <td>Prints a list of assets loaded into texture memory and the amount of free, used, and maximum available memory on your device, respectively. Starting with Roku OS 9.3, the name of each bitmap is included</td>
+      <td>Prints a list of assets loaded into texture memory and the amount of free, used, and maximum available memory on your device, respectively. Starting with [Roku OS 9.3](doc:release-notes#roku-os-93), the name of each bitmap is included</td>
     </tr>
-
     <tr>
       <td>remove\_plugin <em>app id</em></td>
       <td>Removes the indicated app from the local device, as well as from all devices linked to the same Roku account. For example, if an app has a <em>app id</em> of "987654\_cf9a", then the following command would remove it: <code>remove\_plugin 987654\_cf9a</code><br /><br />The list of available app ids can be seen in the second (from leftmost) column of the display produced by the <strong>plugins -m</strong> port 8080 command. The local device must be linked to a Roku account. <br /><br />To use this command, the local device must be linked to a Roku account. Apps are not removed on another device until it synchronizes with the Streaming Store (for example, via an automatic check for updates).</td>
     </tr>
-
     <tr>
       <td>sgnodes all</td>
-      <td>Prints every existing node created by the currently running app. <br /><br />As of Roku OS 14.5, you can use this command on your published app if the device is keyed with the same developer ID/key used to generate the app's package file.<br /><br />As of Roku OS 10.0, this prints the number of <strong>osref</strong> references to the node (held in the Roku platform) and <strong>bscref</strong> references (held in the app). The <strong>bcsref</strong> count includes references from "m." variable and local variables. Child references and field references do not increase <strong>bscref</strong> counts. <br /><br />The <strong>osref</strong> count also includes child references and references from Roku SceneGraph interface fields. For example, for any node with a parent, the parent will count as one <strong>osref</strong> on the child. Additionally, any field of type <strong>node</strong>, <strong>nodearray</strong>, or <strong>assocarray</strong> will add one <strong>osref</strong> to each node referenced from within that field. These could be in variables local to a function, arrays, or associative arrays, including a component global m or an associative array field of a node.<br /><br />The reported <strong>osref</strong> count may vary from release to release of Roku OS; the information here is provided only to give a sense of the kinds of items that the count includes. The <strong>bscref</strong> count provides a more relevant and accurate indication of the resources that the app itself controls.<br /><br />The <code>sgnodes all</code>, <code>sgnodes roots</code>, and <code>sgnodes node\_ID</code> commands are similar to the getAll() , getRoots() , getRootsMeta(), and getAllMeta() <a href="https://roku-ent.readme.io/dev/docs/ifsgnodechildren">ifSGNodeChildren</a> methods, which can be called on any SceneGraph node.</td>
+      <td>Prints every existing node created by the currently running app. <br /><br />As of [Roku OS 14.5](doc:release-notes#roku-os-145), you can use this command on your published app if the device is keyed with the same developer ID/key used to generate the app's package file.<br /><br />As of [Roku OS 10.0](doc:release-notes#roku-os-100), this prints the number of <strong>osref</strong> references to the node (held in the Roku platform) and <strong>bscref</strong> references (held in the app). The <strong>bcsref</strong> count includes references from "m." variable and local variables. Child references and field references do not increase <strong>bscref</strong> counts. <br /><br />The <strong>osref</strong> count also includes child references and references from Roku SceneGraph interface fields. For example, for any node with a parent, the parent will count as one <strong>osref</strong> on the child. Additionally, any field of type <strong>node</strong>, <strong>nodearray</strong>, or <strong>assocarray</strong> will add one <strong>osref</strong> to each node referenced from within that field. These could be in variables local to a function, arrays, or associative arrays, including a component global m or an associative array field of a node.<br /><br />The reported <strong>osref</strong> count may vary from release to release of Roku OS; the information here is provided only to give a sense of the kinds of items that the count includes. The <strong>bscref</strong> count provides a more relevant and accurate indication of the resources that the app itself controls.<br /><br />The <code>sgnodes all</code>, <code>sgnodes roots</code>, and <code>sgnodes node\_ID</code> commands are similar to the getAll() , getRoots() , getRootsMeta(), and getAllMeta() <a href="/dev/docs/ifsgnodechildren">ifSGNodeChildren</a> methods, which can be called on any SceneGraph node.</td>
     </tr>
-
     <tr>
       <td>sgnodes roots</td>
       <td>Prints every existing node without a parent created by the currently running app. The existence of these un-parented nodes means they are being kept alive by direct BrightScript references. These could be in variables local to a function, arrays, or associative arrays, including a component global m or an associative array field of a node.</td>
     </tr>
-
     <tr>
       <td>sgnodes node\_ID</td>
       <td>Prints nodes with an id field set to node\_ID, except it, bypasses all the hierarchy and rules and just runs straight down the whole list in the order of node creation. It will list multiple nodes if there are several that match.</td>
     </tr>
-
     <tr>
       <td>sgperf start|clear|report|stop</td>
       <td>Provides basic node operation performance metrics. This command tracks all node operations by a thread, whether it's being created or an operation on an existing node, and whether it involves a rendezvous. Settings: start - enables counting, clear - resets counters to zero, report - prints current counts with rendezvous as a percentage, stop - disables counting.</td>
     </tr>
-
     <tr>
       <td>sgversion force or default 1.0 or 1.1</td>
       <td>Changes the observer callback model and overrides the default rsg\_version specified in the manifest. For example, <code>sgversion force 1.0</code> will set rsg\_version=1.0 regardless of what is specified in the manifest. With default, it will set the default rsg\_version when it is not specified in the manifest. Changing the rsg\_version will require restarting the app, but these changes will not survive a device reboot. <br /><br />Support for the “rsg\_version=1.0” manifest flag is deprecated. This deprecation means that the 1.0 features are no longer supported (and thus should not be expected to work). All apps must adopt the current observer callback model in successive firmware updates.</td>
     </tr>
-
     <tr>
       <td>fps\_display</td>
       <td>Displays frames-per-second and free memory on-screen. Leverage this tool to optimize your app UI. Following are the commands to use the fps meter: fps\_display 1 turns on the fps meter. It presents a 1-second moving average of the current frame rate AND fps\_display 0 turns the meter back off.</td>
     </tr>
-
     <tr>
       <td>free</td>
       <td>Provides a snapshot of the amount of in-use and free memory on the device.</td>
@@ -244,7 +231,7 @@ This usually means that a BrightScript variable has been incorrectly spelled aft
 
 This message will often coincide with a blank screen. The line number at which the error is detected will be flagged with an asterisk, and the message will provide the name of the file in which the error was detected:
 
-```
+```brightscript
 020:*       smallexamplesize = smallexample.localBoundingRect()
 ...
 'Dot' Operator attempted with invalid BrightScript Component or interface reference. (runtime error &hec) in ...pkg:/components/smallexamplescene.xml(20)
@@ -253,7 +240,7 @@ This message will often coincide with a blank screen. The line number at which t
 
 This message will appear if a component by that name has either not been created, or an attempt is made to access a component member using an incorrectly spelled component name. Check the backtrace information supplied by the debugger for the component objects and variables used at the time of the error, and note the component objects listed as invalid:
 
-```
+```brightscript
 Backtrace:
 #0  Function init() As Void
    file/line: ...pkg:/components/smallexamplescene.xml(20)
@@ -270,7 +257,7 @@ centery          <uninitialized>
 
 Note also the variables that were assigned values from interface functions on invalid component objects will be listed as \<uninitialized>. Typically in Roku SceneGraph applications, the problem is caused by attempting to create a component object for a component class name that is not in either the built-in node classes, or extended node classes declared in the application package components directory. To fix this error, scroll up in the debugger output to the point at which the component object creation error occurred, which will have the following error message:
 
-```
+```brightscript
 BRIGHTSCRIPT: ERROR: roSGNode: Failed to create roSGNode with type Rectangleexample: ...pkg:/components/smallexamplescene.xml(16)
 ```
 
@@ -280,7 +267,7 @@ This shows the file and line number where the actual component object creation e
 
 This often indicates that the ContentNode assigned to the content field of the list or grid either does not exist, or was assigned after focus was set on the list or grid. Ensure that the ContentNode has been created successfully at the time it is assigned to the list or grid content field. Then check that focus was set on the list or grid after the content field is assigned a valid ContentNode. Since you will generally be generating a ContentNode by parsing data from an XML or JSON file downloaded from your server in a Task node (or possibly downloaded as "singleton" at the time the SceneGraph app was created in the main.brs file and converted), make sure you set the content field and focus on the list or grid in this way:
 
-```
+```brightscript
 sub showvideolist()
   m.videolist.content = m.readVideoContentTask.videocontent
   m.videolist.setFocus(true)
@@ -291,7 +278,7 @@ This is a typical callback function that is triggered by the ContentNode being c
 
 Also, if you are having problems with a callback function not assigning a valid ContentNode, carefully check that the field observers were set before the Task node was configured and launched (but after the Task node object was created). For example, for the above example, the Task node object should have been created, had the field observers set, configured, and launched, in that order:
 
-```
+```brightscript
 m.readVideoContentTask = createObject("RoSGNode","MetaDataCR")
 m.readVideoContentTask.observeField("videocontent","showvideolist")
 m.readVideoContentTask.metadatauri = "pkg:/server/videometadata.xml"
@@ -324,6 +311,6 @@ You can also use the equivalent sgnodes debugger commands (see Special SceneGrap
 
 ## Debugging video lesson
 
-You can learn how to debug apps by watching the [Debugging channels](doc:debugging) video lesson in Roku's [SceneGraph: Build a Channel online video course](doc:rsg).
+You can learn how to debug apps by watching the [Debugging apps](doc:debugging) video lesson in Roku's [SceneGraph: Build an App online video course](doc:rsg).
 
 This lesson describes how to view the crash logs, stack traces, and app performance metrics in the console. And it guides you on how to use the interactive debugger to type commands for checking and updating variable values, calling functions, and stepping through the application.

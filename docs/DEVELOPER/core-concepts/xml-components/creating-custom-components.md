@@ -1,11 +1,11 @@
 ---
 title: Creating custom components
-excerpt: ''
+excerpt: 'Define and extend custom SceneGraph components using XML markup'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Creating custom components | Roku Developer Docs'
+  description: 'Define custom SceneGraph components in XML by extending Scene, Group, or built-in node classes and adding interface fields, scripts, and child nodes.'
   robots: index
 next:
   description: ''
@@ -40,25 +40,22 @@ follows:
 
 **Defining Custom Components in XML Markup**
 
-```
+```xml
 <children>
-
   <Rectangle
-    id = "infoRectangle"
-    translation = "[0,40]"
-    height = "460"
-    width = "520"
-    color = "0x00000099" >
-
+    id="infoRectangle"
+    translation="[0,40]"
+    height="460"
+    width="520"
+    color="0x00000099">
     <Label
-      id = "infoLabel"
-      translation = "[15,15]"
-      height = "430"
-      width = "490"
-      wrap = "true"
-      font = "font:MediumBoldSystemFont" />
-  </Rectangle>  
-
+      id="infoLabel"
+      translation="[15,15]"
+      height="430"
+      width="490"
+      wrap="true"
+      font="font:MediumBoldSystemFont" />
+  </Rectangle>
 </children>
 ```
 
@@ -73,15 +70,11 @@ component file by creating it using that name. For example, to use it by
 declaring it in the XML markup in the **\<children>** element of an XML
 component file:
 
-```
+```xml
 <children>
-
-    ...
-
-    <textbox />
-
-    ...
-
+  ...
+  <textbox />
+  ...
 </children>
 ```
 
@@ -101,7 +94,7 @@ focus.
 
 **MainScene.brs file**
 
-```
+```brightscript
 function init() as void
     customView = CreateObject("roSGNode", "CustomView")
     m.top.appendChild(customView)

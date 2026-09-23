@@ -2,7 +2,7 @@
 title: ifSGNodeChildren
 excerpt: ''
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''
@@ -20,21 +20,21 @@ The ifSGNodeChildren interface allows querying and manipulation of nodes in a Sc
 
 To use the methods in this interface to manipulate child nodes at the scene level, the subject nodes must be wrapped in another element, typically a Group node. For example:
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
-<component name = "myScene" extends = "Scene" >
-  <script type = "text/brightscript" >
+<component name="myScene" extends="Scene">
+  <script type="text/brightscript">
     <![CDATA[
-    sub init()
-      m.myGroup = m.top.FindNode("myGroup")
-      m.label = m.myGroup.getChild(0)
-    end sub
+      sub init()
+        m.myGroup = m.top.FindNode("myGroup")
+        m.label = m.myGroup.getChild(0)
+      end sub
     ]]>
   </script>
 
   <children>
-    <Group id = "myGroup">
-      <Label id = "myLabel" ... />
+    <Group id="myGroup">
+      <Label id="myLabel" ... />
     </Group>
   </children>
 </component>
@@ -42,19 +42,19 @@ To use the methods in this interface to manipulate child nodes at the scene leve
 
 In the example above, m.label will contain the roSGNode corresponding to the Label node after the getChild() call. On the other hand, the following will not work:
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
-<component name = "myScene" extends = "Scene" >
-  <script type = "text/brightscript" >
+<component name="myScene" extends="Scene">
+  <script type="text/brightscript">
     <![CDATA[
-    sub init()
-      m.label = m.top.getChild(0)
-    end sub
+      sub init()
+        m.label = m.top.getChild(0)
+      end sub
     ]]>
   </script>
 
   <children>
-    <Label id = "myLabel" ... />
+    <Label id="myLabel" ... />
   </children>
 </component>
 ```
@@ -231,13 +231,6 @@ Moves the subject node to another parent node.
   </tbody>
 </table>
 
-=======
-
-| Name            | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| --------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| newParent       | roSGNode | The new parent node where the child node is to be moved.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| adjustTransform | Boolean  | Specifies whether the translation, rotation, and scale of the node are adjusted so that the node has the same transformation factors relative to the screen as it previously did.<br /><br />If **adjustTransform** is true, the subject node transformation factor fields (translation/rotation/scale) are adjusted so that the node has the same transformation factors relative to the screen as it previously did.<br /><br />If **adjustTransform** is false, the subject node is simply parented to the new node without adjusting its transformation factor fields, in which case, the reparenting operation could cause the node to jump to a new position on the screen. |
-
 #### Return Value
 
 A flag indicating whether the node that was successfully moved to another parent node.
@@ -325,7 +318,7 @@ Takes the key-value pairs in an roAssociativeArray and maps the values to the re
 
 The following example demonstrates how to use this method:
 
-```
+```brightscript
 aa = {"a":"1", "b":"2", "c":"3", "d":"4"}
 cn = createObject("roSGNode", "contentNode")
 cn.addfield("a","string",false)
@@ -352,7 +345,7 @@ cn.update(aa,false)
 
 Replaces the child nodes in the subject node, starting at the position specified by index, with new child nodes specified by child_nodes
 
-> Starting from Roku OS 8.1, when using this method to update the content of each item in a markupGrid, if more items are supplied than there are in the original list (going from 4 items to 5), the 'extra' items are ignored and not added as children. The [appendChildren()](#appendchildchild-as-rosgnode-as-boolean) function can be used to add the extra items.
+> Starting from [Roku OS 8.1](doc:release-notes#roku-os-81), when using this method to update the content of each item in a markupGrid, if more items are supplied than there are in the original list (going from 4 items to 5), the 'extra' items are ignored and not added as children. The [appendChildren()](#appendchildchild-as-rosgnode-as-boolean) function can be used to add the extra items.
 
 #### Parameters
 
@@ -413,7 +406,7 @@ The node's root Scene.
 
 The following methods can be called on any subject node and return the same global results. They can be used in a development app for debugging purposes, but should not be used in a production app.
 
-<p>>These methods are similar to the debugger sgnodes commands. See <a href="https://roku-ent.readme.io/dev/docs/debugging#scenegraph-debug-server-port-8080-commands">Special SceneGraph Debugging Commands</a> for information on the debugger sgnodes commands. Also please note that calling these functions from code should only be done for debugging purposes. Any calls to <a href="#getall-as-object">getAll()</a>, <a href="#getroots-as-object">getRoots()</a>, <a href="#getrootsmeta-as-object">getRootsMeta()</a> and <a href="#getallmeta-as-object">getAllMeta()</a> should be removed from your production channels. |</p>
+<p>>These methods are similar to the debugger sgnodes commands. See <a href="/dev/docs/debugging#scenegraph-debug-server-port-8080-commands">Special SceneGraph Debugging Commands</a> for information on the debugger sgnodes commands. Also please note that calling these functions from code should only be done for debugging purposes. Any calls to <a href="#getall-as-object">getAll()</a>, <a href="#getroots-as-object">getRoots()</a>, <a href="#getrootsmeta-as-object">getRootsMeta()</a> and <a href="#getallmeta-as-object">getAllMeta()</a> should be removed from your production channels. |</p>
 
 ### getAll() as Object
 

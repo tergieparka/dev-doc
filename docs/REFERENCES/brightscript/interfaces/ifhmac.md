@@ -1,11 +1,11 @@
 ---
 title: "ifHMAC"
-excerpt: ''
+excerpt: 'Interface exposing OpenSSL HMAC methods for generating message authentication codes'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'ifHMAC'
+  description: 'Documents the ifHMAC interface, which provides Setup, Reinit, Process, Update, and Final methods for generating a MAC using OpenSSL HMAC functions.'
   robots: index
 next:
   description: ''
@@ -54,7 +54,7 @@ An integer indicating whether the function succeeded (0) or failed (1).
 
 Digests the data in an array generates a MAC. Calling this method is the same as making the following calls:
 
-```
+```brightscript
 hmac.Reinit()
 hmac.Update(message)
 mac = hmac.Final()

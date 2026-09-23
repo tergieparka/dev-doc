@@ -1,12 +1,13 @@
 ---
 title: Specifying display resolution
+excerpt: 'Set target resolutions and enable automatic scaling across SD, HD, and FHD'
 deprecated: false
-hidden: true
+hidden: false
 link:
   new_tab: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Specifying display resolution | Roku Developer Docs'
+  description: 'Specify intended display resolutions in the manifest file and use automatic scaling across SD, HD, and FHD displays for your application.'
   robots: index
 ---
 
@@ -56,7 +57,6 @@ You specify the intended support for various screen display resolutions in speci
       <td><strong>Description</strong></td>
       <td><strong>Example</strong></td>
     </tr>
-
     <tr className="even">
       <td><p>ui_resolutions</p></td>
       <td><p>option list string</p></td>
@@ -93,7 +93,6 @@ You specify the intended support for various screen display resolutions in speci
         <p> </p>
       </td>
     </tr>
-
     <tr className="odd">
       <td>uri_resolution_autosub</td>
       <td>option list string</td>
@@ -110,14 +109,12 @@ You specify the intended support for various screen display resolutions in speci
       </td>
       <td><code>$$RES$$,SD,HD,FHD</code></td>
     </tr>
-
     <tr className="even">
       <td>splash_screen_fhd</td>
       <td>uri</td>
       <td>URI of the FHD version of the splash screen.</td>
       <td><code>"pkg:/images/sge_fhd_splash.jpg"</code></td>
     </tr>
-
     <tr className="odd">
       <td>mm_icon_focus_fhd</td>
       <td>uri</td>

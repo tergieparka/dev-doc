@@ -1,16 +1,16 @@
 ---
 title: Analytics Reports
-excerpt:
+excerpt: 'Access analytics and sales report dashboards for app health, viewership, and transactions'
 deprecated: false
-hidden: true
+hidden: false
 link:
   new_tab: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Analytics Reports | Roku Developer Docs'
+  description: 'Roku''s web-based analytics and sales reports provide standardized dashboards covering app health, viewership, engagement, and transaction data for your app.'
   robots: index
 ---
-Apps have access to web-based app analytics and sales reports through Roku's Developer Dashboard. This allows you to analyze your app's health, viewership trends, and metrics for specific titles and devices. The following video highlights the different app analytics available to you.
+You can use Roku's web-based app analytics and sales reports to analyze your app's health, viewership trends, and metrics for specific titles and devices. The following video highlights the different app analytics available to you.
 
 <video title="Roku Channel Analytic Reports" poster="https://image.roku.com/ZHZscHItMTc2/channel-analytics-poster.png" src="https://image.roku.com/ZHZscHItMTc2/channel-analytics.mp4" width="720" height="480" controls />
 
@@ -28,16 +28,16 @@ Reports also distinguish between "visitors" and "viewers" according to the follo
 
 * Unique visitor and unique viewer counts depend on the time period of measurement, so adding up daily visitors over the course of the week will differ from taking a weekly visitor measurement because some accounts may visit an app multiple times per week.
 
-## Available reports in Developer Dashboard
+## Available reports
 
 Roku automatically generates the following app analytics and sales reports as [Looker](https://looker.com/guide) dashboards for your app (Looker is the business intelligence platform that Roku uses for providing app analytics):
 
 **Analytics:**
 
-* [Channel Engagement](doc:channel-engagement) - installs, visits and streaming data for all apps
-* [Channel Health](doc:channel-health) - BrightScript crashes and buffering data for all apps
+* [App Engagement](doc:channel-engagement) - installs, visits and streaming data for all apps
+* [App Health](doc:channel-health) - BrightScript crashes and buffering data for all apps
 * [Viewership Summary](doc:viewership-summary) - small selection of app engagement and app health data.
-* [Channel Stability](doc:channel-stability): BrightScript crashes and memory closures for all apps across all Roku device models.
+* [App Stability](doc:channel-stability): BrightScript crashes and memory closures for all apps across all Roku device models.
 
 **Sales reports:**
 
@@ -53,15 +53,15 @@ Roku automatically generates the following app analytics and sales reports as [L
 
 ### App Analytics
 
-To open an app analytics report in the Developer Dashboard, follow these steps:
+To open an app analytics report, follow these steps:
 
 1. Click **Analytics** in the left sidebar.
 
-2. Click the tab for the report you want to view (the **Channel Health** report is selected by default).
+2. Click the tab for the report you want to view (the **App Health** report is selected by default).
 
 3. Select the app you want to analyze from the drop-down list. Alternatively, you can click **Public channels** or **Beta app** and then click the analytics icon for the app or select an app and then click **View analytics**.
 
-   <Image alt="roku815px - analytics-report-tabs" border={false} src="https://image.roku.com/ZHZscHItMTc2/channel-stability-report-v4.png" title="analytics-report-tabs" />
+   ![roku815px - analytics-report-tabs](https://image.roku.com/ZHZscHItMTc2/channel-stability-report-v4.png "analytics-report-tabs")
 
 ### Sales reports
 
@@ -73,7 +73,7 @@ To open a sales report in the Developer Dashboard, follow these steps:
 
 3. Select the app you want to analyze from the drop-down list.
 
-   <Image alt="roku815px - sales-reports-list" border={false} src="https://image.roku.com/ZHZscHItMTc2/sales-reports-left-nav.png" title="financial-reports-list" />
+   ![roku815px - sales-reports-list](https://image.roku.com/ZHZscHItMTc2/sales-reports-left-nav.png "financial-reports-list")
 
 ## Updating and saving reports
 
@@ -89,14 +89,14 @@ All reports contain a FILTERS section at the top where you can select the app da
 
 Dashboards may contain several sections and changing filters will cause some sections to update the values displayed while others may not. This depends on what is being measured and how it relates to the changed filter. For instance, total installs is a point-in-time measurement, so changing the Time Grain filter will not change the value displayed for that metric while changing the Time Period will.  Users must click on the "Run" button to update values after changing a filter.
 
-<Image alt="roku815px - analytics-2-filter-section" border={false} src="https://image.roku.com/ZHZscHItMTc2/analytics-report-filters.png" title="analytics-2" />
+![roku815px - analytics-2-filter-section](https://image.roku.com/ZHZscHItMTc2/analytics-report-filters.png "analytics-2")
 
 Information on available filters is also included in the discussion of individual dashboards, and not all of the same filters will be available on all reports.  The most common filters include:
 
 * **Time Period** - Sets the data sample period for the entire report. Changing this filter changes measurements for the entire report.  By default, Time Period is set to "8 days ago for 7 days" in most reports to include the most recent 7 complete day period; the most recent day is always an incomplete day.
 * **Time Grain** - Changing this filter changes the values of metrics with a time dimensions, such as visitors or viewers.  The "day" Time Grain equates to a daily aggregate measurement, "week" to a weekly aggregate and "month" to a monthly aggregate.  Any conflicts between Time Grain and Time Period (e.g. a Time Grain longer than the Time Period specified) will prevent data from displaying correctly.
 * **Streaming Store Code** - Identifies the [code for a market](https://developer.roku.com/publish/analytics-metrics/analytics-index#usingchannelstorecodes), usually a country code, where your app can legally be distributed (i.e. made available for download to a Roku device). More than one code is allowed. Leave Streaming Store Code blank to include all markets where your app is currently published or enter one or more codes to display only data on specific markets.
-* **Device Type** - Available in the Channel Health dashboard, this filters data to specific types of Roku devices.
+* **Device Type** - Available in the App Health dashboard, this filters data to specific types of Roku devices.
 
 ## Exporting reports
 
@@ -106,11 +106,11 @@ To export data from a report, follow the steps below:
 
 2. Click the "three-dot" (**...**) button in the upper-right portion of the report's table-heading, and then click **Download**.
 
-   <Image alt="roku815px - Trans Main showing three-dot" border={false} src="https://image.roku.com/ZHZscHItMTc2/download-analytics-report-1.png" />
+   ![roku815px - Trans Main showing three-dot](https://image.roku.com/ZHZscHItMTc2/download-analytics-report-1.png)
 
 3. The Download dialog appears. The **File Format** field provides PDF (default) and CSV output options. If you select PDF, optionally configure the report layout settings (paper size, table row visibility, and dashboard tiles arrangement).
 
-   <Image alt="roku815px - Trans Download Dialog" border={false} src="https://image.roku.com/ZHZscHItMTc2/download-analytics-report-2.png" />
+   ![roku815px - Trans Download Dialog](https://image.roku.com/ZHZscHItMTc2/download-analytics-report-2.png)
 
 4. Click **Download** to export the report to your local machine. If you are downloading the report as a PDF, you can alternatively click **Open in Browser** to open the report in a new tab in your web browser.
 
@@ -120,11 +120,11 @@ You can create a schedule to automatically email a report in a recurring daily, 
 
 1. Click the "three-dot" (**...**) button in the upper-right portion of the generated report's table-heading, and then click **Schedule Delivery**.
 
-   <Image alt="roku815px - roku_pay_transactions_schedule" border={false} src="https://image.roku.com/ZHZscHItMTc2/schedule-analytics-report-1.png" title="roku-pay-transactions-schedule" />
+   ![roku815px - roku\_pay\_transactions\_schedule](https://image.roku.com/ZHZscHItMTc2/schedule-analytics-report-1.png "roku-pay-transactions-schedule")
 
 2. The **Schedule Delivery** dialog opens.
 
-   <Image alt="roku600px - roku_pay_transactions_schedule" border={false} src="https://image.roku.com/ZHZscHItMTc2/engagement-report-destinations-s3.png" title="roku-pay-transactions-schedule" />
+   ![roku600px - roku\_pay\_transactions\_schedule](https://image.roku.com/ZHZscHItMTc2/engagement-report-destinations-s3.png "roku-pay-transactions-schedule")
 
 3. In the **Settings** tab, enter the following properties:
 
@@ -135,23 +135,19 @@ You can create a schedule to automatically email a report in a recurring daily, 
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>Schedule name</td>
-      <td>By default, the report name is based on the report type (for example, "Channel Engagement" or "Channel Health"). <br /><br />It is recommended that you enter a descriptive name for the schedule that makes it easy to identify in your list of schedules. For example, you can include the app name, format, frequency, time period or any other relevant information that distinguishes the schedule.</td>
+      <td>By default, the report name is based on the report type (for example, "App Engagement" or "App Health"). <br /><br />It is recommended that you enter a descriptive name for the schedule that makes it easy to identify in your list of schedules. For example, you can include the app name, format, frequency, time period or any other relevant information that distinguishes the schedule.</td>
     </tr>
-
     <tr>
       <td>Recurrence</td>
       <td>Configure the cadence used to email the report. You can send the report <strong>Daily</strong>, <strong>Weekly</strong>, <strong>Monthly</strong>, <strong>Hourly</strong>, or <strong>By Minute</strong>, or on specific months or days:<ul><li><strong>Daily</strong>. Email the report every day, every weekday, or one ore more specific days. The report is emailed every day at 8:00AM by default.</li><li><strong>Weekly</strong>. Email the report once a week on a specific day and time. The report is emailed every Monday at 8:00AM by default.</li><li><strong>Monthly</strong>. Email the report once a month on a specific date and time, every quarter (January, April, July, and October), or one or more specific months. The report is emailed on the 1st of each month at 6:00AM by default.</li><li><strong>Hourly</strong>. Email the report every 1, 2, 3, 4, 6, 8, or 12 hours within a specific time range. You can configure on which 5-minute interval the report is sent. The report is emailed every hour on the hour between 6:00AM and 6:00PM by default.</li><li><strong>By Minute</strong>. Email the report every 5, 10, 15, 20, 25, 30 minutes within a specific time range. The report is emailed every 5 minutes between 6:00AM and 6:00PM by default.</li></ul>Once you select a cadence, configure the <strong>Time</strong> to send the report.</td>
     </tr>
-
     <tr>
       <td>Destination</td>
-      <td>Select one of the following destinations to send the report:<ul><li><strong>Email</strong>: Send the report to one on more recipients by entering their email address and then clicking <strong>Add</strong>. Optionally, select the <strong>Include a Custom Message</strong> check box to include any additional information in the body of the email message.</li><li><strong>Webhook</strong>: Enter the Webhook URL.</li><li><strong>Amazon S3</strong>: Enter the S3 bucket, path (optional), access key, secrey key, and region.</li><li><strong>SFTP</strong>: Enter the address, username, password, and preferred key exchange algorithm.</li></ul>The SFTP, S3, and Webhook options enable you to create automation pipelines for ingesting Roku analytics into your backend systems.</td>
+      <td>Select one of the following destinations to send the report:<ul><li><strong>Email</strong>: Send the report to one on more recipients by entering their email address and then clicking <strong>Add</strong>. Optionally, select the <strong>Include a Custom Message</strong> check box to include any additional information in the body of the email message.</li><li><strong>Webhook</strong>: Enter the Webhook URL.</li><li><strong>Amazon S3</strong>: Enter the S3 bucket, path (optional), access key, secret key, and region.</li><li><strong>SFTP</strong>: Enter the address, username, password, and preferred key exchange algorithm.</li></ul>The SFTP, S3, and Webhook options enable you to create automation pipelines for ingesting Roku analytics into your backend systems.</td>
     </tr>
-
     <tr>
       <td>Format</td>
       <td>Select whether to attach the Transaction Report as a <strong>PDF</strong> (tiled or single column), <strong>PNG Visualization</strong> (tiled or single-column chart in a PNG file), or CSV zip file.</td>
@@ -161,11 +157,11 @@ You can create a schedule to automatically email a report in a recurring daily, 
 
 4. Optionally, click the **Filters** tab to edit the currently configured time periods to include in the report.
 
-   <Image alt="roku600px - roku_pay_transactions_schedule" border={false} src="https://image.roku.com/ZHZscHItMTc2/schedule-delivery-filters-tab.png" title="roku-pay-transactions-schedule" />
+   ![roku600px - roku\_pay\_transactions\_schedule](https://image.roku.com/ZHZscHItMTc2/schedule-delivery-filters-tab.png "roku-pay-transactions-schedule")
 
 5. Optionally, expand **Advanced Options** to configure the visualizations, data formatting, and hyperlinks in the email and the attached report.
 
-   <Image alt="roku600px - roku_pay_transactions_schedule" border={false} src="https://image.roku.com/ZHZscHItMTc2/schedule-delivery-adanced-tab.png" title="roku-pay-transactions-schedule" />
+   ![roku600px - roku\_pay\_transactions\_schedule](https://image.roku.com/ZHZscHItMTc2/schedule-delivery-adanced-tab.png "roku-pay-transactions-schedule")
 
 6. Optionally, click **Send Test** to send the report to the list of email recipients in the selected format.
 
@@ -201,6 +197,6 @@ Each Streaming Store code consists of two or more letters, such as "US" for Unit
 * SV - El Salvador
 * US - United States
 
-In Developer Dashboard you can find out which countries your app has been published in by navigating to **Manage My Channels** > **Preview and Publish** > **Properties**.
+In Developer Dashboard you can find out which countries your app has been published in by navigating to **Manage My Apps** > **Preview and Publish** > **Properties**.
 
-<Image alt="roku815px - analytics-6-published-countries" border={false} src="https://image.roku.com/ZHZscHItMTc2/analytics-6b.png" title="analytics-6" />
+![roku815px - analytics-6-published-countries](https://image.roku.com/ZHZscHItMTc2/analytics-6b.png "analytics-6")

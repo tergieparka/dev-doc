@@ -1,11 +1,11 @@
 ---
 title: "roEVPDigest"
-excerpt: ''
+excerpt: 'Interface to OpenSSL EVP message digest algorithms for cryptographic hashing'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'roEVPDigest'
+  description: 'roEVPDigest provides an interface to the OpenSSL EVP library of message digest algorithms, processing arbitrary data to generate a cryptographic hash.'
   robots: index
 next:
   description: ''
@@ -29,18 +29,18 @@ roEVPDigest processes an arbitrary amount of data and generates a hash of the da
 
 **Example: SHA1 Message Digest with roEVPDigest**
 
-~~~
+```brightscript
 ba = CreateObject("roByteArray")
 ' ...populate bytearray...
 digest = CreateObject("roEVPDigest")
 digest.Setup("sha1")
 result = digest.Process(ba)
 print result
-~~~
+```
 
 **Example: MD5 Message Digest with roEVPDigest**
 
-~~~
+```brightscript
 ba1 = CreateOjbect("roByteArray")
 ' ...populate ba1...
 ba2 = CreateObject("roByteArray")
@@ -51,7 +51,7 @@ digest.Update(ba1)
 digest.Update(ba2)
 result = digest.Final()
 print result
-~~~
+```
 
 
 ## Supported interfaces

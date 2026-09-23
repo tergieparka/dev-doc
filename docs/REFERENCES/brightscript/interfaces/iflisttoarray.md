@@ -1,11 +1,11 @@
 ---
 title: "ifListToArray"
-excerpt: ''
+excerpt: 'Interface providing ToArray() to convert a list into an roArray object'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'ifListToArray'
+  description: 'Documents the ifListToArray interface, which provides the ToArray() method that returns an roArray containing the same elements as the list.'
   robots: index
 next:
   description: ''
@@ -24,7 +24,7 @@ next:
 
 ### ToArray() As Object
 
-> This function is available in Roku OS 8.0 or later
+> This function is available in [Roku OS 8.0](doc:release-notes#roku-os-8) or later
 
 #### Description
 

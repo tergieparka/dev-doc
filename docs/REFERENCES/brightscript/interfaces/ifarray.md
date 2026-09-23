@@ -1,11 +1,11 @@
 ---
 title: ifArray
-excerpt: ''
+excerpt: 'Interface providing Push, Pop, Peek, Shift, and other array manipulation methods'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'ifArray'
+  description: 'Documents the ifArray interface, which provides methods such as Push, Pop, Peek, Shift, Unshift, Delete, Count, Clear, and Append for manipulating arrays.'
   robots: index
 next:
   description: ''
@@ -15,10 +15,10 @@ next:
 
 | Name                                                                                                                                | Description                                                                                                                                     |
 | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| <Anchor label="roArray" title="roArray" href="https://roku-ent.readme.io/dev/docs/roarray">roArray</Anchor>                 | An array stores an indexed collection of BrightScript objects. Each entry of an array can be a different type, or they may all of the same type |
-| <Anchor label="roByteArray" title="roByteArray" href="https://roku-ent.readme.io/dev/docs/robytearray">roByteArray</Anchor> | The byte array component is used to contain and manipulate an arbitrary array of bytes                                                          |
-| <Anchor label="roList" title="roList" href="https://roku-ent.readme.io/dev/docs/rolist">roList</Anchor>                     | The list object implements the interfaces: ifList, ifArray, ifEnum and therefore can behave like an array that can dynamically add members      |
-| <Anchor label="roXMLList" title="roXMLList" href="https://roku-ent.readme.io/dev/docs/roxmllist">roXMLList</Anchor>         | Contains a list of roXML objects                                                                                                                |
+| <Anchor label="roArray" title="roArray" href="/dev/docs/roarray">roArray</Anchor>                 | An array stores an indexed collection of BrightScript objects. Each entry of an array can be a different type, or they may all of the same type |
+| <Anchor label="roByteArray" title="roByteArray" href="/dev/docs/robytearray">roByteArray</Anchor> | The byte array component is used to contain and manipulate an arbitrary array of bytes                                                          |
+| <Anchor label="roList" title="roList" href="/dev/docs/rolist">roList</Anchor>                     | The list object implements the interfaces: ifList, ifArray, ifEnum and therefore can behave like an array that can dynamically add members      |
+| <Anchor label="roXMLList" title="roXMLList" href="/dev/docs/roxmllist">roXMLList</Anchor>         | Contains a list of roXML objects                                                                                                                |
 
 ## Supported methods
 
@@ -42,7 +42,7 @@ Returns the last entry (highest index) from the array and removes it from the ar
 
 The last (highest index) array entry.
 
-### Push(tvalue As Dynamic) As Void
+### Push(value As Dynamic) As Void
 
 #### Description
 
@@ -52,29 +52,29 @@ Adds the specified value to the end of the array.
 
 | Name   | Type    | Description                                    |
 | ------ | ------- | ---------------------------------------------- |
-| tvalue | Dynamic | The value to be added to the end of the array. |
+| value  | Dynamic | The value to be added to the end of the array. |
 
 ### Shift() As Dynamic
 
 #### Description
 
-Removes the first entry (zero index) from the beginning of the array and shifts the other entries up. This method is similar to the [Pop method](#pushtvalue-as-dynamic-as-void), but removes the first entry in the array instead of the last one.
+Removes the first entry (zero index) from the beginning of the array and shifts the other entries up. This method is similar to the [Pop method](#pop-as-dynamic), but removes the first entry in the array instead of the last one.
 
 #### Return Value
 
 The first entry (zero index) removed from the array.
 
-### Unshift(tvalue As Dynamic) As Void
+### Unshift(value As Dynamic) As Void
 
 #### Description
 
-Adds the specified value to the beginning of the array (at the zero index) and shifts the other entries down. This method is similar to the [Push method](#push-as-dynamic), but adds the new entry to the beginning of the array instead of to the end.
+Adds the specified value to the beginning of the array (at the zero index) and shifts the other entries down. This method is similar to the [Push method](#pushvalue-as-dynamic-as-void), but adds the new entry to the beginning of the array instead of to the end.
 
 #### Parameters
 
 | Name   | Type    | Description                                          |
 | ------ | ------- | ---------------------------------------------------- |
-| tvalue | Dynamic | The value to be added to the beginning of the array. |
+| value  | Dynamic | The value to be added to the beginning of the array. |
 
 ### Delete(index as Integer) As Boolean
 

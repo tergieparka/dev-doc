@@ -1,11 +1,11 @@
 ---
 title: Creating TVOD apps (Catalog 1.0)
-excerpt: ''
+excerpt: 'Implement transactional video on demand with Roku Pay and the ChannelStore node'
 deprecated: false
-hidden: true
+hidden: false
 metadata:
-  title: ''
-  description: ''
+  title: 'Creating TVOD apps (Catalog 1.0) | Roku Developer Docs'
+  description: 'Create TVOD apps using Roku Pay by setting up in-app products and using the ChannelStore node to handle rental and purchase transactions.'
   robots: index
 next:
   description: ''
@@ -14,11 +14,11 @@ next:
 
 Publishers participating in Roku Pay can monetize content by making it available for rental or purchase. Implementing the transactional video on demand (TVOD) model in a Roku app allows publishers to generate revenue from sporting events, pay-per-views, recent movie releases, and other popular content in their catalog. This enables viewers to enjoy the convenience of consuming a publisher's must-see content on-demand.
 
-<Image alt="roku815px - tvod-sample-UI" border={false} src="https://image.roku.com/ZHZscHItMTc2/tvod-movie-v2.png" />
+![roku815px - tvod-sample-UI](https://image.roku.com/ZHZscHItMTc2/tvod-movie-v2.png)
 
 ## Overview
 
-Offering transactional content in an app entails [creating in-app products](doc:in-channel-products) for the content in the Developer Dashboard and using the [ChannelStore node](doc:channelstore) to [check the user's billing status](doc:channelstore) and [complete the rental or purchase transaction](doc:channelstore).
+Offering transactional content in an app entails [creating in-app products](doc:product-catalog) for the content in the Developer Dashboard and using the [ChannelStore node](doc:channelstore) to [check the user's billing status](doc:channelstore#requestpartnerorder) and [complete the rental or purchase transaction](doc:channelstore#confirmpartnerorder).
 
 > This workflow is intended for:
 >
@@ -27,7 +27,7 @@ Offering transactional content in an app entails [creating in-app products](doc:
 
 ## Creating in-app products for TVOD
 
-To link transactional content with Roku Pay, you create in-app products in the Developer Dashboard. With the TVOD model, in-app products only need to be created for each [product category](doc:in-channel-products) (video, audio, game, or app/utility). For example, if you plan on offering movie rentals, you only need to create a single product that has the video category.
+To link transactional content with Roku Pay, you create in-app products in the Developer Dashboard. With the TVOD model, in-app products only need to be created for each [product category](doc:product-catalog) (video, audio, game, or app/utility). For example, if you plan on offering movie rentals, you only need to create a single product that has the video category.
 
 To manage multiple transactional content items using the same in-app product, your app can leverage your product feed or publisher-specific API to retrieve the item's metadata from your catalog at runtime. When a user selects the content to be purchased, your app can use the runtime metadata to display the item's title, price, and poster image and pass the item's SKU through the ChannelStore functions in order to identify for which item to grant the user access.
 
@@ -38,11 +38,11 @@ When creating an in-app product for transactional content, make sure to do the f
 * **Quantity**. Select **1**.
 * **Price Tier**. Select any price tier. The price passed in the ChannelStore APIs overrides the price corresponding to the selected price tier.
 
-<Image alt="roku400px -  - tvod-product-pricing" border={false} src="https://image.roku.com/ZHZscHItMTc2/tvod-product-pricing.jpg" />
+![roku400px -  - tvod-product-pricing](https://image.roku.com/ZHZscHItMTc2/tvod-product-pricing.jpg)
 
 ## Handling transactional purchases
 
-To handle purchases of transactional content in your app, your app must send the [ChannelStore node's](doc:channelstore) [requestPartnerOrder](doc:channelstore) and [confirmPartnerOrder](doc:channelstore) commands to check the user's billing status and complete the transaction.
+To handle purchases of transactional content in your app, your app must send the [ChannelStore node's](doc:channelstore) [requestPartnerOrder](doc:channelstore#requestpartnerorder) and [confirmPartnerOrder](doc:channelstore#confirmpartnerorder) commands to check the user's billing status and complete the transaction.
 
 To send the **requestPartnerOrder** and **confirmPartnerOrder** commands, follow these steps:
 
@@ -55,7 +55,7 @@ To send the **requestPartnerOrder** and **confirmPartnerOrder** commands, follow
    * **code**. The uniqueID specified for the product in the **In-App Products** page. Use the **addField()** method to add the **code** field to the **ContentNode**.
    * **title** (optional). The title of the product being purchased (for example, the name of a movie rental).
 
-   ```
+   ```brightscript
    m.orderInfo = createObject("roSGNode", "contentNode")
    m.orderInfo.priceDisplay = "5.99"
    m.orderInfo.price = "3.99"
@@ -71,7 +71,7 @@ To send the **requestPartnerOrder** and **confirmPartnerOrder** commands, follow
 
 2. Set the **ContentNode** to the ChannelStore node's **requestPartnerOrder** field.
 
-   ```
+   ```brightscript
    m.channelStore.requestPartnerOrder = m.orderInfo
    m.channelStore.command = "requestPartnerOrder"
    ```
@@ -80,16 +80,16 @@ To send the **requestPartnerOrder** and **confirmPartnerOrder** commands, follow
 
    If the **status** field is set to **failure**, display an error message.
 
-   ```
+   ```brightscript
    m.store.observeField("requestPartnerOrderStatus", "requestPartnerOrderStatusChanged")
 
    'callback function
    function requestPartnerOrderStatusChanged()
-   	if m.store.requestPartnerOrderStatus.status = "Success"
-      	'user's billing status is valid - prompt the user to purchase
-      else
-      	'display an appropriate error message
-   	end if
+       if m.store.requestPartnerOrderStatus.status = "Success"
+           'user's billing status is valid - prompt the user to purchase
+       else
+           'display an appropriate error message
+       end if
    end function
    ```
 
@@ -104,7 +104,7 @@ To send the **requestPartnerOrder** and **confirmPartnerOrder** commands, follow
    * **contentKey**. The publisher's SKU (or other unique identifier) for the product.
    * **code**. The uniqueID specified for the product in the **In-Channel Products** page. Use the **addField()** method to add the **code** field to the **ContentNode**.
 
-     ```
+     ```brightscript
      m.confirmOrderInfo = CreateObject("roSGNode", "ContentNode")
      m.confirmOrderInfo.orderId = m.store.requestPartnerOrderStatus.orderID
      m.confirmOrderInfo.title = "TV Show 1"
@@ -123,7 +123,7 @@ To send the **requestPartnerOrder** and **confirmPartnerOrder** commands, follow
 
 5. Set the **ContentNode** to the ChannelStore node's **confirmPartnerOrder** field. This will prompt the user to complete the transaction.
 
-   ```
+   ```brightscript
    'Set the ContentNode to the ChannelStore node
     m.store.confirmPartnerOrder = m.confirmOrderInfo
 
@@ -135,16 +135,16 @@ To send the **requestPartnerOrder** and **confirmPartnerOrder** commands, follow
 
    If the **status** field is set to **failure**, display an error message explaining why the transaction could not be completed.
 
-   ```
+   ```brightscript
    m.store.observeField("confirmPartnerOrderStatus", "confirmPartnerOrderStatusChanged")
 
    'callback function
    function confirmPartnerOrderStatusChanged()
-   		if m.store.confirmPartnerOrderStatus.status = "Success"
-   				displayOrderStatusDialog(m.store.confirmPartnerOrderStatus	
-   		else
-   				'display an appropriate error message
-   		end if
+       if m.store.confirmPartnerOrderStatus.status = "Success"
+           displayOrderStatusDialog(m.store.confirmPartnerOrderStatus)
+       else
+           'display an appropriate error message
+       end if
    end function
    ```
 

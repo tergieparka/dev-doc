@@ -2,7 +2,7 @@
 title: "Distributing apps in Europe"
 excerpt: ''
 deprecated: false
-hidden: true
+hidden: false
 metadata:
   title: ''
   description: ''
@@ -28,8 +28,8 @@ This video explains how developers can surface their Roku apps to relevant viewe
 
 [Launching an app in Germany knowledge center article](https://partnersuccess.roku.com/hc/en-us/articles/1500006343601)
 
-[Channel publishing guide](doc:channel-publishing-guide)  
+[App publishing guide](doc:channel-publishing-guide)  
 
 [Search feed spec](doc:search-feed)
 
-[Roku Pay in-app products](doc:in-channel-products)
+[Roku Pay in-app products](doc:product-catalog)
